@@ -87,8 +87,12 @@
         padding: 0.5rem;
         background: rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        /* Updated style for multiline specs */
+        text-align: left;
+        padding-left: 20%; /* Pushes text inward slightly */
+        line-height: 1.6;
     }
-
+    
     .card h2 {
       font-size: 1.6rem;
       margin: 0;
@@ -114,6 +118,7 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         pointer-events: none; /* Disables interaction */
         user-select: none;
+        text-align: center; /* Ensures price is centered inside its container */
     }
 
     footer {
@@ -296,7 +301,7 @@
     </div>
   </div>
 
-  <script>
+  <script type="module">
     // --- Polyfills and Constants ---
     if (!window.crypto.randomUUID) {
         window.crypto.randomUUID = () => {
@@ -310,6 +315,10 @@
     const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
 
     // --- Firebase and Auth Initialization (Minimal required for Canvas) ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
     let app, db, auth;
     let userId;
 
@@ -324,36 +333,31 @@
             firebaseConfig = {};
         }
 
-        // Check if necessary Firebase functions are available
-        if (typeof initializeApp === 'function' && typeof getAuth === 'function' && typeof signInWithCustomToken === 'function' && typeof getFirestore === 'function' && typeof signInAnonymously === 'function') {
-            try {
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken).catch(err => {
-                        console.error("Firebase custom sign-in failed. Falling back to anonymous.", err);
-                        return signInAnonymously(auth);
-                    });
-                } else {
-                    await signInAnonymously(auth);
-                }
-                userId = auth.currentUser?.uid || crypto.randomUUID();
-                
-                // Fetch and render phone data after successful (or anonymous) sign-in
-                fetchAndRenderPhones();
-
-            } catch (e) {
-                console.warn("Firebase initialization failed. Running without data persistence.", e);
-                // Still attempt to fetch phone data if Firebase failed, just without persistence logic
-                fetchAndRenderPhones(); 
+        // Since we are now inside a type="module" script, the functions are available via import.
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            
+            if (initialAuthToken) {
+                await signInWithCustomToken(auth, initialAuthToken).catch(err => {
+                    console.error("Firebase custom sign-in failed. Falling back to anonymous.", err);
+                    return signInAnonymously(auth);
+                });
+            } else {
+                await signInAnonymously(auth);
             }
-        } else {
-            console.warn("Firebase SDK functions not found. Check imports. Proceeding with phone fetch.");
+            userId = auth.currentUser?.uid || crypto.randomUUID();
+            
+            // Fetch and render phone data after successful (or anonymous) sign-in
             fetchAndRenderPhones();
+
+        } catch (e) {
+            console.warn("Firebase initialization failed. Running without data persistence.", e);
+            // Still attempt to fetch phone data if Firebase failed, just without persistence logic
+            fetchAndRenderPhones(); 
         }
 
         // --- Custom Message Box Logic (Remains unchanged) ---
@@ -389,7 +393,7 @@
     });
 
     // =========================================================================
-    // === 🛠️ QUICK EDIT ZONE: PHONE DATA (Edit only this block for prices) 🛠️ ===
+    // === 🛠️ QUICK EDIT ZONE: PHONE DATA (UPDATED SPEC FORMAT) 🛠️ ===
     // =========================================================================
 
     const phoneData = [
@@ -398,42 +402,48 @@
             name: "Galaxy Z Fold 7", 
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold7-3.jpg", 
             description: "The future of foldables with seamless display technology.", 
-            specs: "Display: 8.0-inch Foldable AMOLED | Hinge: Invisible Flex | S Pen Support",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 12GB | Storage: 512GB | Battery: 4400 mAh | Camera: 200MP Dual",
             priceNGN: "₦2,250,000",
         },
         {
             name: "Google Pixel 10",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-10-11.jpg", 
             description: "Next-gen AI integration and computational photography mastery.",
-            specs: "Chipset: Tensor G5 | Camera: 10x Optical Zoom | Feature: Real-time Translation",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 12GB | Storage: 256GB | Battery: 4970 mAh | Camera: 48MP Triple",
             priceNGN: "₦1,290,000",
         },
         {
             name: "Redmi 15 5G",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", 
-            description: "Affordable 5G speed and reliable performance for the masses, increadible battery life.",
-            specs: "Connectivity: 5G Ready | Battery: 7000mAh Mah | Price: Aggressive Mid-Range",
+            description: "Affordable 5G speed and reliable performance for the masses.",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
             priceNGN: "₦295,000",
         },
         {
             name: "Infinix Hot 60 Pro Plus",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg", 
             description: "High-power gaming and massive endurance at a budget price.",
-            specs: "Processor: Helio G200 Ultra | RAM: 12GB+8GB ",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 8GB | Storage: 256GB | Battery: 5160 mAh | Camera: 50MP Main",
             priceNGN: "₦266,000",
         },
         {
             name: "Oppo A6 Pro",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
             description: "Sleek, lightweight design with rapid charging capability.",
-            specs: "Design: Sleek | Charging: 85W SuperVOOC | Camera: Cinematic Mode",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 8GB | Storage: 128GB | Battery: 6500 mAh | Camera: 50MP Triple",
             priceNGN: "₦485,000",
         },
         {
             name: "Itel Super 26 Ultra",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", 
             description: "The essential budget phone focused on battery life and durability.",
-            specs: "Feature: | Battery: 6,000mAh | Storage: 256GB",
+            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
             priceNGN: "₦257,000",
         },
     ];
@@ -485,6 +495,9 @@
             card.className = 'card';
             card.setAttribute('data-phone-name', phone.name);
             
+            // Format specs for display: split by pipe and join with a line break (<br>)
+            const formattedSpecs = phone.specs.split('|').map(spec => spec.trim()).join('<br>');
+
             // Use PLACEHOLDER_IMAGE if the URL is invalid or empty
             const imageUrl = phone.imageUrl && phone.imageUrl.startsWith('http') ? phone.imageUrl : PLACEHOLDER_IMAGE;
             
@@ -496,9 +509,15 @@
                 >
                 <h2>${phone.name}</h2>
                 <p>${phone.description}</p>
-                <div class="specs">${phone.specs}</div>
+                <!-- Specs are now displayed as a clean list of RAM, Storage, Battery, Camera -->
+                <div class="specs">${formattedSpecs}</div> 
                 <div class="price-tag">Price: ${phone.priceNGN}</div>
             `;
+
+            // Add click listener to show the custom message box
+            card.addEventListener('click', () => {
+                window.showMessage('Full Review Coming Soon!', `You clicked to view the full review for **${phone.name}**. This feature is under development. Check back next week!`);
+            });
             
             main.appendChild(card);
         });
@@ -512,20 +531,5 @@
         renderCards(phones);
     }
   </script>
-  <!-- Firebase SDK Imports for Canvas --><script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-    // Expose functions to the global scope for the script block to use
-    window.initializeApp = initializeApp;
-    window.getAuth = getAuth;
-    window.signInAnonymously = signInAnonymously;
-    window.signInWithCustomToken = signInWithCustomToken;
-    window.getFirestore = getFirestore;
-    window.setLogLevel = setLogLevel; 
-  </script>
 </body>
-
 </html>
-
