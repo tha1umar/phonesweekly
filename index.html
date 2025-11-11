@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE: html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -124,21 +124,47 @@
       font-size: 0.9rem;
     }
 
+    footer p {
+      margin: 0.5rem 0; /* Add some vertical space between footer paragraphs */
+    }
+
     footer a {
       color: var(--primary-green);
       text-decoration: none;
       font-weight: 500;
     }
-
+    
+    /* Updated .form-placeholder to center it and constrain width */
     .form-placeholder {
       background: rgba(0, 0, 0, 0.2);
       border-radius: 20px;
       padding: 3rem;
       text-align: center;
-      margin: 2rem;
+      margin: 2rem auto; /* Added auto margins for centering */
+      max-width: 600px; /* Added max-width to control size */
       font-size: 1rem;
       color: var(--text-light);
       border: 1px dashed rgba(255, 255, 255, 0.3);
+    }
+    
+    /* NEW: Feedback Button Styling */
+    .feedback-button {
+        display: inline-block;
+        padding: 0.8rem 2.5rem;
+        margin-top: 1.5rem;
+        background-color: var(--primary-green);
+        color: var(--dark-teal);
+        font-weight: 800;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .feedback-button:hover {
+        background-color: #00c853; /* slightly brighter green */
+        transform: translateY(-2px) scale(1.02);
     }
     
     /* Custom Modal/Message Box Styling */
@@ -228,7 +254,7 @@
         padding: 1rem;
       }
       .form-placeholder {
-        margin: 1rem;
+        margin: 1rem auto;
         padding: 2rem 1rem;
       }
     }
@@ -250,20 +276,15 @@
 
   <section class="form-placeholder">
     <h2>Share Your Feedback!</h2>
-    <p>Please use the embedded form below to give us feedback or suggest phones for review.</p>
-    <!-- Embedded Google Form --><iframe 
-      src="https://forms.gle/iARHXHXdCsWLSazJ8" 
-      width="100%" 
-      height="650" 
-      frameborder="0" 
-      marginheight="0" 
-      marginwidth="0"
-      style="border-radius: 15px; border: none; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); display: block; max-width: 800px; margin: 2rem auto 0 auto;">
-      Loading Form...
-    </iframe>
+    <p>We rely on your suggestions to keep our reviews honest and relevant!</p>
+    <a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button">
+      Open Suggestion Form
+    </a>
   </section>
 
   <footer>
+    <p>For more questions and inquiries about any of these devices, including direct shops to get them at the best prices in Abuja, please send a WhatsApp message to **08165481152**.</p>
+    <p>Subject should be **(Phones weekly)**.</p>
     <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
   </footer>
 
@@ -289,7 +310,6 @@
     const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
 
     // --- Firebase and Auth Initialization (Minimal required for Canvas) ---
-    // This block is necessary for the Canvas environment to prevent runtime errors.
     let app, db, auth;
     let userId;
 
@@ -368,67 +388,89 @@
         });
     });
 
+    // =========================================================================
+    // === 🛠️ QUICK EDIT ZONE: PHONE DATA (Edit only this block for prices) 🛠️ ===
+    // =========================================================================
+
+    const phoneData = [
+        {
+            // Note: Update 'priceNGN' to reflect current Abuja/Jiji prices. 
+            name: "Galaxy Z Fold 7", 
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold7-3.jpg", 
+            description: "The future of foldables with seamless display technology.", 
+            specs: "Display: 8.1-inch Foldable AMOLED | Hinge: Invisible Flex | S Pen Support",
+            priceNGN: "₦2,250,000",
+        },
+        {
+            name: "Google Pixel 10",
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-10-11.jpg", 
+            description: "Next-gen AI integration and computational photography mastery.",
+            specs: "Chipset: Tensor G5 | Camera: 10x Optical Zoom | Feature: Real-time Translation",
+            priceNGN: "₦1,290,000",
+        },
+        {
+            name: "Redmi 15 5G",
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", 
+            description: "Affordable 5G speed and reliable performance for the masses.",
+            specs: "Connectivity: 5G Ready | Battery: 6000mAh Mega | Price: Aggressive Mid-Range",
+            priceNGN: "₦295,000",
+        },
+        {
+            name: "Infinix Hot 60 Pro Plus",
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg", 
+            description: "High-power gaming and massive endurance at a budget price.",
+            specs: "Processor: Helio G99 Ultra | RAM: 12GB+8GB Virtual | Charging: 80W Thunder Charge",
+            priceNGN: "₦266,000",
+        },
+        {
+            name: "Oppo A6 Pro",
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
+            description: "Sleek, lightweight design with rapid charging capability.",
+            specs: "Design: Vegan Leather Back | Charging: 65W SuperVOOC | Camera: Cinematic Mode",
+            priceNGN: "₦485,000",
+        },
+        {
+            name: "Itel Super 26 Ultra",
+            imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", 
+            description: "The essential budget phone focused on battery life and durability.",
+            specs: "Feature: Flashlight Pro | Battery: 10,000mAh | Storage: Basic 32GB",
+            priceNGN: "₦257,000",
+        },
+    ];
+
+    // =========================================================================
+    // === 🛑 END OF QUICK EDIT ZONE (Editing below here is not recommended) 🛑 ===
+    // =========================================================================
+
+
     /**
-     * This function returns hardcoded data for manual input.
+     * Helper function to parse the NGN price string into a comparable numeric value.
+     */
+    function parsePrice(priceString) {
+        if (typeof priceString !== 'string') return 0;
+        // Remove currency symbol (₦) and commas, then convert to float
+        const numericString = priceString.replace('₦', '').replace(/,/g, '');
+        return parseFloat(numericString) || 0;
+    }
+
+    /**
+     * This function returns the hardcoded data and sorts it.
      */
     async function fetchPhoneSpecs() {
-        // --- MANUAL DATA INPUT: IMAGE URLS POPULATED WITH REAL WEB IMAGES ---
-        const manualPhoneData = [
-            {
-                // Phone 1: Galaxy z fold 7 (Using Z Fold 5 image as a proxy)
-                name: "Galaxy Z Fold 7", 
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold7-3.jpg", // <--- UPDATED URL
-                description: "The future of foldables with seamless display technology.", 
-                specs: "Display: 8.1-inch Foldable AMOLED | Hinge: Invisible Flex | S Pen Support",
-                priceNGN: "₦2,450,000",
-            },
-            {
-                // Phone 2: Google pixel 10 (Using Pixel 8 Pro image as a proxy)
-                name: "Google Pixel 10",
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-10-11.jpg", // <--- UPDATED URL
-                description: "Next-gen AI integration and computational photography mastery.",
-                specs: "Chipset: Tensor G5 | Camera: 10x Optical Zoom | Feature: Real-time Translation",
-                priceNGN: "₦1,890,000",
-            },
-            {
-                // Phone 3: Redmi 15 5g 
-                name: "Redmi 15 5G",
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", // <--- UPDATED URL
-                description: "Affordable 5G speed and reliable performance for the masses.",
-                specs: "Connectivity: 5G Ready | Battery: 6000mAh Mega | Price: Aggressive Mid-Range",
-                priceNGN: "₦285,000",
-            },
-            {
-                // Phone 4: infinix hot 60 pro plus (Using Infinix GT 10 Pro image as a proxy)
-                name: "Infinix Hot 60 Pro Plus",
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg", // <--- UPDATED URL
-                description: "High-power gaming and massive endurance at a budget price.",
-                specs: "Processor: Helio G99 Ultra | RAM: 12GB+8GB Virtual | Charging: 80W Thunder Charge",
-                priceNGN: "₦415,000",
-            },
-            {
-                // Phone 5: oppo a6 pro
-                name: "Oppo A6 Pro",
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
-                description: "Sleek, lightweight design with rapid charging capability.",
-                specs: "Design: Vegan Leather Back | Charging: 65W SuperVOOC | Camera: Cinematic Mode",
-                priceNGN: "₦720,000",
-            },
-            {
-                // Phone 6: itel super 26 (Using Itel S23+ image as a proxy)
-                name: "Itel Super 26",
-                imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", // <--- UPDATED URL
-                description: "The essential budget phone focused on battery life and durability.",
-                specs: "Feature: Flashlight Pro | Battery: 10,000mAh | Storage: Basic 32GB",
-                priceNGN: "₦120,000",
-            },
-        ];
-        // ---------------------------------------------
+        // Create a copy of the data to sort
+        const phonesToSort = [...phoneData]; 
+
+        // Sort the data in descending order based on price (highest price first)
+        phonesToSort.sort((a, b) => {
+            const priceA = parsePrice(a.priceNGN);
+            const priceB = parsePrice(b.priceNGN);
+            return priceB - priceA; // b - a for descending order
+        });
 
         // Simulate network delay before returning data
         await new Promise(resolve => setTimeout(resolve, 500)); 
         
-        return manualPhoneData;
+        return phonesToSort;
     }
 
     /**
@@ -446,7 +488,6 @@
             // Use PLACEHOLDER_IMAGE if the URL is invalid or empty
             const imageUrl = phone.imageUrl && phone.imageUrl.startsWith('http') ? phone.imageUrl : PLACEHOLDER_IMAGE;
             
-            // Note: The click listener on the card is removed since the 'Read Full Review' button is gone.
             card.innerHTML = `
                 <img 
                     src="${imageUrl}" 
@@ -459,11 +500,6 @@
                 <div class="price-tag">Price: ${phone.priceNGN}</div>
             `;
             
-            // Do not add event listener as the 'Read Full Review' functionality was replaced.
-            // Keeping the card non-interactive for now.
-            // If the user wants to keep the modal, the listener should be re-added to the card element itself.
-            // Since the request was only to replace the *button*, I'm keeping the card non-interactive.
-
             main.appendChild(card);
         });
     }
