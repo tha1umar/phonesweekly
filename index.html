@@ -105,20 +105,44 @@
       font-weight: 300;
     }
     
-    /* NEW: Price Tag styling replacing the review button */
+    /* NEW: User Review Display Styling (Replaces Textarea) */
+    .user-review-display {
+        font-family: 'Inter', sans-serif;
+        width: 100%;
+        height: 100px; /* Fixed height for aesthetic consistency */
+        padding: 10px;
+        margin-top: 1rem;
+        border-radius: 10px;
+        border: 1px solid var(--medium-teal);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--dark-teal);
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        text-align: left;
+        overflow-y: auto; /* Allows scrolling for longer reviews */
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        line-height: 1.4;
+    }
+    
+    .review-placeholder {
+        color: #757575; /* Gray color for placeholder text */
+        font-style: italic;
+    }
+    
+    /* Price Tag styling */
     .price-tag {
         display: inline-block;
         margin-top: 1rem;
-        padding: 0.6rem 2rem; /* Slightly larger padding */
+        padding: 0.6rem 2rem; 
         background-color: var(--primary-green);
         color: var(--dark-teal);
-        font-weight: 800; /* Bolder for visibility */
-        font-size: 1.2rem; /* Larger font */
+        font-weight: 800; 
+        font-size: 1.2rem; 
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        pointer-events: none; /* Disables interaction */
+        pointer-events: none; 
         user-select: none;
-        text-align: center; /* Ensures price is centered inside its container */
+        text-align: center; 
     }
 
     footer {
@@ -152,7 +176,7 @@
       border: 1px dashed rgba(255, 255, 255, 0.3);
     }
     
-    /* NEW: Feedback Button Styling */
+    /* Feedback Button Styling */
     .feedback-button {
         display: inline-block;
         padding: 0.8rem 2.5rem;
@@ -269,12 +293,12 @@
 
   <header>
     <h1>Phones Weekly</h1>
-    <p>Phones Weekly brings you honest phone suggestions straight from Abuja — from the really affordable to the ones that might hurt your pocket (in a good way)</p>
+    <p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy!</p>
   </header>
 
   <main id="phone-reviews">
     <!-- Dynamic Content Area --><div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
-        Loading your manually entered phone reviews...
+        Loading phone data...
         <div class="spinner"></div>
     </div>
   </main>
@@ -302,6 +326,11 @@
   </div>
 
   <script type="module">
+    // --- Firebase and Auth Initialization ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
     // --- Polyfills and Constants ---
     if (!window.crypto.randomUUID) {
         window.crypto.randomUUID = () => {
@@ -313,17 +342,15 @@
     }
 
     const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
-
-    // --- Firebase and Auth Initialization (Minimal required for Canvas) ---
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    // This text is only used if no review is present in the static data OR in Firestore.
+    const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one."; 
 
     let app, db, auth;
     let userId;
+    let appId;
 
     document.addEventListener('DOMContentLoaded', async () => {
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         let firebaseConfig;
 
         try {
@@ -333,7 +360,6 @@
             firebaseConfig = {};
         }
 
-        // Since we are now inside a type="module" script, the functions are available via import.
         try {
             app = initializeApp(firebaseConfig);
             db = getFirestore(app);
@@ -350,13 +376,12 @@
                 await signInAnonymously(auth);
             }
             userId = auth.currentUser?.uid || crypto.randomUUID();
+            console.log("Authenticated with user ID:", userId);
             
-            // Fetch and render phone data after successful (or anonymous) sign-in
             fetchAndRenderPhones();
 
         } catch (e) {
             console.warn("Firebase initialization failed. Running without data persistence.", e);
-            // Still attempt to fetch phone data if Firebase failed, just without persistence logic
             fetchAndRenderPhones(); 
         }
 
@@ -366,7 +391,6 @@
         const messageText = document.getElementById('messageText');
         const closeButton = document.getElementById('closeButton');
         
-        // Function to show the modal (used in dynamic card listeners)
         window.showMessage = (title, text) => {
             messageTitle.textContent = title;
             messageText.innerHTML = text;
@@ -393,66 +417,123 @@
     });
 
     // =========================================================================
-    // === 🛠️ QUICK EDIT ZONE: PHONE DATA (UPDATED SPEC FORMAT) 🛠️ ===
+    // === FIREBASE STORAGE LOGIC (READ) ===
     // =========================================================================
+    
+    /**
+     * Gets the Firestore document reference for a user's specific phone review.
+     */
+    function getReviewDocRef(phoneName) {
+        if (!db || !userId || !appId) {
+            // console.error("Firestore not initialized or userId/appId is missing.");
+            return null;
+        }
+        // Creates a clean ID by replacing non-alphanumeric chars with underscores
+        const docId = phoneName.replace(/[^a-zA-Z0-9]/g, '_'); 
+        // Path: /artifacts/{appId}/users/{userId}/phone_reviews/{phoneName}
+        return doc(db, 'artifacts', appId, 'users', userId, 'phone_reviews', docId);
+    }
+    
+    /**
+     * Loads the existing review text from Firestore and populates the display div.
+     * This checks for a user-saved review override (simulating a personalized save).
+     */
+    async function loadUserReviewOverride(displayElement, defaultReview) {
+        const phoneName = displayElement.dataset.phoneName;
+        const docRef = getReviewDocRef(phoneName);
+        
+        // Start with the default review from the static data
+        displayElement.textContent = defaultReview;
+        if (defaultReview === DEFAULT_REVIEW_TEXT) {
+            displayElement.classList.add('review-placeholder');
+        } else {
+            displayElement.classList.remove('review-placeholder');
+        }
+        
+        if (!docRef) return;
+
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const overrideReview = data.review;
+                
+                // If a user-saved review exists in the DB, use it to override the static/default one.
+                if (overrideReview && overrideReview.trim()) {
+                    displayElement.textContent = overrideReview;
+                    displayElement.classList.remove('review-placeholder');
+                }
+            }
+        } catch (e) {
+            console.error("Error loading review override:", e);
+        }
+    }
+
+
+    // =========================================================================
+    // === 🛠️ QUICK EDIT ZONE: PHONE DATA 🛠️ ===
+    // =========================================================================
+    // To change a phone's review, edit the text inside the 'review' property below.
+    // This is the easiest way to update the content you see on the page.
 
     const phoneData = [
         {
-            // Note: Update 'priceNGN' to reflect current Abuja/Jiji prices. 
             name: "Galaxy Z Fold 7", 
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold7-3.jpg", 
             description: "The future of foldables with seamless display technology.", 
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
             specs: "RAM: 12GB | Storage: 512GB | Battery: 4400 mAh | Camera: 200MP Dual",
             priceNGN: "₦2,250,000",
+            // --- EDIT THIS LINE TO CHANGE THE REVIEW TEXT ---
+            review: "Hands down, the best foldable on the market right now. The main screen crease is barely visible, and the software optimization is finally perfect. Worth every penny for a true flagship experience.",
         },
         {
             name: "Google Pixel 10",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-10-11.jpg", 
             description: "Next-gen AI integration and computational photography mastery.",
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
             specs: "RAM: 12GB | Storage: 256GB | Battery: 4970 mAh | Camera: 48MP Triple",
             priceNGN: "₦1,290,000",
+            review: "If you prioritize photography and a clean Android experience, nothing beats the Pixel. The new Tensor chip's AI features are game-changing for everyday tasks and editing photos on the fly.",
         },
         {
             name: "Redmi 15 5G",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", 
             description: "Affordable 5G speed and reliable performance for the masses.",
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
             specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
             priceNGN: "₦295,000",
+            review: "An absolute battery beast. You can push this phone for two full days without needing a charge. The camera is decent in good light, making this the go-to choice for budget endurance.",
         },
         {
             name: "Infinix Hot 60 Pro +",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg", 
             description: "High-power gaming and massive endurance at a budget price.",
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
             specs: "RAM: 8GB | Storage: 256GB | Battery: 5160 mAh | Camera: 50MP Main",
             priceNGN: "₦266,000",
+            review: "Great for mobile gaming on a budget. The display is bright and the included cooling system works surprisingly well during extended play sessions. Best value for gamers.",
         },
         {
             name: "Oppo A6 Pro",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
-            description: "Sleek, lightweight design with rapid charging capability. Increadible device.",
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
+            description: "Sleek, lightweight design with rapid charging capability. Incredible device.",
             specs: "RAM: 8GB | Storage: 128GB | Battery: 6500 mAh | Camera: 50MP Triple",
             priceNGN: "₦485,000",
+            review: "The fastest charging in its class. Going from 0% to 100% in under 30 minutes is a lifesaver. It’s also incredibly thin and easy to hold, making it perfect for commuters.",
         },
         {
             name: "Itel Super 26 Ultra",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", 
             description: "The essential budget phone focused on battery life and durability.",
-            // NEW STRUCTURE: RAM | Storage | Battery | Camera
             specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
             priceNGN: "₦257,000",
+            review: "Extremely durable and reliable. While not the fastest, its build quality means it can withstand everyday bumps and drops. Perfect if you need a reliable workhorse phone.",
         },
-        // --- HONORABLE MENTIONS ADDED BELOW ---
+        // --- HONORABLE MENTIONS ---
         {
             name: "Tecno Pop 10 Pro",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg", 
             description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
             specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
             priceNGN: "₦130,000",
+            review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro is a solid all-rounder for everyday use (even if its camera won’t challenge the big players).",
         },
         {
             name: "Infinix Hot 40",
@@ -460,6 +541,8 @@
             description: "A solid budget performer offering decent speed and a modern display for its price segment.",
             specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
             priceNGN: "₦210,000",
+            // FIXED: Replaced smart closing quote (”) with standard double quote (")
+            review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
         },
         {
             name: "Itel P65",
@@ -467,31 +550,19 @@
             description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
             specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
             priceNGN: "₦130,000",
+            // FIXED: Replaced smart closing quote (”) with standard double quote (")
+            review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
         },
-        // --- END OF HONORABLE MENTIONS ---
     ];
 
     // =========================================================================
-    // === 🛑 END OF QUICK EDIT ZONE (Editing below here is not recommended) 🛑 ===
+    // === CORE RENDERING FUNCTIONS ===
     // =========================================================================
-
-
-    /**
-     * Helper function to parse the NGN price string into a comparable numeric value.
-     */
-    function parsePrice(priceString) {
-        if (typeof priceString !== 'string') return 0;
-        // Remove currency symbol (₦) and commas, then convert to float
-        const numericString = priceString.replace('₦', '').replace(/,/g, '');
-        return parseFloat(numericString) || 0;
-    }
 
     /**
      * Fetches phone specification data. Currently returns static data.
      */
     async function fetchPhoneSpecs() {
-        // In a real application, this would fetch data from Firestore/API.
-        // For now, return the static data array.
         return phoneData; 
     }
 
@@ -500,7 +571,6 @@
      */
     function renderCards(phones) {
         const container = document.getElementById('phone-reviews');
-        // Clear loading indicator
         container.innerHTML = ''; 
 
         if (phones.length === 0) {
@@ -509,7 +579,8 @@
         }
 
         phones.forEach(phone => {
-            // Apply error handling for images using the onerror attribute
+            const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
+
             const cardHtml = `
                 <div class="card" data-phone-name="${phone.name}">
                     <img src="${phone.imageUrl}" 
@@ -521,6 +592,13 @@
                     <div class="specs">
                         ${phone.specs.split(' | ').join('<br>')}
                     </div>
+                    <!-- The review content starts with the text set in the phoneData array -->
+                    <div 
+                        class="user-review-display ${initialReview === DEFAULT_REVIEW_TEXT ? 'review-placeholder' : ''}" 
+                        data-phone-name="${phone.name}"
+                    >
+                        ${initialReview}
+                    </div>
                     <div class="price-tag">${phone.priceNGN}</div>
                 </div>
             `;
@@ -528,7 +606,23 @@
             cardWrapper.innerHTML = cardHtml.trim();
             const cardElement = cardWrapper.firstChild;
             
-            ;
+            // Add click listener to show the message box
+            cardElement.addEventListener('click', (e) => {
+                // Prevent modal from showing if the user clicks on the review box
+                if (e.target.classList.contains('user-review-display')) return;
+                window.showMessage('Review Page Coming Soon!', 
+                    'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
+            });
+            
+            // Get the display div element for persistence logic
+            const reviewDisplay = cardElement.querySelector('.user-review-display');
+            
+            if (reviewDisplay) {
+                // Load any existing user review from Firestore to OVERRIDE the static review
+                if (db && userId) {
+                    loadUserReviewOverride(reviewDisplay, initialReview);
+                }
+            }
             
             container.appendChild(cardElement);
         });
