@@ -487,62 +487,50 @@
     }
 
     /**
-     * This function returns the hardcoded data and sorts it.
+     * Fetches phone specification data. Currently returns static data.
      */
     async function fetchPhoneSpecs() {
-        // Create a copy of the data to sort
-        const phonesToSort = [...phoneData]; 
-
-        // Sort the data in descending order based on price (highest price first)
-        phonesToSort.sort((a, b) => {
-            const priceA = parsePrice(a.priceNGN);
-            const priceB = parsePrice(b.priceNGN);
-            return priceB - priceA; // b - a for descending order
-        });
-
-        // Simulate network delay before returning data
-        await new Promise(resolve => setTimeout(resolve, 500)); 
-        
-        return phonesToSort;
+        // In a real application, this would fetch data from Firestore/API.
+        // For now, return the static data array.
+        return phoneData; 
     }
 
     /**
-     * Renders the phone cards onto the page using the fetched data.
+     * Renders the phone cards onto the page.
      */
     function renderCards(phones) {
-        const main = document.getElementById('phone-reviews');
-        main.innerHTML = ''; // Clear loading indicator
+        const container = document.getElementById('phone-reviews');
+        // Clear loading indicator
+        container.innerHTML = ''; 
+
+        if (phones.length === 0) {
+            container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews available yet.</p>';
+            return;
+        }
 
         phones.forEach(phone => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.setAttribute('data-phone-name', phone.name);
-            
-            // Format specs for display: split by pipe and join with a line break (<br>)
-            const formattedSpecs = phone.specs.split('|').map(spec => spec.trim()).join('<br>');
-
-            // Use PLACEHOLDER_IMAGE if the URL is invalid or empty
-            const imageUrl = phone.imageUrl && phone.imageUrl.startsWith('http') ? phone.imageUrl : PLACEHOLDER_IMAGE;
-            
-            card.innerHTML = `
-                <img 
-                    src="${imageUrl}" 
-                    alt="${phone.name} smartphone image"
-                    onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}'; this.style.backgroundColor='#4a148c';"
-                >
-                <h2>${phone.name}</h2>
-                <p>${phone.description}</p>
-                <!-- Specs are now displayed as a clean list of RAM, Storage, Battery, Camera -->
-                <div class="specs">${formattedSpecs}</div> 
-                <div class="price-tag">Price: ${phone.priceNGN}</div>
+            // Apply error handling for images using the onerror attribute
+            const cardHtml = `
+                <div class="card" data-phone-name="${phone.name}">
+                    <img src="${phone.imageUrl}" 
+                         alt="${phone.name}" 
+                         onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
+                    >
+                    <h2>${phone.name}</h2>
+                    <p>${phone.description}</p>
+                    <div class="specs">
+                        ${phone.specs.split(' | ').join('<br>')}
+                    </div>
+                    <div class="price-tag">${phone.priceNGN}</div>
+                </div>
             `;
-
-            // Add click listener to show the custom message box
-            card.addEventListener('click', () => {
-                window.showMessage('Full Review Coming Soon!', `You clicked to view the full review for **${phone.name}**. This feature is under development. Check back next week!`);
-            });
+            const cardWrapper = document.createElement('div');
+            cardWrapper.innerHTML = cardHtml.trim();
+            const cardElement = cardWrapper.firstChild;
             
-            main.appendChild(card);
+            ;
+            
+            container.appendChild(cardElement);
         });
     }
 
@@ -556,4 +544,3 @@
   </script>
 </body>
 </html>
-
