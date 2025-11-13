@@ -105,7 +105,7 @@
       font-weight: 300;
     }
     
-    /* NEW: User Review Display Styling (Replaces Textarea) */
+    /* NEW: User Review Display Styling (Now just displays static content) */
     .user-review-display {
         font-family: 'Inter', sans-serif;
         width: 100%;
@@ -297,7 +297,8 @@
   </header>
 
   <main id="phone-reviews">
-    <!-- Dynamic Content Area --><div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
+    <!-- Dynamic Content Area -->
+    <div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
         Loading phone data...
         <div class="spinner"></div>
     </div>
@@ -317,7 +318,8 @@
     <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
   </footer>
 
-  <!-- Custom Message Box for simulating 'Full Review' page --><div id="messageBox" class="message-box">
+  <!-- Custom Message Box for simulating 'Full Review' page -->
+  <div id="messageBox" class="message-box">
     <div class="message-content">
       <h3 id="messageTitle">Review Page Coming Soon!</h3>
       <p id="messageText">You clicked to view the full review for **Phone Name**. This feature is under development. Check back next week!</p>
@@ -325,67 +327,15 @@
     </div>
   </div>
 
-  <script type="module">
-    // --- Firebase and Auth Initialization ---
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
+  <script>
     // --- Polyfills and Constants ---
-    if (!window.crypto.randomUUID) {
-        window.crypto.randomUUID = () => {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-        };
-    }
-
     const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
-    // This text is only used if no review is present in the static data OR in Firestore.
+    // This text is only used if no review is present in the static data.
     const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one."; 
 
-    let app, db, auth;
-    let userId;
-    let appId;
+    document.addEventListener('DOMContentLoaded', () => {
 
-    document.addEventListener('DOMContentLoaded', async () => {
-        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        let firebaseConfig;
-
-        try {
-            firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        } catch (e) {
-            console.error("Error parsing firebase config:", e);
-            firebaseConfig = {};
-        }
-
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-            
-            if (initialAuthToken) {
-                await signInWithCustomToken(auth, initialAuthToken).catch(err => {
-                    console.error("Firebase custom sign-in failed. Falling back to anonymous.", err);
-                    return signInAnonymously(auth);
-                });
-            } else {
-                await signInAnonymously(auth);
-            }
-            userId = auth.currentUser?.uid || crypto.randomUUID();
-            console.log("Authenticated with user ID:", userId);
-            
-            fetchAndRenderPhones();
-
-        } catch (e) {
-            console.warn("Firebase initialization failed. Running without data persistence.", e);
-            fetchAndRenderPhones(); 
-        }
-
-        // --- Custom Message Box Logic (Remains unchanged) ---
+        // --- Custom Message Box Logic ---
         const messageBox = document.getElementById('messageBox');
         const messageTitle = document.getElementById('messageTitle');
         const messageText = document.getElementById('messageText');
@@ -414,61 +364,10 @@
                 hideMessage();
             }
         });
+        
+        // Start fetching and rendering the static data
+        fetchAndRenderPhones();
     });
-
-    // =========================================================================
-    // === FIREBASE STORAGE LOGIC (READ) ===
-    // =========================================================================
-    
-    /**
-     * Gets the Firestore document reference for a user's specific phone review.
-     */
-    function getReviewDocRef(phoneName) {
-        if (!db || !userId || !appId) {
-            // console.error("Firestore not initialized or userId/appId is missing.");
-            return null;
-        }
-        // Creates a clean ID by replacing non-alphanumeric chars with underscores
-        const docId = phoneName.replace(/[^a-zA-Z0-9]/g, '_'); 
-        // Path: /artifacts/{appId}/users/{userId}/phone_reviews/{phoneName}
-        return doc(db, 'artifacts', appId, 'users', userId, 'phone_reviews', docId);
-    }
-    
-    /**
-     * Loads the existing review text from Firestore and populates the display div.
-     * This checks for a user-saved review override (simulating a personalized save).
-     */
-    async function loadUserReviewOverride(displayElement, defaultReview) {
-        const phoneName = displayElement.dataset.phoneName;
-        const docRef = getReviewDocRef(phoneName);
-        
-        // Start with the default review from the static data
-        displayElement.textContent = defaultReview;
-        if (defaultReview === DEFAULT_REVIEW_TEXT) {
-            displayElement.classList.add('review-placeholder');
-        } else {
-            displayElement.classList.remove('review-placeholder');
-        }
-        
-        if (!docRef) return;
-
-        try {
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                const overrideReview = data.review;
-                
-                // If a user-saved review exists in the DB, use it to override the static/default one.
-                if (overrideReview && overrideReview.trim()) {
-                    displayElement.textContent = overrideReview;
-                    displayElement.classList.remove('review-placeholder');
-                }
-            }
-        } catch (e) {
-            console.error("Error loading review override:", e);
-        }
-    }
-
 
     // =========================================================================
     // === 🛠️ QUICK EDIT ZONE: PHONE DATA 🛠️ ===
@@ -541,7 +440,6 @@
             description: "A solid budget performer offering decent speed and a modern display for its price segment.",
             specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
             priceNGN: "₦210,000",
-            // FIXED: Replaced smart closing quote (”) with standard double quote (")
             review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
         },
         {
@@ -550,7 +448,6 @@
             description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
             specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
             priceNGN: "₦130,000",
-            // FIXED: Replaced smart closing quote (”) with standard double quote (")
             review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
         },
     ];
@@ -560,14 +457,15 @@
     // =========================================================================
 
     /**
-     * Fetches phone specification data. Currently returns static data.
+     * Fetches phone specification data. Returns the static data array.
      */
     async function fetchPhoneSpecs() {
+        // Simulating an async fetch operation, but returning local data instantly
         return phoneData; 
     }
 
     /**
-     * Renders the phone cards onto the page.
+     * Renders the phone cards onto the page using only the static data.
      */
     function renderCards(phones) {
         const container = document.getElementById('phone-reviews');
@@ -580,6 +478,7 @@
 
         phones.forEach(phone => {
             const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
+            const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
 
             const cardHtml = `
                 <div class="card" data-phone-name="${phone.name}">
@@ -592,9 +491,9 @@
                     <div class="specs">
                         ${phone.specs.split(' | ').join('<br>')}
                     </div>
-                    <!-- The review content starts with the text set in the phoneData array -->
+                    <!-- This div now only displays the static review from phoneData -->
                     <div 
-                        class="user-review-display ${initialReview === DEFAULT_REVIEW_TEXT ? 'review-placeholder' : ''}" 
+                        class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}" 
                         data-phone-name="${phone.name}"
                     >
                         ${initialReview}
@@ -614,16 +513,6 @@
                     'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
             });
             
-            // Get the display div element for persistence logic
-            const reviewDisplay = cardElement.querySelector('.user-review-display');
-            
-            if (reviewDisplay) {
-                // Load any existing user review from Firestore to OVERRIDE the static review
-                if (db && userId) {
-                    loadUserReviewOverride(reviewDisplay, initialReview);
-                }
-            }
-            
             container.appendChild(cardElement);
         });
     }
@@ -638,5 +527,3 @@
   </script>
 </body>
 </html>
-
-
