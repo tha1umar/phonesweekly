@@ -158,7 +158,7 @@
         transform: translateY(-1px);
     }
     
-    /* Price Tag styling */
+    /* Price Tag styling - Now applied to an <a> tag */
     .price-tag {
         display: inline-block;
         margin-top: 1rem;
@@ -169,10 +169,18 @@
         font-size: 1.2rem; 
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        pointer-events: none; 
         user-select: none;
         text-align: center; 
+        text-decoration: none; /* Crucial for making it look like a button */
+        transition: transform 0.2s, box-shadow 0.2s; /* Added transition for hover effect */
     }
+    
+    .price-tag:hover {
+        transform: translateY(-2px); /* Lift slightly on hover */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+        cursor: pointer;
+    }
+
 
     footer {
       text-align: center;
@@ -409,29 +417,33 @@
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold7-3.jpg", 
             description: "The future of foldables with seamless display technology.", 
             specs: "RAM: 12GB | Storage: 512GB | Battery: 4400 mAh | Camera: 200MP Dual",
-            priceNGN: "₦2,250,000",
+            priceNGN: "₦2,180,000",
             // --- EDIT THIS LINE TO CHANGE THE REVIEW TEXT ---
             review: "Hands down, the best foldable on the market right now. The main screen crease is barely visible, and the software optimization is finally perfect. Worth every penny for a true flagship experience.",
-            // --- NEW: GSMArena URL ---
+            // --- GSMArena URL ---
             gsmarenaUrl: "https://www.gsmarena.com/samsung_galaxy_z_fold7-13826.php",
+            // --- NEW: Jiji URL (Edit this to link to a specific Jiji listing!) ---
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-samsung-galaxy-z-fold7-256-gb-b4ktAAIpI6Vu58W4zrJ7kkhw.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=134&lid=UiET8vQ-jIgvZk6h&indexPosition=0", 
         },
         {
             name: "Google Pixel 10",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-10-11.jpg", 
             description: "Next-gen AI integration and computational photography mastery.",
             specs: "RAM: 12GB | Storage: 256GB | Battery: 4970 mAh | Camera: 48MP Triple",
-            priceNGN: "₦1,290,000",
+            priceNGN: "₦1,250,000",
             review: "If you prioritize photography and a clean Android experience, nothing beats the Pixel. The new Tensor chip's AI features are game-changing for everyday tasks and editing photos on the fly.",
             gsmarenaUrl: "https://www.gsmarena.com/google_pixel_10_5g-13979.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-10-256-gb-black-3pgiCL3BM1hFMMvkumWrVYTs.html?page=1&pos=3&cur_pos=3&ads_per_page=15&ads_count=156&lid=zJjHrwfBWZ2xMwDw&indexPosition=2",
         },
         {
             name: "Redmi 15 5G",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", 
             description: "Affordable 5G speed and reliable performance for the masses.",
             specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
-            priceNGN: "₦295,000",
+            priceNGN: "₦290,000",
             review: "An absolute battery beast. You can push this phone for two full days without needing a charge. The camera is decent in good light, making this the go-to choice for budget endurance.",
             gsmarenaUrl: "https://www.gsmarena.com/xiaomi_redmi_15_5g-14036.php",
+            jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-xiaomi-redmi-15-5g-256-gb-black-1bbpcIWtjzBtpp4iAvRfSfdb.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=KTpfcb6rNhMvd-Pj&indexPosition=2",
         },
         {
             name: "Infinix Hot 60 Pro+",
@@ -441,24 +453,27 @@
             priceNGN: "₦260,000",
             review: "Great for mobile gaming on a budget. The display is bright and the included dedicated button is a joy to play with. Best value for gamers.",
             gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_60_pro+-14002.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-60-pro-128-gb-kTnBEf1rFYOJGjEoCNaRrGAj.html?page=1&pos=1&cur_pos=1&ads_per_page=3&ads_count=3&lid=ES7PM-EKaLlxZEpd&indexPosition=0",
         },
         {
             name: "Oppo A6 Pro",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
             description: "Sleek, lightweight design with rapid charging capability. Incredible device.",
             specs: "RAM: 8GB | Storage: 128GB | Battery: 6500 mAh | Camera: 50MP Triple",
-            priceNGN: "₦485,000",
+            priceNGN: "₦420,000",
             review: "The fastest charging in its class. Going from 0% to 100% in under 30 minutes is a lifesaver. It’s also incredibly thin and easy to hold, making it perfect for commuters.",
             gsmarenaUrl: "https://www.gsmarena.com/oppo_a6_pro_5g-14171.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-oppo-a6-pro-256-gb-blue-frq1OMDd7VdiZlsmmYpavbDs.html?page=1&pos=4&cur_pos=4&ads_per_page=5&ads_count=5&lid=fyCtXzCb3Bo79xQx&indexPosition=3",
         },
         {
             name: "Itel Super 26 Ultra",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", 
             description: "The essential budget phone focused on battery life and durability.",
             specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
-            priceNGN: "₦257,000",
+            priceNGN: "₦250,000",
             review: "Extremely durable and reliable. While not the fastest, its build quality means it can withstand everyday bumps and drops. Perfect if you need a reliable workhorse phone.",
             gsmarenaUrl: "https://www.gsmarena.com/itel_super_26_ultra-14128.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-s26-ultra-256-gb-gold-7u3ktBdLLGnfpvbVfxVQUMym.html?page=1&pos=1&cur_pos=1&ads_per_page=1&ads_count=1&lid=aJ2PdJkF8oJBwzaD&indexPosition=0",
         },
         // --- HONORABLE MENTIONS ---
         {
@@ -466,27 +481,30 @@
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg", 
             description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
             specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
-            priceNGN: "₦130,000",
+            priceNGN: "₦125,000",
             review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro (also known as the spark 40 c) is a solid all-rounder for everyday use (even if its camera won’t challenge the big players).",
             gsmarenaUrl: "https://www.gsmarena.com/tecno_spark_40c-14052.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-pop-10-pro-128-gb-jSNZH4kPHvkjyq0Wxpf2mF6q.html?page=1&pos=2&cur_pos=2&ads_per_page=3&ads_count=3&lid=kTEJTIQFdiKegH2m&indexPosition=1",
         },
         {
             name: "Infinix Hot 40",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg", 
             description: "A solid budget performer offering decent speed and a modern display for its price segment.",
             specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-            priceNGN: "₦210,000",
+            priceNGN: "₦200,000",
             review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
             gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_40-12732.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-40-256-gb-vdjlsPFFmIiy5mioY9c42Fa4.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=j9VlEAMRZ8QMQJc3&indexPosition=0",
         },
         {
             name: "Itel P65",
             imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg", 
             description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
             specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-            priceNGN: "₦130,000",
+            priceNGN: "₦129,000",
             review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
             gsmarenaUrl: "https://www.gsmarena.com/itel_p65-13258.php",
+            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-p65-128-gb-aCKR9t2FoUfAuKP9vw78c50V.html?page=1&pos=3&cur_pos=3&ads_per_page=6&ads_count=6&lid=VtX_Ze5wOOf2CGb6&indexPosition=2",
         },
     ];
 
@@ -517,7 +535,8 @@
         phones.forEach(phone => {
             const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
             const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
-            const gsmarenaLink = phone.gsmarenaUrl || '#'; // Get the new URL
+            const gsmarenaLink = phone.gsmarenaUrl || '#'; 
+            const jijiLink = phone.jijiUrl || '#'; // Get the new Jiji URL
             
             // Check if the title is the long one, and apply a class if so
             const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
@@ -543,12 +562,15 @@
                         ${initialReview}
                     </div>
                     
-                    <!-- NEW: GSMArena Link -->
+                    <!-- GSMArena Link -->
                     <a href="${gsmarenaLink}" target="_blank" class="review-link">
                         Check Full Specs on GSMArena &rarr;
                     </a>
 
-                    <div class="price-tag">${phone.priceNGN}</div>
+                    <!-- CHANGED: Price Tag is now a link to Jiji.ng -->
+                    <a href="${jijiLink}" target="_blank" class="price-tag price-link" aria-label="Find ${phone.name} on Jiji.ng">
+                        ${phone.priceNGN}
+                    </a>
                 </div>
             `;
             const cardWrapper = document.createElement('div');
@@ -557,8 +579,10 @@
             
             // Add click listener to show the message box
             cardElement.addEventListener('click', (e) => {
-                // Prevent modal from showing if the user clicks on the review box OR the new GSMArena link
-                if (e.target.classList.contains('user-review-display') || e.target.classList.contains('review-link')) {
+                // Prevent modal from showing if the user clicks on the review box, the GSMArena link, OR the new Jiji price link
+                if (e.target.classList.contains('user-review-display') || 
+                    e.target.classList.contains('review-link') ||
+                    e.target.classList.contains('price-tag')) { // <-- Added 'price-tag' check
                     return;
                 }
                 window.showMessage('Review Page Coming Soon!', 
@@ -579,4 +603,3 @@
   </script>
 </body>
 </html>
-
