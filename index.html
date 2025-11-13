@@ -181,6 +181,12 @@
         cursor: pointer;
     }
 
+    /* Styling for the image link wrapper */
+    .image-link {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
 
     footer {
       text-align: center;
@@ -330,7 +336,7 @@
 
   <header>
     <h1>Phones Weekly</h1>
-    <p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy!</p>
+    <p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
   </header>
 
   <main id="phone-reviews">
@@ -545,10 +551,14 @@
 
             const cardHtml = `
                 <div class="card" data-phone-name="${phone.name}">
-                    <img src="${phone.imageUrl}" 
-                         alt="${phone.name}" 
-                         onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
-                    >
+                    <!-- START OF NEW IMAGE LINK -->
+                    <a href="${phone.imageUrl}" target="_blank" class="image-link" aria-label="View full size image for ${phone.name}">
+                        <img src="${phone.imageUrl}" 
+                            alt="${phone.name}" 
+                            onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
+                        >
+                    </a>
+                    <!-- END OF NEW IMAGE LINK -->
                     <h2 class="${titleClass}">${phone.name}</h2>
                     <p>${phone.description}</p>
                     <div class="specs">
@@ -579,10 +589,13 @@
             
             // Add click listener to show the message box
             cardElement.addEventListener('click', (e) => {
-                // Prevent modal from showing if the user clicks on the review box, the GSMArena link, OR the new Jiji price link
+                // Prevent modal from showing if the user clicks on any specific link or interactive element:
+                // Review box, GSMArena link, Jiji price link, OR the NEW Image link (or the image inside it).
                 if (e.target.classList.contains('user-review-display') || 
                     e.target.classList.contains('review-link') ||
-                    e.target.classList.contains('price-tag')) { // <-- Added 'price-tag' check
+                    e.target.classList.contains('price-tag') ||
+                    e.target.classList.contains('image-link') ||
+                    e.target.tagName === 'IMG') { // Check if the image itself was clicked
                     return;
                 }
                 window.showMessage('Review Page Coming Soon!', 
