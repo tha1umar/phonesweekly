@@ -99,6 +99,11 @@
       font-weight: 600;
     }
 
+    /* NEW: Specific style for the long title */
+    .card h2.smaller-title {
+        font-size: 1.5rem;
+    }
+
     .card p {
       font-size: 1rem;
       opacity: 0.85;
@@ -513,6 +518,11 @@
             const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
             const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
             const gsmarenaLink = phone.gsmarenaUrl || '#'; // Get the new URL
+            
+            // Check if the title is the long one, and apply a class if so
+            const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
+            const titleClass = isSmallTitle ? 'smaller-title' : '';
+
 
             const cardHtml = `
                 <div class="card" data-phone-name="${phone.name}">
@@ -520,7 +530,7 @@
                          alt="${phone.name}" 
                          onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
                     >
-                    <h2>${phone.name}</h2>
+                    <h2 class="${titleClass}">${phone.name}</h2>
                     <p>${phone.description}</p>
                     <div class="specs">
                         ${phone.specs.split(' | ').join('<br>')}
