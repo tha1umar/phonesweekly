@@ -1,11 +1,12 @@
-<!DOCTYPE: html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
-  <!-- Load Inter Font --><link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Load Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <style>
@@ -313,6 +314,60 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* NEW: YouTube Links Section Styling */
+    .youtube-links-section {
+      text-align: center;
+      padding: 2rem 2rem 0;
+      max-width: 1000px; /* Constrain width for desktop */
+      margin: 0 auto;
+    }
+
+    .youtube-links-section h2 {
+        color: var(--primary-green);
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .channel-card {
+        display: block;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: transform 0.2s, background 0.2s;
+        text-align: left;
+    }
+
+    .channel-card:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.12);
+    }
+    
+    .channel-card h3 {
+        color: var(--primary-green);
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    
+    .channel-card p {
+        color: var(--text-light);
+        opacity: 0.85;
+        font-size: 0.95rem;
+        margin: 0;
+        line-height: 1.4;
+    }
+
     /* Media Queries for Mobile Adjustments */
     @media (max-width: 600px) {
       header {
@@ -328,6 +383,9 @@
       .form-placeholder {
         margin: 1rem auto;
         padding: 2rem 1rem;
+      }
+      .youtube-links-section {
+        padding: 1rem 1rem 0;
       }
     }
   </style>
@@ -347,10 +405,29 @@
     </div>
   </main>
 
+  <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
+  <section class="youtube-links-section">
+    <h2>Recommended Tech Channels</h2>
+    <div class="channel-grid">
+        <a href="https://www.youtube.com/results?search_query=tech+spurt" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 1">
+            <h3 class="channel-title">Reviews on high end and mid range devices</h3>
+            <p class="channel-description">Expect in-depth tech reviews, comparisons, unboxings and hands-on features with fresh new UK smartphones, laptops, wearables, apps and other new gadgets.</p>
+        </a>
+        <a href="https://www.youtube.com/@topphoneex" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Phone Breakdown Channel">
+            <h3 class="channel-title">Budget Phone Breakdown</h3>
+            <p class="channel-description">Specializes in affordable and mid-range devices, offering the best value picks for Nigerian buyers on a tight budget.</p>
+        </a>
+        <a href="https://www.youtube.com/@howtomen" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 3">
+            <h3 class="channel-title">Software & Tips Guy</h3>
+            <p class="channel-description">Covers mobile operating system updates, hidden features, and advanced tips for getting the most out of your phone.</p>
+        </a>
+    </div>
+  </section>
+
   <section class="form-placeholder">
     <h2>Share Your Feedback!</h2>
     <p>We rely on your suggestions to keep our reviews honest and relevant!</p>
-    <a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button">
+    <a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button" rel="noopener noreferrer">
       Open Suggestion Form
     </a>
   </section>
@@ -522,7 +599,6 @@
      * Fetches phone specification data. Returns the static data array.
      */
     async function fetchPhoneSpecs() {
-        // Simulating an async fetch operation, but returning local data instantly
         return phoneData; 
     }
 
@@ -542,7 +618,7 @@
             const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
             const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
             const gsmarenaLink = phone.gsmarenaUrl || '#'; 
-            const jijiLink = phone.jijiUrl || '#'; // Get the new Jiji URL
+            const jijiLink = phone.jijiUrl || '#'; 
             
             // Check if the title is the long one, and apply a class if so
             const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
@@ -552,7 +628,7 @@
             const cardHtml = `
                 <div class="card" data-phone-name="${phone.name}">
                     <!-- START OF NEW IMAGE LINK -->
-                    <a href="${phone.imageUrl}" target="_blank" class="image-link" aria-label="View full size image for ${phone.name}">
+                    <a href="${phone.imageUrl}" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="View full size image for ${phone.name}">
                         <img src="${phone.imageUrl}" 
                             alt="${phone.name}" 
                             onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
@@ -573,12 +649,12 @@
                     </div>
                     
                     <!-- GSMArena Link -->
-                    <a href="${gsmarenaLink}" target="_blank" class="review-link">
+                    <a href="${gsmarenaLink}" target="_blank" class="review-link" rel="noopener noreferrer">
                         Check Full Specs on GSMArena &rarr;
                     </a>
 
                     <!-- CHANGED: Price Tag is now a link to Jiji.ng -->
-                    <a href="${jijiLink}" target="_blank" class="price-tag price-link" aria-label="Find ${phone.name} on Jiji.ng">
+                    <a href="${jijiLink}" target="_blank" class="price-tag price-link" rel="noopener noreferrer" aria-label="Find ${phone.name} on Jiji.ng">
                         ${phone.priceNGN}
                     </a>
                 </div>
@@ -587,17 +663,18 @@
             cardWrapper.innerHTML = cardHtml.trim();
             const cardElement = cardWrapper.firstChild;
             
-            // Add click listener to show the message box
-            cardElement.addEventListener('click', (e) => {
-                // Prevent modal from showing if the user clicks on any specific link or interactive element:
-                // Review box, GSMArena link, Jiji price link, OR the NEW Image link (or the image inside it).
-                if (e.target.classList.contains('user-review-display') || 
-                    e.target.classList.contains('review-link') ||
-                    e.target.classList.contains('price-tag') ||
-                    e.target.classList.contains('image-link') ||
-                    e.target.tagName === 'IMG') { // Check if the image itself was clicked
-                    return;
-                }
+            // Get all interactive elements inside the card
+            const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag, .user-review-display');
+
+            // Add stopPropagation to all interactive elements to prevent the parent card's click event
+            interactiveElements.forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+            
+            // Add click listener to show the message box (This fires only if no specific link was clicked)
+            cardElement.addEventListener('click', () => {
                 window.showMessage('Review Page Coming Soon!', 
                     'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
             });
@@ -616,4 +693,3 @@
   </script>
 </body>
 </html>
-
