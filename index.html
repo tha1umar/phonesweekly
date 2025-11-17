@@ -601,6 +601,16 @@
 			// =========================================================================
 
 			/**
+			 * Converts a price string (e.g., "₦1,250,000") into a numeric value.
+			 * @param {string} priceString - The price string with currency and commas.
+			 * @returns {number} The numeric value of the price.
+			 */
+			function getPriceValue(priceString) {
+				// Remove '₦' and all commas, then parse as integer
+				return parseInt(priceString.replace('₦', '').replace(/,/g, ''), 10);
+			}
+
+			/**
 			 * Fetches phone specification data. Returns the static data array.
 			 */
 			async function fetchPhoneSpecs() {
@@ -610,7 +620,7 @@
 			}
 
 			/**
-			 * Renders the phone cards onto the page using only the static data.
+			 * Renders the phone cards onto the page using the provided data array.
 			 */
 			function renderCards(phones) {
 				const container = document.getElementById('phone-reviews');
@@ -695,11 +705,20 @@
 			}
 
 			/**
-			 * Orchestrates the data fetching and rendering process.
+			 * Orchestrates the data fetching and rendering process, now including sorting.
 			 */
 			async function fetchAndRenderPhones() {
 				const phones = await fetchPhoneSpecs();
-				renderCards(phones);
+				
+				// Sort the phones in descending order based on price (highest first)
+				const sortedPhones = phones.sort((a, b) => {
+					const priceA = getPriceValue(a.priceNGN);
+					const priceB = getPriceValue(b.priceNGN);
+					// Descending order: b - a
+					return priceB - priceA;
+				});
+
+				renderCards(sortedPhones);
 			}
 		});
 	</script>
