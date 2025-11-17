@@ -1,698 +1,707 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
-  <!-- Load Inter Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-green: #00e676; /* Light, vibrant green */
-      --dark-teal: #004d40;
-      --medium-teal: #009688;
-      --text-light: #fff;
-    }
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
+	<!-- Favicon: Green phone icon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
+	<!-- Load Inter Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--primary-green: #00e676; /* Light, vibrant green */
+			--primary-dark: #004d40; /* Dark Teal - Used for main background */
+			--medium-teal: #009688;
+			--text-light: #fff;
+		}
 
-    body {
-      font-family: 'Inter', sans-serif; /* Using Inter font */
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(120deg, var(--dark-teal), var(--medium-teal));
-      color: var(--text-light);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+		body {
+			font-family: 'Inter', sans-serif;
+			margin: 0;
+			padding: 0;
+			/* Use the primary dark color for the gradient background */
+			background: linear-gradient(120deg, var(--primary-dark), var(--medium-teal));
+			color: var(--text-light);
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
 
-    header {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(8px); /* Increased blur for better effect */
-    }
+		header {
+			text-align: center;
+			padding: 2.5rem 1rem;
+			background: rgba(0, 0, 0, 0.3);
+			backdrop-filter: blur(8px);
+		}
 
-    header h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-    }
+		header h1 {
+			margin: 0;
+			font-size: clamp(2rem, 5vw, 3rem);
+			font-weight: 700;
+		}
 
-    header p {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      opacity: 0.9;
-      font-weight: 300;
-    }
+		header p {
+			font-size: clamp(1rem, 2vw, 1.3rem);
+			opacity: 0.9;
+			font-weight: 300;
+		}
 
-    main {
-      flex-grow: 1; /* Allows main content to fill space */
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
+		main {
+			flex-grow: 1;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 2rem;
+			padding: 2rem;
+		}
 
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px; /* More rounded corners */
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-    }
+		.card {
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 20px;
+			padding: 1.5rem;
+			text-align: center;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+			transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+			cursor: pointer;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
 
-    .card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-      background: rgba(255, 255, 255, 0.15);
-    }
+		.card:hover {
+			transform: translateY(-5px) scale(1.02);
+			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+			background: rgba(255, 255, 255, 0.15);
+		}
 
-    .card img {
-      max-width: 100%;
-      border-radius: 15px; /* More rounded image corners */
-      aspect-ratio: 3 / 2;
-      object-fit: contain; /* Changed to 'contain' to fit without cropping */
-      margin-bottom: 1rem;
-      background-color: rgba(0, 0, 0, 0.1); /* Background for images */
-    }
-    
-    .card .specs {
-        font-size: 0.85rem;
-        opacity: 0.9;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        /* Updated style for multiline specs */
-        text-align: left;
-        padding-left: 20%; /* Pushes text inward slightly */
-        line-height: 1.6;
-    }
-    
-    .card h2 {
-      font-size: 1.6rem;
-      margin: 0;
-      font-weight: 600;
-    }
+		.card img {
+			max-width: 100%;
+			border-radius: 15px;
+			aspect-ratio: 3 / 2;
+			object-fit: contain;
+			margin-bottom: 1rem;
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+		
+		.card .specs {
+			font-size: 0.85rem;
+			opacity: 0.9;
+			margin-top: 0.5rem;
+			padding: 0.5rem;
+			background: rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			text-align: left;
+			padding-left: 20%;
+			line-height: 1.6;
+		}
+		
+		.card h2 {
+			font-size: 1.6rem;
+			margin: 0;
+			font-weight: 600;
+		}
 
-    /* NEW: Specific style for the long title */
-    .card h2.smaller-title {
-        font-size: 1.5rem;
-    }
+		.card h2.smaller-title {
+			font-size: 1.5rem;
+		}
 
-    .card p {
-      font-size: 1rem;
-      opacity: 0.85;
-      font-weight: 300;
-    }
-    
-    /* NEW: User Review Display Styling (Now just displays static content) */
-    .user-review-display {
-        font-family: 'Inter', sans-serif;
-        width: 100%;
-        height: 100px; /* Fixed height for aesthetic consistency */
-        padding: 10px;
-        margin-top: 1rem;
-        border-radius: 10px;
-        border: 1px solid var(--medium-teal);
-        background: rgba(255, 255, 255, 0.9);
-        color: var(--dark-teal);
-        box-sizing: border-box;
-        font-size: 0.9rem;
-        text-align: left;
-        overflow-y: auto; /* Allows scrolling for longer reviews */
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        line-height: 1.4;
-    }
-    
-    .review-placeholder {
-        color: #757575; /* Gray color for placeholder text */
-        font-style: italic;
-    }
+		.card p {
+			font-size: 1rem;
+			opacity: 0.85;
+			font-weight: 300;
+		}
+		
+		.user-review-display {
+			font-family: 'Inter', sans-serif;
+			width: 100%;
+			height: 100px;
+			padding: 10px;
+			margin-top: 1rem;
+			border-radius: 10px;
+			border: 1px solid var(--medium-teal);
+			background: rgba(255, 255, 255, 0.9);
+			color: var(--primary-dark); /* Using primary-dark for contrast */
+			box-sizing: border-box;
+			font-size: 0.9rem;
+			text-align: left;
+			overflow-y: auto;
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+			line-height: 1.4;
+		}
+		
+		.review-placeholder {
+			color: #757575;
+			font-style: italic;
+		}
 
-    /* NEW: GSMArena Link Styling */
-    .review-link {
-        display: block;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem; /* Space before price tag */
-        padding: 0.4rem 1rem;
-        background-color: var(--primary-green);
-        color: var(--dark-teal);
-        font-weight: 600;
-        font-size: 0.85rem;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background-color 0.2s, transform 0.2s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        width: fit-content; /* Make the link button wrap its content */
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .review-link:hover {
-        background-color: #00c853; 
-        transform: translateY(-1px);
-    }
-    
-    /* Price Tag styling - Now applied to an <a> tag */
-    .price-tag {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.6rem 2rem; 
-        background-color: var(--primary-green);
-        color: var(--dark-teal);
-        font-weight: 800; 
-        font-size: 1.2rem; 
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        user-select: none;
-        text-align: center; 
-        text-decoration: none; /* Crucial for making it look like a button */
-        transition: transform 0.2s, box-shadow 0.2s; /* Added transition for hover effect */
-    }
-    
-    .price-tag:hover {
-        transform: translateY(-2px); /* Lift slightly on hover */
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
-        cursor: pointer;
-    }
+		.review-link {
+			display: block;
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
+			padding: 0.4rem 1rem;
+			background-color: var(--primary-green);
+			color: var(--primary-dark);
+			font-weight: 600;
+			font-size: 0.85rem;
+			border-radius: 8px;
+			text-decoration: none;
+			transition: background-color 0.2s, transform 0.2s;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			width: fit-content;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.review-link:hover {
+			background-color: #00c853;	
+			transform: translateY(-1px);
+		}
+		
+		/* Price Tag styling - Now applied to an <a> tag */
+		.price-tag {
+			display: inline-block;
+			margin-top: 1rem;
+			padding: 0.6rem 2rem;	
+			background-color: var(--primary-green);
+			color: var(--primary-dark);
+			font-weight: 800;	
+			font-size: 1.2rem;	
+			border-radius: 12px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			user-select: none;
+			text-align: center;	
+			text-decoration: none;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+		
+		.price-tag:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+			cursor: pointer;
+		}
 
-    /* Styling for the image link wrapper */
-    .image-link {
-        display: block;
-        margin-bottom: 1rem;
-    }
+		/* Styling for the image link wrapper */
+		.image-link {
+			display: block;
+			margin-bottom: 1rem;
+		}
 
 
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: auto; /* Pushes footer to the bottom */
-      background: rgba(0, 0, 0, 0.4);
-      font-size: 0.9rem;
-    }
+		footer {
+			text-align: center;
+			padding: 1.5rem 1rem;
+			/* margin-top: auto; (Handled by body flex layout) */
+			background: rgba(0, 0, 0, 0.4);
+			font-size: 0.9rem;
+		}
 
-    footer p {
-      margin: 0.5rem 0; /* Add some vertical space between footer paragraphs */
-    }
+		footer p {
+			margin: 0.5rem 0;
+		}
 
-    footer a {
-      color: var(--primary-green);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    
-    /* Updated .form-placeholder to center it and constrain width */
-    .form-placeholder {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 20px;
-      padding: 3rem;
-      text-align: center;
-      margin: 2rem auto; /* Added auto margins for centering */
-      max-width: 600px; /* Added max-width to control size */
-      font-size: 1rem;
-      color: var(--text-light);
-      border: 1px dashed rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Feedback Button Styling */
-    .feedback-button {
-        display: inline-block;
-        padding: 0.8rem 2.5rem;
-        margin-top: 1.5rem;
-        background-color: var(--primary-green);
-        color: var(--dark-teal);
-        font-weight: 800;
-        font-size: 1.1rem;
-        border-radius: 10px;
-        text-decoration: none;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        transition: transform 0.2s, background-color 0.2s;
-    }
+		footer a {
+			color: var(--primary-green);
+			text-decoration: none;
+			font-weight: 500;
+		}
+		
+		.form-placeholder {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 20px;
+			padding: 3rem;
+			text-align: center;
+			margin: 2rem auto;
+			max-width: 600px;
+			font-size: 1rem;
+			color: var(--text-light);
+			border: 1px dashed rgba(255, 255, 255, 0.3);
+		}
+		
+		.feedback-button {
+			display: inline-block;
+			padding: 0.8rem 2.5rem;
+			margin-top: 1.5rem;
+			background-color: var(--primary-green);
+			color: var(--primary-dark);
+			font-weight: 800;
+			font-size: 1.1rem;
+			border-radius: 10px;
+			text-decoration: none;
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+			transition: transform 0.2s, background-color 0.2s;
+		}
 
-    .feedback-button:hover {
-        background-color: #00c853; /* slightly brighter green */
-        transform: translateY(-2px) scale(1.02);
-    }
-    
-    /* Custom Modal/Message Box Styling */
-    .message-box {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        display: none; /* Hidden by default */
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    
-    .message-content {
-        background: linear-gradient(135deg, var(--dark-teal), #00695c);
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        text-align: center;
-        max-width: 90%;
-        width: 400px;
-        border: 2px solid var(--primary-green);
-        transform: scale(0.9);
-        opacity: 0;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+		.feedback-button:hover {
+			background-color: #00c853;
+			transform: translateY(-2px) scale(1.02);
+		}
+		
+		/* Custom Modal/Message Box Styling */
+		.message-box {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: none;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+		
+		.message-content {
+			background: linear-gradient(135deg, var(--primary-dark), #00695c);
+			padding: 2rem;
+			border-radius: 15px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+			text-align: center;
+			max-width: 90%;
+			width: 400px;
+			border: 2px solid var(--primary-green);
+			transform: scale(0.9);
+			opacity: 0;
+			transition: transform 0.3s ease, opacity 0.3s ease;
+		}
 
-    .message-box.active .message-content {
-        transform: scale(1);
-        opacity: 1;
-    }
-    
-    .message-content h3 {
-        color: var(--primary-green);
-        margin-top: 0;
-        font-size: 1.5rem;
-    }
-    
-    .message-content p {
-        margin-bottom: 1.5rem;
-    }
-    
-    .message-close-button {
-        background-color: var(--primary-green);
-        color: var(--dark-teal);
-        font-weight: 700;
-        padding: 0.5rem 1.5rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
-    
-    .message-close-button:hover {
-        background-color: #00c853;
-    }
+		.message-box.active .message-content {
+			transform: scale(1);
+			opacity: 1;
+		}
+		
+		.message-content h3 {
+			color: var(--primary-green);
+			margin-top: 0;
+			font-size: 1.5rem;
+		}
+		
+		.message-content p {
+			margin-bottom: 1.5rem;
+		}
+		
+		.message-close-button {
+			background-color: var(--primary-green);
+			color: var(--primary-dark);
+			font-weight: 700;
+			padding: 0.5rem 1.5rem;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: background-color 0.2s;
+		}
+		
+		.message-close-button:hover {
+			background-color: #00c853;
+		}
 
-    /* Loading Spinner Styles */
-    .spinner {
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top: 4px solid var(--primary-green);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto 0;
-    }
+		/* Loading Spinner Styles */
+		.spinner {
+			border: 4px solid rgba(255, 255, 255, 0.3);
+			border-top: 4px solid var(--primary-green);
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			animation: spin 1s linear infinite;
+			margin: 20px auto 0;
+		}
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
 
-    /* NEW: YouTube Links Section Styling */
-    .youtube-links-section {
-      text-align: center;
-      padding: 2rem 2rem 0;
-      max-width: 1000px; /* Constrain width for desktop */
-      margin: 0 auto;
-    }
+		/* YouTube Links Section Styling */
+		.youtube-links-section {
+			text-align: center;
+			padding: 2rem 2rem 0;
+			max-width: 1000px;
+			margin: 0 auto;
+		}
 
-    .youtube-links-section h2 {
-        color: var(--primary-green);
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-    }
+		.youtube-links-section h2 {
+			color: var(--primary-green);
+			margin-bottom: 1.5rem;
+			font-size: 2rem;
+		}
 
-    .channel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
+		.channel-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 1.5rem;
+			margin-bottom: 2rem;
+		}
 
-    .channel-card {
-        display: block;
-        text-decoration: none;
-        background: rgba(255, 255, 255, 0.08);
-        padding: 1.5rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        transition: transform 0.2s, background 0.2s;
-        text-align: left;
-    }
+		.channel-card {
+			display: block;
+			text-decoration: none;
+			background: rgba(255, 255, 255, 0.08);
+			padding: 1.5rem;
+			border-radius: 15px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			transition: transform 0.2s, background 0.2s;
+			text-align: left;
+		}
 
-    .channel-card:hover {
-        transform: translateY(-3px);
-        background: rgba(255, 255, 255, 0.12);
-    }
-    
-    .channel-card h3 {
-        color: var(--primary-green);
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-size: 1.2rem;
-        font-weight: 700;
-    }
-    
-    .channel-card p {
-        color: var(--text-light);
-        opacity: 0.85;
-        font-size: 0.95rem;
-        margin: 0;
-        line-height: 1.4;
-    }
+		.channel-card:hover {
+			transform: translateY(-3px);
+			background: rgba(255, 255, 255, 0.12);
+		}
+		
+		.channel-card h3 {
+			color: var(--primary-green);
+			margin-top: 0;
+			margin-bottom: 0.5rem;
+			font-size: 1.2rem;
+			font-weight: 700;
+		}
+		
+		.channel-card p {
+			color: var(--text-light);
+			opacity: 0.85;
+			font-size: 0.95rem;
+			margin: 0;
+			line-height: 1.4;
+		}
 
-    /* Media Queries for Mobile Adjustments */
-    @media (max-width: 600px) {
-      header {
-        padding: 1.5rem 1rem;
-      }
-      main {
-        padding: 1rem;
-        gap: 1.5rem;
-      }
-      .card {
-        padding: 1rem;
-      }
-      .form-placeholder {
-        margin: 1rem auto;
-        padding: 2rem 1rem;
-      }
-      .youtube-links-section {
-        padding: 1rem 1rem 0;
-      }
-    }
-  </style>
+		/* Media Queries for Mobile Adjustments */
+		@media (max-width: 600px) {
+			header {
+				padding: 1.5rem 1rem;
+			}
+			main {
+				padding: 1rem;
+				gap: 1.5rem;
+			}
+			.card {
+				padding: 1rem;
+			}
+			.form-placeholder {
+				margin: 1rem auto;
+				padding: 2rem 1rem;
+			}
+			.youtube-links-section {
+				padding: 1rem 1rem 0;
+			}
+		}
+	</style>
 </head>
 <body>
 
-  <header>
-    <h1>Phones Weekly</h1>
-    <p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
-  </header>
+	<header>
+		<h1>Phones Weekly</h1>
+		<p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
+	</header>
 
-  <main id="phone-reviews">
-    <!-- Dynamic Content Area -->
-    <div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
-        Loading phone data...
-        <div class="spinner"></div>
-    </div>
-  </main>
+	<main id="phone-reviews">
+		<!-- Phone Cards will be rendered here -->
+		<div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
+			Loading phone data...
+			<div class="spinner"></div>
+		</div>
+	</main>
 
-  <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
-  <section class="youtube-links-section">
-    <h2>Recommended Tech YouTube Channels</h2>
-    <div class="channel-grid">
-        <a href="https://www.youtube.com/@TechSpurt" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 1">
-            <h3 class="channel-title">Reviews on high end and mid range devices</h3>
-            <p class="channel-description">Expect in-depth tech reviews, comparisons, unboxings and hands-on features with fresh new UK smartphones, laptops, wearables, apps and other new gadgets.</p>
-        </a>
-        <a href="https://www.youtube.com/@topphoneex" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Phone Breakdown Channel">
-            <h3 class="channel-title">Budget Phone Breakdown</h3>
-            <p class="channel-description">Specializes in affordable and mid-range devices, offering the best value picks for Nigerian buyers on a tight budget.</p>
-        </a>
-        <a href="https://www.youtube.com/@howtomen" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 3">
-            <h3 class="channel-title">Software & Tips Guy</h3>
-            <p class="channel-description">Covers mobile operating system updates, hidden features, and advanced tips for getting the most out of your phone.</p>
-        </a>
-    </div>
-  </section>
+	<!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
+	<section class="youtube-links-section">
+		<h2>Recommended Tech YouTube Channels</h2>
+		<div class="channel-grid">
+			<a href="https://www.youtube.com/@TechSpurt" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 1">
+				<h3 class="channel-title">Reviews on high end and mid range devices</h3>
+				<p class="channel-description">Expect in-depth tech reviews, comparisons, unboxings and hands-on features with fresh new UK smartphones, laptops, wearables, apps and other new gadgets.</p>
+			</a>
+			<a href="https://www.youtube.com/@topphoneex" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Phone Breakdown Channel">
+				<h3 class="channel-title">Budget Phone Breakdown</h3>
+				<p class="channel-description">Specializes in affordable and mid-range devices, offering the best value picks for Nigerian buyers on a tight budget.</p>
+			</a>
+			<a href="https://www.youtube.com/@howtomen" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 3">
+				<h3 class="channel-title">Software & Tips Guy</h3>
+				<p class="channel-description">Covers mobile operating system updates, hidden features, and advanced tips for getting the most out of your phone.</p>
+			</a>
+		</div>
+	</section>
 
-  <section class="form-placeholder">
-    <h2>Share Your Feedback!</h2>
-    <p>We rely on your suggestions to keep our reviews honest and relevant!</p>
-    <a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button" rel="noopener noreferrer">
-      Open Suggestion Form
-    </a>
-  </section>
+	<!-- FEEDBACK SECTION -->
+	<section class="form-placeholder">
+		<h2>Share Your Feedback!</h2>
+		<p>We rely on your suggestions to keep our reviews honest and relevant!</p>
+		<a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button" rel="noopener noreferrer">
+			Open Suggestion Form
+		</a>
+	</section>
 
-  <footer>
-    <p>For more questions and inquiries about any of these devices, including direct shops to get them at the best prices in Abuja, please send a WhatsApp message to **08165481152**.</p>
-    <p>Subject should be **(Phones weekly)**.</p>
-    <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
-  </footer>
+	<footer>
+		<p>For more questions and inquiries about any of these devices, including direct shops to get them at the best prices in Abuja, please send a WhatsApp message to **08165481152**.</p>
+		<p>Subject should be **(Phones weekly)**.</p>
+		<p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
+	</footer>
 
-  <!-- Custom Message Box for simulating 'Full Review' page -->
-  <div id="messageBox" class="message-box">
-    <div class="message-content">
-      <h3 id="messageTitle">Review Page Coming Soon!</h3>
-      <p id="messageText">You clicked to view the full review for **Phone Name**. This feature is under development. Check back next week!</p>
-      <button id="closeButton" class="message-close-button">Close</button>
-    </div>
-  </div>
+	<!-- Custom Message Box/Modal -->
+	<div id="messageBox" class="message-box">
+		<div class="message-content">
+			<h3 id="messageTitle">Review Page Coming Soon!</h3>
+			<p id="messageText">You clicked to view the full review for **Phone Name**. This feature is under development. Check back next week!</p>
+			<button id="closeButton" class="message-close-button">Close</button>
+		</div>
+	</div>
 
-  <script>
-    // --- Polyfills and Constants ---
-    const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
-    // This text is only used if no review is present in the static data.
-    const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one."; 
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
 
-    document.addEventListener('DOMContentLoaded', () => {
+			// =========================================================================
+			// === 🛠️ QUICK EDIT ZONE: PHONE DATA & CONSTANTS 🛠️ ===
+			// =========================================================================
 
-        // --- Custom Message Box Logic ---
-        const messageBox = document.getElementById('messageBox');
-        const messageTitle = document.getElementById('messageTitle');
-        const messageText = document.getElementById('messageText');
-        const closeButton = document.getElementById('closeButton');
-        
-        window.showMessage = (title, text) => {
-            messageTitle.textContent = title;
-            messageText.innerHTML = text;
-            messageBox.style.display = 'flex';
-            setTimeout(() => {
-                messageBox.classList.add('active');
-            }, 10);
-        };
+			const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
+			const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one.";	
 
-        const hideMessage = () => {
-            messageBox.classList.remove('active');
-            setTimeout(() => {
-                messageBox.style.display = 'none';
-            }, 300);
-        };
+			const phoneData = [
+				{
+					name: "IPhone 16 pro max",	
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-16-pro-max-1.jpg",	
+					description: "I dare say, the best iphone to date, yes, to date.",	
+					specs: "RAM: 8GB | Storage: 256GB | Battery: 4685 mAh | Camera: 48MP Dual",
+					priceNGN: "₦1,650,000",
+					review: "The iPhone 16 Pro Max delivers top-tier performance, an excellent camera system, and longer battery life, all wrapped in a sleek titanium body. Its massive 6.9-inch display is perfect for creators but makes it bulky for everyday use. Overall, it’s a powerhouse phone—ideal if you’ll fully use its camera and performance, less so if you just want a regular upgrade.",
+					gsmarenaUrl: "https://www.gsmarena.com/apple_iphone_16_pro_max-13123.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-apple-iphone-16-pro-max-256-gb-6vZZrtsRiS0krddYNkmpTGA1.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=83&lid=LQGTKbjOtvxMCgJ0&indexPosition=0",	
+				},
+				{
+					name: "Google Pixel 9a",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-9a-1.jpg",	
+					description: "Based on functionality and price, arguably the best pixel phone ever",
+					specs: "RAM: 8GB | Storage: 128GB | Battery: 5100 mAh | Camera: 48MP Triple",
+					priceNGN: "₦1,250,000",
+					review: "If you prioritize photography and a clean Android experience, nothing beats the Pixel. The new Tensor chip's AI features are game-changing for everyday tasks and editing photos on the fly.",
+					gsmarenaUrl: "https://www.gsmarena.com/res.php3?sSearch=pixel+9a",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-mobile-phone-128-gb-pink-2UowDAAmF0cAe5TpK3QlPsRX.html?page=1&pos=8&cur_pos=8&ads_per_page=8&ads_count=8&lid=GDWAx4EVNC2es7aG&indexPosition=7",
+				},
+				{
+					name: "Redmi 15 5G",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg",	
+					description: "Affordable 5G speed and reliable performance for the masses.",
+					specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
+					priceNGN: "₦290,000",
+					review: "An absolute battery beast. You can push this phone for two full days without needing a charge. The camera is decent in good light, making this the go-to choice for budget endurance.",
+					gsmarenaUrl: "https://www.gsmarena.com/xiaomi_redmi_15_5g-14036.php",
+					jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-xiaomi-redmi-15-5g-256-gb-black-1bbpcIWtjzBtpp4iAvRfSfdb.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=KTpfcb6rNhMvd-Pj&indexPosition=2",
+				},
+				{
+					name: "Infinix Hot 60 Pro+",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg",	
+					description: "High-power gaming and massive endurance at a budget price.",
+					specs: "RAM: 8GB | Storage: 256GB | Battery: 5160 mAh | Camera: 50MP Main",
+					priceNGN: "₦260,000",
+					review: "Great for mobile gaming on a budget. The display is bright and the included dedicated button is a joy to play with. Best value for gamers.",
+					gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_60_pro+-14002.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-60-pro-128-gb-kTnBEf1rFYOJGjEoCNaRrGAj.html?page=1&pos=1&cur_pos=1&ads_per_page=3&ads_count=3&lid=ES7PM-EKaLlxZEpd&indexPosition=0",
+				},
+				{
+					name: "Oppo A6 Pro",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
+					description: "Sleek, lightweight design with rapid charging capability. Incredible device.",
+					specs: "RAM: 8GB | Storage: 128GB | Battery: 6500 mAh | Camera: 50MP Triple",
+					priceNGN: "₦420,000",
+					review: "The fastest charging in its class. Going from 0% to 100% in under 30 minutes is a lifesaver. It’s also incredibly thin and easy to hold, making it perfect for commuters.",
+					gsmarenaUrl: "https://www.gsmarena.com/oppo_a6_pro_5g-14171.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-oppo-a6-pro-256-gb-blue-frq1OMDd7VdiZlsmmYpavbDs.html?page=1&pos=4&cur_pos=4&ads_per_page=5&ads_count=5&lid=fyCtXzCb3Bo79xQx&indexPosition=3",
+				},
+				{
+					name: "Itel Super 26 Ultra",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg",	
+					description: "The essential budget phone focused on battery life and durability.",
+					specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
+					priceNGN: "₦250,000",
+					review: "Extremely durable and reliable. While not the fastest, its build quality means it can withstand everyday bumps and drops. Perfect if you need a reliable workhorse phone.",
+					gsmarenaUrl: "https://www.gsmarena.com/itel_super_26_ultra-14128.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-s26-ultra-256-gb-gold-7u3ktBdLLGnfpvbVfxVQUMym.html?page=1&pos=1&cur_pos=1&ads_per_page=1&ads_count=1&lid=aJ2PdJkF8oJBwzaD&indexPosition=0",
+				},
+				{
+					name: "iPhone 13",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg",
+					description: "The ideal mid-range phone, balancing premium features with an approachable price.",
+					specs: "RAM: 4GB | Storage: 126GB | Battery: 3240 mAh | Camera: 12MP",
+					priceNGN: "₦480,000",
+					review: "Smooth, powerful, and creator-friendly. Although the battery might be an issue—typical iPhone life—it can still comfortably last a full day with moderate use, making it a dependable choice for content creation..",
+					gsmarenaUrl: "https://www.gsmarena.com/apple_iphone_13-11103.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-apple-iphone-13-128-gb-white-nBy7bHb6T4rUeCLaM6izQWz0.html?page=1&pos=2&cur_pos=2&ads_per_page=20&ads_count=2277&lid=OkJ4p11WaqBFvWUX&indexPosition=1", // Placeholder Jiji URL
+				},
+				// --- HONORABLE MENTIONS (3 entries remain here) ---
+				{
+					name: "Tecno Pop 10 Pro",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg",	
+					description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
+					specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
+					priceNGN: "₦125,000",
+					review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro (also known as the spark 40 c) is a solid all-rounder for everyday use (even if its camera won’t challenge the big players).",
+					gsmarenaUrl: "https://www.gsmarena.com/tecno_spark_40c-14052.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-pop-10-pro-128-gb-jSNZH4kPHvkjyq0Wxpf2mF6q.html?page=1&pos=2&cur_pos=2&ads_per_page=3&ads_count=3&lid=kTEJTIQFdiKegH2m&indexPosition=1",
+				},
+				{
+					name: "Infinix Hot 40",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg",	
+					description: "A solid budget performer offering decent speed and a modern display for its price segment.",
+					specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
+					priceNGN: "₦200,000",
+					review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
+					gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_40-12732.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-40-256-gb-vdjlsPFFmIiy5mioY9c42Fa4.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=j9VlEAMRZ8QMQJc3&indexPosition=0",
+				},
+				{
+					name: "Itel P65",
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg",	
+					description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
+					specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
+					priceNGN: "₦129,000",
+					review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
+					gsmarenaUrl: "https://www.gsmarena.com/itel_p65-13258.php",
+					jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-p65-128-gb-aCKR9t2FoUfAuKP9vw78c50V.html?page=1&pos=3&cur_pos=3&ads_per_page=6&ads_count=6&lid=VtX_Ze5wOOf2CGb6&indexPosition=2",
+				},
+			];
 
-        closeButton.addEventListener('click', hideMessage);
-        
-        messageBox.addEventListener('click', (event) => {
-            if (event.target === messageBox) {
-                hideMessage();
-            }
-        });
-        
-        // Start fetching and rendering the static data
-        fetchAndRenderPhones();
-    });
+			// =========================================================================
+			// === CUSTOM MESSAGE BOX LOGIC ===
+			// =========================================================================
+			const messageBox = document.getElementById('messageBox');
+			const messageTitle = document.getElementById('messageTitle');
+			const messageText = document.getElementById('messageText');
+			const closeButton = document.getElementById('closeButton');
+			
+			// Utility function for showing the modal
+			const showMessage = (title, text) => {
+				messageTitle.textContent = title;
+				messageText.innerHTML = text;
+				messageBox.style.display = 'flex';
+				setTimeout(() => {
+					messageBox.classList.add('active');
+				}, 10);
+			};
 
-    // =========================================================================
-    // === 🛠️ QUICK EDIT ZONE: PHONE DATA 🛠️ ===
-    // =========================================================================
-    // To change a phone's review or its GSMArena link, edit the properties below.
+			// Utility function for hiding the modal
+			const hideMessage = () => {
+				messageBox.classList.remove('active');
+				setTimeout(() => {
+					messageBox.style.display = 'none';
+				}, 300);
+			};
 
-    const phoneData = [
-        {
-            name: "IPhone 16 pro max", 
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-16-pro-max-1.jpg", 
-            description: "I dare say, the best iphone to date, yes, to date.", 
-            specs: "RAM: 8GB | Storage: 256GB | Battery: 4685 mAh | Camera: 48MP Dual",
-            priceNGN: "₦1,650,000",
-            // --- EDIT THIS LINE TO CHANGE THE REVIEW TEXT ---
-            review: "The iPhone 16 Pro Max delivers top-tier performance, an excellent camera system, and longer battery life, all wrapped in a sleek titanium body. Its massive 6.9-inch display is perfect for creators but makes it bulky for everyday use. Overall, it’s a powerhouse phone—ideal if you’ll fully use its camera and performance, less so if you just want a regular upgrade.",
-            // --- GSMArena URL ---
-            gsmarenaUrl: "https://www.gsmarena.com/apple_iphone_16_pro_max-13123.php",
-            // --- NEW: Jiji URL (Edit this to link to a specific Jiji listing!) ---
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-apple-iphone-16-pro-max-256-gb-6vZZrtsRiS0krddYNkmpTGA1.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=83&lid=LQGTKbjOtvxMCgJ0&indexPosition=0", 
-        },
-        {
-            name: "Google Pixel 9a",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-9a-1.jpg", 
-            description: "Based on functionality and price, arguably the best pixel phone ever",
-            specs: "RAM: 8GB | Storage: 128GB | Battery: 5100 mAh | Camera: 48MP Triple",
-            priceNGN: "₦1,250,000",
-            review: "If you prioritize photography and a clean Android experience, nothing beats the Pixel. The new Tensor chip's AI features are game-changing for everyday tasks and editing photos on the fly.",
-            gsmarenaUrl: "https://www.gsmarena.com/res.php3?sSearch=pixel+9a",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-mobile-phone-128-gb-pink-2UowDAAmF0cAe5TpK3QlPsRX.html?page=1&pos=8&cur_pos=8&ads_per_page=8&ads_count=8&lid=GDWAx4EVNC2es7aG&indexPosition=7",
-        },
-        {
-            name: "Redmi 15 5G",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg", 
-            description: "Affordable 5G speed and reliable performance for the masses.",
-            specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
-            priceNGN: "₦290,000",
-            review: "An absolute battery beast. You can push this phone for two full days without needing a charge. The camera is decent in good light, making this the go-to choice for budget endurance.",
-            gsmarenaUrl: "https://www.gsmarena.com/xiaomi_redmi_15_5g-14036.php",
-            jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-xiaomi-redmi-15-5g-256-gb-black-1bbpcIWtjzBtpp4iAvRfSfdb.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=KTpfcb6rNhMvd-Pj&indexPosition=2",
-        },
-        {
-            name: "Infinix Hot 60 Pro+",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg", 
-            description: "High-power gaming and massive endurance at a budget price.",
-            specs: "RAM: 8GB | Storage: 256GB | Battery: 5160 mAh | Camera: 50MP Main",
-            priceNGN: "₦260,000",
-            review: "Great for mobile gaming on a budget. The display is bright and the included dedicated button is a joy to play with. Best value for gamers.",
-            gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_60_pro+-14002.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-60-pro-128-gb-kTnBEf1rFYOJGjEoCNaRrGAj.html?page=1&pos=1&cur_pos=1&ads_per_page=3&ads_count=3&lid=ES7PM-EKaLlxZEpd&indexPosition=0",
-        },
-        {
-            name: "Oppo A6 Pro",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-3.jpg",
-            description: "Sleek, lightweight design with rapid charging capability. Incredible device.",
-            specs: "RAM: 8GB | Storage: 128GB | Battery: 6500 mAh | Camera: 50MP Triple",
-            priceNGN: "₦420,000",
-            review: "The fastest charging in its class. Going from 0% to 100% in under 30 minutes is a lifesaver. It’s also incredibly thin and easy to hold, making it perfect for commuters.",
-            gsmarenaUrl: "https://www.gsmarena.com/oppo_a6_pro_5g-14171.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-oppo-a6-pro-256-gb-blue-frq1OMDd7VdiZlsmmYpavbDs.html?page=1&pos=4&cur_pos=4&ads_per_page=5&ads_count=5&lid=fyCtXzCb3Bo79xQx&indexPosition=3",
-        },
-        {
-            name: "Itel Super 26 Ultra",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg", 
-            description: "The essential budget phone focused on battery life and durability.",
-            specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
-            priceNGN: "₦250,000",
-            review: "Extremely durable and reliable. While not the fastest, its build quality means it can withstand everyday bumps and drops. Perfect if you need a reliable workhorse phone.",
-            gsmarenaUrl: "https://www.gsmarena.com/itel_super_26_ultra-14128.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-s26-ultra-256-gb-gold-7u3ktBdLLGnfpvbVfxVQUMym.html?page=1&pos=1&cur_pos=1&ads_per_page=1&ads_count=1&lid=aJ2PdJkF8oJBwzaD&indexPosition=0",
-        },
-        // --- HONORABLE MENTIONS ---
-        {
-            name: "Tecno Pop 10 Pro",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg", 
-            description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
-            specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
-            priceNGN: "₦125,000",
-            review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro (also known as the spark 40 c) is a solid all-rounder for everyday use (even if its camera won’t challenge the big players).",
-            gsmarenaUrl: "https://www.gsmarena.com/tecno_spark_40c-14052.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-pop-10-pro-128-gb-jSNZH4kPHvkjyq0Wxpf2mF6q.html?page=1&pos=2&cur_pos=2&ads_per_page=3&ads_count=3&lid=kTEJTIQFdiKegH2m&indexPosition=1",
-        },
-        {
-            name: "Infinix Hot 40",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg", 
-            description: "A solid budget performer offering decent speed and a modern display for its price segment.",
-            specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-            priceNGN: "₦200,000",
-            review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
-            gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_40-12732.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-40-256-gb-vdjlsPFFmIiy5mioY9c42Fa4.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=j9VlEAMRZ8QMQJc3&indexPosition=0",
-        },
-        {
-            name: "Itel P65",
-            imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg", 
-            description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
-            specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-            priceNGN: "₦129,000",
-            review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
-            gsmarenaUrl: "https://www.gsmarena.com/itel_p65-13258.php",
-            jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-itel-p65-128-gb-aCKR9t2FoUfAuKP9vw78c50V.html?page=1&pos=3&cur_pos=3&ads_per_page=6&ads_count=6&lid=VtX_Ze5wOOf2CGb6&indexPosition=2",
-        },
-    ];
+			closeButton.addEventListener('click', hideMessage);
+			
+			// Close modal when clicking outside the content area
+			messageBox.addEventListener('click', (event) => {
+				if (event.target === messageBox) {
+					hideMessage();
+				}
+			});
+			
+			// Start fetching and rendering the static data
+			fetchAndRenderPhones();
 
-    // =========================================================================
-    // === CORE RENDERING FUNCTIONS ===
-    // =========================================================================
+			// =========================================================================
+			// === CORE RENDERING FUNCTIONS ===
+			// =========================================================================
 
-    /**
-     * Fetches phone specification data. Returns the static data array.
-     */
-    async function fetchPhoneSpecs() {
-        return phoneData; 
-    }
+			/**
+			 * Fetches phone specification data. Returns the static data array.
+			 */
+			async function fetchPhoneSpecs() {
+				// Simulate a network delay (for testing the loading indicator)
+				await new Promise(resolve => setTimeout(resolve, 500));
+				return phoneData;	
+			}
 
-    /**
-     * Renders the phone cards onto the page using only the static data.
-     */
-    function renderCards(phones) {
-        const container = document.getElementById('phone-reviews');
-        container.innerHTML = ''; 
+			/**
+			 * Renders the phone cards onto the page using only the static data.
+			 */
+			function renderCards(phones) {
+				const container = document.getElementById('phone-reviews');
+				container.innerHTML = '';	// Clear loading indicator
 
-        if (phones.length === 0) {
-            container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews available yet.</p>';
-            return;
-        }
+				if (phones.length === 0) {
+					container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews available yet.</p>';
+					return;
+				}
 
-        phones.forEach(phone => {
-            const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
-            const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
-            const gsmarenaLink = phone.gsmarenaUrl || '#'; 
-            const jijiLink = phone.jijiUrl || '#'; 
-            
-            // Check if the title is the long one, and apply a class if so
-            const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
-            const titleClass = isSmallTitle ? 'smaller-title' : '';
+				phones.forEach(phone => {
+					const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
+					const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
+					const gsmarenaLink = phone.gsmarenaUrl || '#';	
+					const jijiLink = phone.jijiUrl || '#';	
+					
+					// Apply smaller title class for longer names like "Infinix Hot 60 Pro+"
+					const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
+					const titleClass = isSmallTitle ? 'smaller-title' : '';
 
 
-            const cardHtml = `
-                <div class="card" data-phone-name="${phone.name}">
-                    <!-- START OF NEW IMAGE LINK -->
-                    <a href="${phone.imageUrl}" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="View full size image for ${phone.name}">
-                        <img src="${phone.imageUrl}" 
-                            alt="${phone.name}" 
-                            onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
-                        >
-                    </a>
-                    <!-- END OF NEW IMAGE LINK -->
-                    <h2 class="${titleClass}">${phone.name}</h2>
-                    <p>${phone.description}</p>
-                    <div class="specs">
-                        ${phone.specs.split(' | ').join('<br>')}
-                    </div>
-                    <!-- Review Display -->
-                    <div 
-                        class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}" 
-                        data-phone-name="${phone.name}"
-                    >
-                        ${initialReview}
-                    </div>
-                    
-                    <!-- GSMArena Link -->
-                    <a href="${gsmarenaLink}" target="_blank" class="review-link" rel="noopener noreferrer">
-                        Check Full Specs on GSMArena &rarr;
-                    </a>
+					const cardHtml = `
+						<div class="card" data-phone-name="${phone.name}">
+							<!-- Link to view the full image -->
+							<a href="${phone.imageUrl}" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="View full size image for ${phone.name}">
+								<img src="${phone.imageUrl}"	
+									alt="${phone.name}"	
+									onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
+								>
+							</a>
+							
+							<h2 class="${titleClass}">${phone.name}</h2>
+							<p>${phone.description}</p>
+							
+							<div class="specs">
+								${phone.specs.split(' | ').join('<br>')}
+							</div>
+							
+							<!-- Review Display -->
+							<div	
+								class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}"	
+								data-phone-name="${phone.name}"
+							>
+								${initialReview}
+							</div>
+							
+							<!-- GSMArena Link -->
+							<a href="${gsmarenaLink}" target="_blank" class="review-link" rel="noopener noreferrer">
+								Check Full Specs on GSMArena &rarr;
+							</a>
 
-                    <!-- CHANGED: Price Tag is now a link to Jiji.ng -->
-                    <a href="${jijiLink}" target="_blank" class="price-tag price-link" rel="noopener noreferrer" aria-label="Find ${phone.name} on Jiji.ng">
-                        ${phone.priceNGN}
-                    </a>
-                </div>
-            `;
-            const cardWrapper = document.createElement('div');
-            cardWrapper.innerHTML = cardHtml.trim();
-            const cardElement = cardWrapper.firstChild;
-            
-            // Get all interactive elements inside the card
-            const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag, .user-review-display');
+							<!-- Price Tag/Vendor Link (Jiji.ng) -->
+							<a href="${jijiLink}" target="_blank" class="price-tag price-link" rel="noopener noreferrer" aria-label="Find ${phone.name} on Jiji.ng">
+								${phone.priceNGN}
+							</a>
+						</div>
+					`;
+					
+					// Use a template element for robust HTML injection
+					const template = document.createElement('template');
+					template.innerHTML = cardHtml.trim();
+					const cardElement = template.content.firstChild;
+					
+					// Get all interactive elements inside the card
+					const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag, .user-review-display');
 
-            // Add stopPropagation to all interactive elements to prevent the parent card's click event
-            interactiveElements.forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            });
-            
-            // Add click listener to show the message box (This fires only if no specific link was clicked)
-            cardElement.addEventListener('click', () => {
-                window.showMessage('Review Page Coming Soon!', 
-                    'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
-            });
-            
-            container.appendChild(cardElement);
-        });
-    }
+					// Add stopPropagation to all interactive elements to prevent the parent card's click event
+					interactiveElements.forEach(el => {
+						el.addEventListener('click', (e) => {
+							e.stopPropagation();
+						});
+					});
+					
+					// Add click listener to show the message box (This fires only if no specific link was clicked)
+					cardElement.addEventListener('click', () => {
+						showMessage('Review Page Coming Soon!',	
+							'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
+					});
+					
+					container.appendChild(cardElement);
+				});
+			}
 
-    /**
-     * Orchestrates the data fetching and rendering process.
-     */
-    async function fetchAndRenderPhones() {
-        const phones = await fetchPhoneSpecs();
-        renderCards(phones);
-    }
-  </script>
+			/**
+			 * Orchestrates the data fetching and rendering process.
+			 */
+			async function fetchAndRenderPhones() {
+				const phones = await fetchPhoneSpecs();
+				renderCards(phones);
+			}
+		});
+	</script>
 </body>
 </html>
-
-
-
