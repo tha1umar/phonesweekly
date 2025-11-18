@@ -217,6 +217,94 @@
 			border: 1px dashed rgba(255, 255, 255, 0.3);
 		}
 		
+		/* YouTube Links Section Styling */
+		.youtube-links-section {
+			text-align: center;
+			padding: 2rem 2rem 0;
+			max-width: 1000px;
+			margin: 0 auto;
+		}
+
+		.youtube-links-section h2 {
+			color: var(--primary-green);
+			margin-bottom: 1.5rem;
+			font-size: 2rem;
+		}
+
+		.channel-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 1.5rem;
+			margin-bottom: 2rem;
+		}
+
+		.channel-card {
+			display: block;
+			text-decoration: none;
+			background: rgba(255, 255, 255, 0.08);
+			padding: 1.5rem;
+			border-radius: 15px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			transition: transform 0.2s, background 0.2s;
+			text-align: left;
+		}
+
+		.channel-card:hover {
+			transform: translateY(-3px);
+			background: rgba(255, 255, 255, 0.12);
+		}
+		
+		.channel-card h3 {
+			color: var(--primary-green);
+			margin-top: 0;
+			margin-bottom: 0.5rem;
+			font-size: 1.2rem;
+			font-weight: 700;
+		}
+		
+		.channel-card p {
+			color: var(--text-light);
+			opacity: 0.85;
+			font-size: 0.95rem;
+			margin: 0;
+			line-height: 1.4;
+		}
+
+		/* Styling for the new text block with generic options */
+		.youtube-text-placeholder {
+			background: rgba(255, 255, 255, 0.05); /* Lighter than form, transparent */
+			border-radius: 15px;
+			padding: 1.5rem;
+			margin: 2rem auto;
+			max-width: 800px;
+			font-size: 1rem;
+			color: var(--text-light);
+			border: 1px dashed rgba(255, 255, 255, 0.2);
+			text-align: center;
+			opacity: 0.9; 
+			line-height: 1.6;
+		}
+		
+		.youtube-text-placeholder p {
+			margin: 0.5rem 0;
+		}
+		
+		.generic-option-wrapper {
+			display: flex; 
+			flex-direction: column; 
+			gap: 0.5rem; 
+			margin-bottom: 0.75rem;
+			padding: 0.5rem;
+			border: 1px dashed rgba(255, 255, 255, 0.1);
+			border-radius: 10px;
+		}
+		.generic-option-wrapper p {
+			font-size: 0.8rem;
+			opacity: 0.7;
+			margin: 0;
+		}
+
 		.feedback-button {
 			display: inline-block;
 			padding: 0.8rem 2.5rem;
@@ -310,60 +398,6 @@
 			100% { transform: rotate(360deg); }
 		}
 
-		/* YouTube Links Section Styling */
-		.youtube-links-section {
-			text-align: center;
-			padding: 2rem 2rem 0;
-			max-width: 1000px;
-			margin: 0 auto;
-		}
-
-		.youtube-links-section h2 {
-			color: var(--primary-green);
-			margin-bottom: 1.5rem;
-			font-size: 2rem;
-		}
-
-		.channel-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 1.5rem;
-			margin-bottom: 2rem;
-		}
-
-		.channel-card {
-			display: block;
-			text-decoration: none;
-			background: rgba(255, 255, 255, 0.08);
-			padding: 1.5rem;
-			border-radius: 15px;
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-			border: 1px solid rgba(255, 255, 255, 0.15);
-			transition: transform 0.2s, background 0.2s;
-			text-align: left;
-		}
-
-		.channel-card:hover {
-			transform: translateY(-3px);
-			background: rgba(255, 255, 255, 0.12);
-		}
-		
-		.channel-card h3 {
-			color: var(--primary-green);
-			margin-top: 0;
-			margin-bottom: 0.5rem;
-			font-size: 1.2rem;
-			font-weight: 700;
-		}
-		
-		.channel-card p {
-			color: var(--text-light);
-			opacity: 0.85;
-			font-size: 0.95rem;
-			margin: 0;
-			line-height: 1.4;
-		}
-
 		/* Media Queries for Mobile Adjustments */
 		@media (max-width: 600px) {
 			header {
@@ -418,6 +452,39 @@
 				<p class="channel-description">Covers mobile operating system updates, hidden features, and advanced tips for getting the most out of your phone.</p>
 			</a>
 		</div>
+		
+		<!-- New Text Placeholder Added Here with Clickable Links (Generic Labels) -->
+		<div class="youtube-text-placeholder">
+			<p>Used phone to get? That’s a deal — but be careful.</p>
+			<p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is **strongly recommended**, because if anything goes wrong, you have a real location to return to and report issues.</p>
+			
+			<!-- Three clickable link placeholders added here -->
+			<div style="margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+				
+				<div class="generic-option-wrapper">
+					<!-- Updated href for Option A -->
+					<a href="https://www.facebook.com/share/1ADZPwYULa/" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
+						Option A
+					</a>
+					<p>External tool to verify device history.</p>
+				</div>
+				
+				<div class="generic-option-wrapper">
+					<a href="https://www.consumernig.com/" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
+						Option B
+					</a>
+					<p>Information on buyer protection and rights.</p>
+				</div>
+				
+				<div class="generic-option-wrapper">
+					<a href="https://www.repairshop.ng/" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
+						Option C
+					</a>
+					<p>Locate a vetted physical repair or sales shop.</p>
+				</div>
+			</div>
+		</div>
+
 	</section>
 
 	<!-- FEEDBACK SECTION -->
@@ -467,7 +534,7 @@
 				},
 				{
 					name: "Google Pixel 9a",
-					imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-9a-1.jpg",	
+					imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-9a-1.jpg",
 					description: "Based on functionality and price, arguably the best pixel phone ever",
 					specs: "RAM: 8GB | Storage: 128GB | Battery: 5100 mAh | Camera: 48MP Triple",
 					priceNGN: "₦1,250,000",
@@ -724,7 +791,3 @@
 	</script>
 </body>
 </html>
-
-
-
-
