@@ -31,11 +31,40 @@
 		}
 
 		header {
+			position: relative; /* Essential for absolute positioning of the logo */
 			text-align: center;
 			padding: 2.5rem 1rem;
 			background: rgba(0, 0, 0, 0.3);
 			backdrop-filter: blur(8px);
 		}
+		
+		/* --- NEW: Logo Placeholder Styling --- */
+		.logo-placeholder {
+			position: absolute;
+			top: 1.5rem; /* Adjusted for visual spacing */
+			left: 1.5rem; /* Adjusted for visual spacing */
+			width: 50px; /* 1:1 Ratio */
+			height: 50px; /* 1:1 Ratio */
+			background-color: var(--primary-green);
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+			transition: transform 0.2s;
+			cursor: pointer;
+		}
+		
+		.logo-placeholder:hover {
+			transform: scale(1.05);
+		}
+		
+		.logo-placeholder span {
+			color: var(--primary-dark);
+			font-size: 1.5rem;
+			font-weight: 900;
+		}
+		/* --- END NEW STYLING --- */
 
 		header h1 {
 			margin: 0;
@@ -403,6 +432,16 @@
 			header {
 				padding: 1.5rem 1rem;
 			}
+			/* Adjust logo position for smaller screens */
+			.logo-placeholder {
+				top: 0.75rem;
+				left: 0.75rem;
+				width: 40px; 
+				height: 40px;
+			}
+			.logo-placeholder span {
+				font-size: 1.2rem;
+			}
 			main {
 				padding: 1rem;
 				gap: 1.5rem;
@@ -423,8 +462,16 @@
 <body>
 
 	<header>
-		<h1>Phones Weekly</h1>
-		<p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
+		<!-- NEW: Logo Placeholder (1:1 Ratio) -->
+		<div class="logo-placeholder">
+			<span>PW</span>
+		</div>
+		
+		<!-- Main Header Content -->
+		<div>
+			<h1>Phones Weekly</h1>
+			<p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
+		</div>
 	</header>
 
 	<main id="phone-reviews">
@@ -791,12 +838,3 @@
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
