@@ -38,18 +38,15 @@
 			backdrop-filter: blur(8px);
 		}
 		
-		/* --- NEW: Logo Placeholder Styling --- */
+		/* --- UPDATED: Logo Placeholder Styling for Image --- */
 		.logo-placeholder {
 			position: absolute;
 			top: 1.5rem; /* Adjusted for visual spacing */
 			left: 1.5rem; /* Adjusted for visual spacing */
-			width: 50px; /* 1:1 Ratio */
-			height: 50px; /* 1:1 Ratio */
-			background-color: var(--primary-green);
+			width: 50px; /* 1:1 Ratio container */
+			height: 50px; /* 1:1 Ratio container */
 			border-radius: 10px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			overflow: hidden; /* Ensures the image respects the border-radius */
 			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 			transition: transform 0.2s;
 			cursor: pointer;
@@ -59,12 +56,13 @@
 			transform: scale(1.05);
 		}
 		
-		.logo-placeholder span {
-			color: var(--primary-dark);
-			font-size: 1.5rem;
-			font-weight: 900;
+		.logo-placeholder img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover; /* Ensures the image fills the 1:1 container */
+			display: block;
 		}
-		/* --- END NEW STYLING --- */
+		/* --- END UPDATED STYLING --- */
 
 		header h1 {
 			margin: 0;
@@ -439,9 +437,7 @@
 				width: 40px; 
 				height: 40px;
 			}
-			.logo-placeholder span {
-				font-size: 1.2rem;
-			}
+			/* Removed span styling here as it's no longer needed */
 			main {
 				padding: 1rem;
 				gap: 1.5rem;
@@ -462,9 +458,10 @@
 <body>
 
 	<header>
-		<!-- NEW: Logo Placeholder (1:1 Ratio) -->
+		<!-- UPDATED: Logo Placeholder now contains a proper <img> tag -->
 		<div class="logo-placeholder">
-			<span>PW</span>
+			<!-- Replace the 'src' value below with the URL of your actual 1:1 logo image. -->
+			<img src="https://placehold.co/50x50/ffffff/004d40?text=Logo" alt="Phones Weekly Logo" class="logo-img">
 		</div>
 		
 		<!-- Main Header Content -->
