@@ -843,6 +843,18 @@
                     jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-itel-p65-128-gb-black-3wNcqVEJd6ZgMnTWHzAJod0Y.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=xDFoKvqhMsHahUZE&indexPosition=2",
                     isBestValue: false, 
                 },
+                // --- NEW PHONE DATA ENTRY ---
+                {
+                    name: "Oppo Reno12 F",
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno12-f-1.jpg",
+                    description: "A stunning mid-range performer featuring dazzling portrait photography and fast daily performance.",
+                    specs: "RAM: 12GB | Storage: 256GB | Battery: 4800 mAh | Camera: 64MP Triple",
+                    priceNGN: "₦500,000",
+                    review: "This is the gaming champion in the mid-range bracket, featuring a massive cooling system and ultra-responsive screen. The camera is decent, but the focus is clearly on frame rates.",
+                    gsmarenaUrl: "https://www.gsmarena.com/oppo_reno12_f-13182.php",
+                    jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-oppo-reno12-f-256-gb-5pp5vVXws0ZN9QfzGJIGHHaY.html?page=12&pos=9&cur_pos=9&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=228",
+                    isBestValue: false,
+                },
             ];
 
             // Global variable to store processed and searchable data (Re-introduced for filter setup)
@@ -891,7 +903,9 @@
             // =========================================================================
 
             function getPriceValue(priceString) {
-                return parseInt(priceString.replace('₦', '').replace(/,/g, ''), 10);
+                // Defensive check and cleanup, handles null/undefined/non-string
+                if (typeof priceString !== 'string') return 0;
+                return parseInt(priceString.replace('₦', '').replace(/,/g, ''), 10) || 0;
             }
 
             function getPriceTier(priceValue) {
@@ -1078,5 +1092,3 @@
     </script>
 </body>
 </html>
-
-
