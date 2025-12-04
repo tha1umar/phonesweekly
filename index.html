@@ -597,8 +597,9 @@
             <!-- Filter buttons -->
             <button class="filter-button active" data-filter="all">Show All</button>
             <button class="filter-button" data-filter="budget">₦100k - ₦300k (Budget)</button>
-            <button class="filter-button" data-filter="midrange">₦300k - ₦900k (Mid-Range)</button>
-            <button class="filter-button" data-filter="premium">₦900k+ (Premium)</button>
+            <button class="filter-button" data-filter="midrange">₦300k - ₦600k (Mid-Range)</button>
+            <button class="filter-button" data-filter="midrangeplus">₦600k - ₦990k (Mid-Range+)</button>
+            <button class="filter-button" data-filter="premium">₦990k+ (Premium)</button>
         </div>
     </section>
 
@@ -727,8 +728,9 @@
             // Define price tiers for filtering logic
             const PRICE_TIERS = {
                 budget: { min: 100000, max: 300000 },
-                midrange: { min: 300001, max: 900000 },
-                premium: { min: 900001, max: 5000000 } // Set a high upper limit
+                midrange: { min: 300001, max: 599999 }, // Adjusted upper limit
+                midrangeplus: { min: 600000, max: 990000 }, // New tier
+                premium: { min: 990001, max: 5000000 } // Adjusted lower limit
             };
 
             const rawPhoneData = [
@@ -973,7 +975,7 @@
                     review: "The Redmi 15 4G is a brilliant budget performer. While it lacks 5G, the smooth display, solid 50MP camera, and massive 5000 mAh battery make it one of the best choices under ₦250k for users who prioritize longevity over cutting-edge speed.",
                     gsmarenaUrl: "https://www.gsmarena.com/xiaomi_redmi_15-14037.php",
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-xiaomi-redmi-15-256-gb-black-fd78zCIv0W55DbEgIEe0WqTa.html?page=1&pos=20&cur_pos=20&ads_per_page=20&ads_count=40&lid=vs_A_FgD6B-96sLz&indexPosition=19",
-                    isBestValue: true,
+                    isBestValue: false,
                 },
             ];
 
@@ -1029,14 +1031,18 @@
             }
 
             function getPriceTier(priceValue) {
-                if (priceValue >= PRICE_TIERS.budget.min && priceValue <= PRICE_TIERS.budget.max) {
-                    return 'budget';
+                // Check in reverse order of price ranges (Premium first to avoid overlap issues)
+                if (priceValue >= PRICE_TIERS.premium.min) {
+                    return 'premium';
+                }
+                if (priceValue >= PRICE_TIERS.midrangeplus.min && priceValue <= PRICE_TIERS.midrangeplus.max) {
+                    return 'midrangeplus';
                 }
                 if (priceValue >= PRICE_TIERS.midrange.min && priceValue <= PRICE_TIERS.midrange.max) {
                     return 'midrange';
                 }
-                if (priceValue >= PRICE_TIERS.premium.min) {
-                    return 'premium';
+                if (priceValue >= PRICE_TIERS.budget.min && priceValue <= PRICE_TIERS.budget.max) {
+                    return 'budget';
                 }
                 return 'unknown';
             }
@@ -1212,4 +1218,3 @@
     </script>
 </body>
 </html>
-
