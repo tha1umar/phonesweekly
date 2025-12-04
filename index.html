@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
     <!-- Favicon: Green phone icon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg">
     <!-- Load Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,10 +211,10 @@
             font-weight: 300;
         }
         
+        /* UPDATED: Removed fixed height and overflow auto for show/hide functionality */
         .user-review-display {
             font-family: 'Inter', sans-serif;
             width: 100%;
-            height: 100px;
             padding: 10px;
             margin-top: 1rem;
             border-radius: 10px;
@@ -224,13 +224,28 @@
             box-sizing: border-box;
             font-size: 0.9rem;
             text-align: left;
-            overflow-y: auto;
             line-height: 1.4;
+            min-height: 50px; /* Min height for visual consistency */
+            transition: all 0.3s ease;
         }
         
         .review-placeholder {
             color: #757575;
             font-style: italic;
+        }
+        
+        /* NEW: Styling for the show/hide button */
+        .review-toggle-button {
+            background: none;
+            border: none;
+            color: var(--primary-dark); /* Contrast color */
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 5px;
+            display: inline-block;
+            text-decoration: underline;
+            font-size: 0.85rem;
         }
 
         .review-link {
@@ -358,10 +373,12 @@
             margin: 0 auto;
         }
 
-        .youtube-links-section h2 {
+        /* The original H2 styling for the section title (now used for the independent H2) */
+        .youtube-links-section > h2 { 
             color: var(--primary-green);
             margin-bottom: 1.5rem;
             font-size: 2rem;
+            margin-top: 1.5rem; /* Ensure proper spacing above it */
         }
 
         /* New Snippet Placeholder Styling */
@@ -369,11 +386,13 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--primary-green);
             padding: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2rem; /* Add spacing below the snippet */
             border-radius: 10px;
             text-align: left;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Removed internal H2 styling */
 
         .news-snippet-placeholder h3 {
             color: var(--value-gold);
@@ -395,6 +414,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
+            /* Removed margin-top as H2 is now independent and adds spacing */
         }
 
         .channel-card {
@@ -639,14 +659,16 @@
 
     <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
     <section class="youtube-links-section">
-        <h2>Recommended Tech YouTube Channels</h2>
 
-        <!-- NEWS SNIPPET INSERTED HERE -->
+        <!-- NEWS SNIPPET INSERTED HERE (Independent Block) -->
         <div class="news-snippet-placeholder">
             <h3>Best Phone Store in Wuse 2: S-NAMAMA</h3>
             <p>Looking for the most competitive prices (not Banex)? Visit S-Namama in Wuse 2. They are located just after Zenith Bank and before the Ibro Hotel junction. Give them a visit if you please. **Phone Number: 08105038181**</p>
         </div>
         
+        <!-- RECOMMENDED TECH YOUTUBE CHANNELS (Independent H2) -->
+        <h2>Recommended Tech YouTube Channels</h2>
+
         <div class="channel-grid">
             <a href="https://www.youtube.com/@TechSpurt" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 1">
                 <h3 class="channel-title">Reviews on high end and mid range devices</h3>
@@ -950,7 +972,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-oppo-a6-pro-256-gb-blue-frq1OMDd7VdiZlsmmYpavbDs.html?page=9&pos=9&cur_pos=9&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=168",
                     isBestValue: true,
                 },
-                // --- NEW PHONE DATA ENTRY (Google Pixel 7) ---
                 {
                     name: "Google Pixel 7",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel7-2.jpg",
@@ -962,7 +983,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7-128-gb-7uDBPtvOg7rdHR6M4N7tCfbb.html?page=9&pos=10&cur_pos=10&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=169",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Google Pixel 7a) ---
                 {
                     name: "Google Pixel 7a",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-7a-1.jpg",
@@ -974,7 +994,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7a-128-gb-black-mntwtSNpYA2SrgN7vvKx8ULx.html?page=11&pos=18&cur_pos=18&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=217",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Apple iPhone 13) ---
                 {
                     name: "Apple iPhone 13",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg",
@@ -986,7 +1005,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-apple-iphone-13-128-gb-red-BqZGVruh3BS2H7oCugHQLOSx.html?page=11&pos=20&cur_pos=20&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=219",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Google Pixel 8) ---
                 {
                     name: "Google Pixel 8",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-8-1.jpg",
@@ -998,7 +1016,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-8-128-gb-black-5HoqFXNXunUt3D83tH9Uqy5d.html?page=2&pos=24&cur_pos=24&ads_per_page=24&ads_count=176&lid=uhZvOUbyIgsbqi3u&indexPosition=47",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Redmi 15 4G) ---
                 {
                     name: "Redmi 15 4G",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-15-4g-1.jpg",
@@ -1126,10 +1143,25 @@
                     container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews available yet.</p>';
                     return;
                 }
+                
+                // Define the max length for the visible review text
+                const MAX_REVIEW_LENGTH = 150; 
 
                 phones.forEach(phone => {
                     const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
                     const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
+                    
+                    // Check if we should truncate the review
+                    const isLongReview = initialReview.length > MAX_REVIEW_LENGTH && !isPlaceholder;
+                    let displayReview = initialReview;
+                    let truncatedReview = initialReview;
+
+                    if (isLongReview) {
+                        // Create the truncated text
+                        truncatedReview = initialReview.substring(0, MAX_REVIEW_LENGTH).trim() + '...';
+                        displayReview = truncatedReview; // Start with truncated text
+                    }
+                    
                     const gsmarenaLink = phone.gsmarenaUrl || '#';    
                     const jijiLink = phone.jijiUrl || '#';    
                     
@@ -1161,12 +1193,12 @@
                                 ${phone.specs.split(' | ').join('<br>')}
                             </div>
                             
-                            <!-- Review Display -->
-                            <div    
-                                class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}"    
-                                data-phone-name="${phone.name}"
-                            >
-                                ${initialReview}
+                            <!-- Review Display Container -->
+                            <div class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}">
+                                <span class="review-text-content">${displayReview}</span>
+                                ${isLongReview ? 
+                                    // Store full and truncated text in data attributes for easy access in the click handler
+                                    `<button class="review-toggle-button" data-full-text="${encodeURIComponent(initialReview)}" data-truncated-text="${encodeURIComponent(truncatedReview)}">Show More</button>` : ''}
                             </div>
                             
                             <!-- GSMArena Link -->
@@ -1187,7 +1219,7 @@
                     const cardElement = template.content.firstChild;
                     
                     // Get all interactive elements inside the card
-                    const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag, .user-review-display');
+                    const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag');
 
                     // Add stopPropagation to all interactive elements to prevent the parent card's click event
                     interactiveElements.forEach(el => {
@@ -1196,7 +1228,32 @@
                         });
                     });
                     
-                    // Add click listener to show the message box (This fires only if no specific link was clicked)
+                    // --- NEW: Add event listener for the toggle button ---
+                    const toggleButton = cardElement.querySelector('.review-toggle-button');
+                    if (toggleButton) {
+                        toggleButton.addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent card click
+                            const button = e.currentTarget;
+                            const reviewDisplay = button.closest('.user-review-display');
+                            // Target the span holding the text content
+                            const reviewTextSpan = reviewDisplay.querySelector('.review-text-content'); 
+                            
+                            const isShowingMore = button.textContent === 'Show More';
+                            // Decode URI to safely retrieve the text strings
+                            const fullText = decodeURIComponent(button.dataset.fullText);
+                            const truncatedText = decodeURIComponent(button.dataset.truncatedText);
+                            
+                            if (isShowingMore) {
+                                reviewTextSpan.textContent = fullText;
+                                button.textContent = 'Show Less';
+                            } else {
+                                reviewTextSpan.textContent = truncatedText;
+                                button.textContent = 'Show More';
+                            }
+                        });
+                    }
+                    
+                    // Add click listener to show the message box (This fires only if no specific link or button was clicked)
                     cardElement.addEventListener('click', () => {
                         showMessage('Review Page Coming Soon!',   
                             'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
