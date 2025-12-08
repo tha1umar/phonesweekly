@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
     <!-- Favicon: Green phone icon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
     <!-- Load Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +16,15 @@
             --primary-dark: #3540e0; /* Dark Teal - Used for main background */
             --medium-teal: #009688;
             --text-light: #fff;
-            /* NEW: Value Badge Color */
             --value-gold: #ffc107;
+            --chat-bg: #1e293b; /* Slate blue for chat container */
+            --chat-bubble: #374151; /* Darker slate for bubbles */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            /* Use the primary dark color for the gradient background */
             background: linear-gradient(120deg, var(--primary-dark), var(--medium-teal));
             color: var(--text-light);
             min-height: 100vh;
@@ -33,7 +33,7 @@
         }
 
         header {
-            position: relative; /* Essential for absolute positioning of the logo */
+            position: relative;
             text-align: center;
             padding: 2.5rem 1rem;
             background: rgba(0, 0, 0, 0.3);
@@ -43,12 +43,12 @@
         /* --- Logo Placeholder Styling for Image --- */
         .logo-placeholder {
             position: absolute;
-            top: 1.5rem; /* Adjusted for visual spacing */
-            left: 1.5rem; /* Adjusted for visual spacing */
-            width: 50px; /* 1:1 Ratio container */
-            height: 50px; /* 1:1 Ratio container */
+            top: 1.5rem;
+            left: 1.5rem;
+            width: 50px;
+            height: 50px;
             border-radius: 10px;
-            overflow: hidden; /* Ensures the image respects the border-radius */
+            overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             transition: transform 0.2s;
             cursor: pointer;
@@ -61,10 +61,9 @@
         .logo-placeholder img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures the image fills the 1:1 container */
+            object-fit: cover;
             display: block;
         }
-        /* --- END UPDATED STYLING --- */
 
         header h1 {
             margin: 0;
@@ -85,7 +84,6 @@
             margin: 0 auto;
             text-align: center;
         }
-        /* REMOVED .search-input CSS */
 
         .filter-buttons {
             display: flex;
@@ -121,7 +119,6 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        /* END NEW FILTER STYLING */
 
         main {
             flex-grow: 1;
@@ -132,7 +129,7 @@
         }
 
         .card {
-            position: relative; /* For the new badge positioning */
+            position: relative;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 1.5rem;
@@ -143,11 +140,10 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Highlight style for Best Value card */
         .card.best-value {
             border: 3px solid var(--value-gold);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.4); /* Gold shadow */
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.4);
         }
         
         .card:hover {
@@ -211,7 +207,6 @@
             font-weight: 300;
         }
         
-        /* UPDATED: Removed fixed height and overflow auto for show/hide functionality */
         .user-review-display {
             font-family: 'Inter', sans-serif;
             width: 100%;
@@ -220,12 +215,12 @@
             border-radius: 10px;
             border: 1px solid var(--medium-teal);
             background: rgba(255, 255, 255, 0.9);
-            color: var(--primary-dark); /* Using primary-dark for contrast */
+            color: var(--primary-dark);
             box-sizing: border-box;
             font-size: 0.9rem;
             text-align: left;
             line-height: 1.4;
-            min-height: 50px; /* Min height for visual consistency */
+            min-height: 50px;
             transition: all 0.3s ease;
         }
         
@@ -234,11 +229,10 @@
             font-style: italic;
         }
         
-        /* NEW: Styling for the show/hide button */
-        .review-toggle-button {
+       .review-toggle-button {
             background: none;
             border: none;
-            color: var(--primary-dark); /* Contrast color */
+            color: var(--primary-dark);
             font-weight: 600;
             cursor: pointer;
             padding: 0;
@@ -276,7 +270,7 @@
             display: block; 
             width: 90%; 
             margin: 1.5rem auto 0; 
-            padding: 0.8rem 2rem;     
+            padding: 0.8rem 2rem;      
             background: linear-gradient(90deg, #ff9800, #ff5722); 
             color: white; 
             font-weight: 900;     
@@ -353,157 +347,101 @@
             font-weight: 500;
         }
         
-        .form-placeholder {
-            background: rgba(0, 0, 0, 0.2);
+        /* === NEW: Chatbot Section Styling === */
+        .chatbot-section {
+            background: var(--chat-bg);
             border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
+            padding: 2rem;
             margin: 2rem auto;
             max-width: 600px;
-            font-size: 1rem;
-            color: var(--text-light);
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-        }
-        
-        /* YouTube Links Section Styling */
-        .youtube-links-section {
-            text-align: center;
-            padding: 2rem 2rem 0;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* The original H2 styling for the section title (now used for the independent H2) */
-        .youtube-links-section > h2 { 
-            color: var(--primary-green);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            margin-top: 1.5rem; /* Ensure proper spacing above it */
-        }
-
-        /* New Snippet Placeholder Styling */
-        .news-snippet-placeholder {
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             border: 1px solid var(--primary-green);
-            padding: 1rem;
-            margin-bottom: 2rem; /* Add spacing below the snippet */
-            border-radius: 10px;
-            text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Removed internal H2 styling */
-
-        .news-snippet-placeholder h3 {
-            color: var(--value-gold);
-            margin: 0 0 0.5rem 0;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .news-snippet-placeholder p {
-            font-size: 1rem;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .channel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            /* Removed margin-top as H2 is now independent and adds spacing */
-        }
-
-        .channel-card {
-            display: block;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: transform 0.2s, background 0.2s;
-            text-align: left;
-        }
-
-        .channel-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.12);
-        }
-        
-        .channel-card h3 {
+        .chat-title {
             color: var(--primary-green);
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-output {
+            height: 300px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary-dark);
+            border-bottom-right-radius: 0;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background-color: var(--chat-bubble);
+            border-bottom-left-radius: 0;
+            color: var(--text-light);
+            /* Highlight recommendation names */
+        }
+        
+        .ai-message strong {
+            color: var(--primary-green);
             font-weight: 700;
         }
-        
-        .channel-card p {
-            color: var(--text-light);
-            opacity: 0.85;
-            font-size: 0.95rem;
-            margin: 0;
-            line-height: 1.4;
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
         }
 
-        /* Styling for the new text block with generic options */
-        .youtube-text-placeholder {
-            background: rgba(255, 255, 255, 0.05); /* Lighter than form, transparent */
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            font-size: 1rem;
-            color: var(--text-light);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            text-align: center;
-            opacity: 0.9; 
-            line-height: 1.6;
-        }
-        
-        .youtube-text-placeholder p {
-            margin: 0.5rem 0;
-        }
-        
-        .generic-option-wrapper {
-            display: flex; 
-            flex-direction: column; 
-            gap: 0.5rem; 
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+        #chatInput {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
             border-radius: 10px;
-        }
-        .generic-option-wrapper p {
-            font-size: 0.8rem;
-            opacity: 0.7;
-            margin: 0;
+            border: 1px solid var(--medium-teal);
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #333;
+            font-size: 1rem;
         }
 
-        .feedback-button {
-            display: inline-block;
-            padding: 0.8rem 2.5rem;
-            margin-top: 1.5rem;
+        #sendButton {
             background-color: var(--primary-green);
             color: var(--primary-dark);
-            font-weight: 800;
-            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border: none;
             border-radius: 10px;
-            text-decoration: none;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
-        .feedback-button:hover {
+        #sendButton:hover:not(:disabled) {
             background-color: #00c853;
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-1px);
         }
         
-        /* Custom Modal/Message Box Styling */
+        #sendButton:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* === END NEW CHATBOT STYLING === */
+        
+        /* Custom Modal/Message Box Styling (retained) */
         .message-box {
             position: fixed;
             top: 0;
@@ -561,7 +499,7 @@
             background-color: #00c853;
         }
 
-        /* Loading Spinner Styles */
+        /* Loading Spinner Styles (retained) */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid var(--primary-green);
@@ -577,19 +515,39 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Media Queries for Mobile Adjustments */
+        /* --- NEW CHANNEL WIDGET STYLES --- */
+        .channel-icon {
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .channel-card:hover .channel-icon {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .channel-icon svg {
+            fill: #FF0000; /* YouTube Red */
+            width: 28px;
+            height: 28px;
+            display: block;
+        }
+
+        /* Adjustments for Mobile */
         @media (max-width: 600px) {
             header {
                 padding: 1.5rem 1rem;
             }
-            /* Adjust logo position for smaller screens */
             .logo-placeholder {
                 top: 0.75rem;
                 left: 0.75rem;
                 width: 40px; 
                 height: 40px;
             }
-            /* Removed span styling here as it's no longer needed */
             main {
                 padding: 1rem;
                 gap: 1.5rem;
@@ -597,14 +555,13 @@
             .card {
                 padding: 1rem;
             }
-            .form-placeholder {
+            .chatbot-section {
                 margin: 1rem auto;
-                padding: 2rem 1rem;
+                padding: 1.5rem 1rem;
             }
             .youtube-links-section {
                 padding: 1rem 1rem 0;
             }
-            /* Mobile price tag adjustment */
             .price-tag {
                 width: 100%;
             }
@@ -624,23 +581,19 @@
     </svg>
 
     <header>
-        <!-- UPDATED: Logo Placeholder now contains a proper <img> tag -->
         <div class="logo-placeholder">
-            <!-- Replace the 'src' value below with the URL of your actual 1:1 logo image. -->
             <img src="https://pbs.twimg.com/profile_images/1993320664040660992/qbWuhOaM_400x400.jpg" alt="Phones Weekly Logo" class="logo-img">
         </div>
         
-        <!-- Main Header Content -->
         <div>
             <h1>Phones Weekly</h1>
             <p>Phones Weekly keeps it real — straight from Abuja! We test, gist, and drop honest phone reviews — from cheap and cheerful to the ones that flex your pocket (but worth it). No tech jargon, no fake hype — just real talk, hot gadgets, and smart choices for real people. Follow for the gist before you buy! Click on the price to find a trusted vendor in Abuja.</p>
         </div>
     </header>
     
-    <!-- UPDATED: Filter Controls (Search input removed) -->
+    <!-- Filter Controls -->
     <section class="controls-section">
         <div class="filter-buttons" id="price-filters">
-            <!-- Filter buttons -->
             <button class="filter-button active" data-filter="all">Show All</button>
             <button class="filter-button" data-filter="budget">₦100k - ₦300k (Budget)</button>
             <button class="filter-button" data-filter="midrange">₦300k - ₦600k (Mid-Range)</button>
@@ -656,6 +609,24 @@
             <div class="spinner"></div>
         </div>
     </main>
+    
+    <!-- === NEW: SMART RECOMMENDATION CHATBOT SECTION === -->
+    <section class="chatbot-section">
+        <h2 class="chat-title">Need a Personal Recommendation? Ask our AI Analyst!</h2>
+        <div id="chatOutput" class="chat-output">
+            <!-- Initial AI Greeting -->
+            <div class="chat-message ai-message">
+                Hello! I'm your Phones Weekly AI Analyst. Tell me your budget, main uses (e.g., gaming, battery life, camera), and I will recommend the best phone from the list above.
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="E.g., Gaming phone under N450,000..." aria-label="Phone recommendation prompt">
+            <button id="sendButton">Send</button>
+        </div>
+        <div id="chatLoading" style="display: none; text-align: center; margin-top: 1rem; color: var(--primary-green);">
+            Thinking... <div class="spinner" style="width: 20px; height: 20px; border-width: 2px; margin: 5px auto;"></div>
+        </div>
+    </section>
 
     <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
     <section class="youtube-links-section">
@@ -671,29 +642,42 @@
 
         <div class="channel-grid">
             <a href="https://www.youtube.com/@TechSpurt" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 1">
-                <h3 class="channel-title">Reviews on high end and mid range devices</h3>
+                <div class="channel-icon">
+                    <svg viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 8.2c0-1.1-.9-2-2-2h-3.3c-.3-1.1-.9-2-2-2h-3.4c-1.1 0-1.7.9-2 2H4c-1.1 0-2 .9-2 2v7.7c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8.2zm-12.7 8.5v-6.9l6 3.4-6 3.5z"/>
+                    </svg>
+                </div>
+                <h3 class="channel-title">High-End & Mid-Range Reviews</h3>
                 <p class="channel-description">Expect in-depth tech reviews, comparisons, unboxings and hands-on features with fresh new UK smartphones, laptops, wearables, apps and other new gadgets.</p>
             </a>
             <a href="https://www.youtube.com/@topphoneex" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Phone Breakdown Channel">
+                <div class="channel-icon">
+                    <svg viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 8.2c0-1.1-.9-2-2-2h-3.3c-.3-1.1-.9-2-2-2h-3.4c-1.1 0-1.7.9-2 2H4c-1.1 0-2 .9-2 2v7.7c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8.2zm-12.7 8.5v-6.9l6 3.4-6 3.5z"/>
+                    </svg>
+                </div>
                 <h3 class="channel-title">Budget Phone Breakdown</h3>
                 <p class="channel-description">Specializes in affordable and mid-range devices, offering the best value picks for Nigerian buyers on a tight budget.</p>
             </a>
             <a href="https://www.youtube.com/@howtomen" class="channel-card" target="_blank" rel="noopener noreferrer" aria-label="Visit Tech Review Channel 3">
+                <div class="channel-icon">
+                    <svg viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 8.2c0-1.1-.9-2-2-2h-3.3c-.3-1.1-.9-2-2-2h-3.4c-1.1 0-1.7.9-2 2H4c-1.1 0-2 .9-2 2v7.7c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8.2zm-12.7 8.5v-6.9l6 3.4-6 3.5z"/>
+                    </svg>
+                </div>
                 <h3 class="channel-title">Software & Tips Guy</h3>
                 <p class="channel-description">Covers mobile operating system updates, hidden features, and advanced tips for getting the most out of your phone.</p>
             </a>
         </div>
         
-        <!-- New Text Placeholder Added Here with Clickable Links (Generic Labels) -->
+        <!-- Used Phone Warning and Links -->
         <div class="youtube-text-placeholder">
             <p>Used affordable phone suggestion to buy on a deal — but be careful.</p>
             <p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is **strongly recommended**, because if anything goes wrong, you have a real location to return to and report issues.</p>
             
-            <!-- Three clickable link placeholders added here -->
             <div style="margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
                 
                 <div class="generic-option-wrapper">
-                    <!-- Updated href for Infinix 60pro -->
                     <a href="https://jiji.ng/garki-i/mobile-phones/samsung-galaxy-a14-128-gb-black-3pfUj2AFDCYsTLWIRGzQcpc9.html?pos=2&cur_pos=2&ads_per_page=100&page=1&lid=tKZVXGb_0pkDXHsK" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
                         Samsung Galaxy A14
                     </a>
@@ -701,10 +685,10 @@
                 </div>
                 
                 <div class="generic-option-wrapper">
-                    <a href="https://jiji.ng/kubwa/mobile-phones/xiaomi-redmi-14c-128-gb-black-tsK4wZLpuHfNcYr0fBUvyXyL.html?page=1&pos=10&cur_pos=10&ads_per_page=20&ads_count=1692&lid=WaaF8c8yfnirS5lb&indexPosition=9" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
-                        Redmi 14c
+                    <a href="Coming soon" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
+                        Searching for deals
                     </a>
-                    <p>Open box Infinix Hot 30i. 90k</p>
+                    <p>Searching for deals</p>
                 </div>
                 
                 <div class="generic-option-wrapper">
@@ -718,37 +702,24 @@
 
     </section>
 
-    <!-- FEEDBACK SECTION -->
-    <section class="form-placeholder">
-        <h2>Share Your Feedback!</h2>
-        <p>We rely on your suggestions to keep our reviews honest and relevant!</p>
-        <a href="https://forms.gle/iARHXHXdCsWLSazJ8" target="_blank" class="feedback-button" rel="noopener noreferrer">
-            Open Suggestion Form
-        </a>
-    </section>
-
     <footer>
         <!-- Social Media Links -->
         <div class="social-links">
-            <!-- TIKTOK LINK: UPDATED HREF to tiktok.com/@tha1umar -->
             <a href="https://tiktok.com/@tha1umar" target="_blank" class="social-link tiktok" aria-label="Follow us on TikTok">
                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.33 3.55c.22 0 .42-.14.49-.35.12-.39.22-.79.31-1.19.03-.13.1-.25.21-.33.15-.12.33-.18.52-.18h.06c.33 0 .61.27.61.6v6.4c0 .32-.26.59-.58.6l-2.07-.01c-.32 0-.59-.26-.59-.58v-4.6c-.19.06-.39.13-.61.19a4.84 4.84 0 0 0-4.04 4.79v3.1c0 2.22 1.8 4.02 4.02 4.02 2.21 0 4.02-1.8 4.02-4.02v-5.2c0-.32.27-.59.59-.59h.01c.32 0 .59.27.59.59v5.2c0 3.86-3.14 7-7 7s-7-3.14-7-7c0-3.12 2.05-5.83 5.03-6.68 1.4-.38 2.87-.04 4.08.7.12.07.25.1.37.1h.01z"/>
+                    <path d="M12.33 3.55c.22 0 .42-.14.49-.35.12-.39.22-.79.31-1.19.03-.13.1-.25.21-.33.15-.12.33-.18.52-.18h.06c.33 0 .61.27.61.6v6.4c0 .32-.26.59-.58.6l-2.07-.01c-.32 0-.59-.26-.59-.58v-4.6c-.19.06-.39.13-.61.19a4.84 4.84 0 0 0-4.04 4.79v3.1c0 2.22 1.8 4.02 4.02 4.02 2.21 0 4.02-1.8 4.02-4.02v5.2c0-.32.27-.59.59-.59h.01c.32 0 .59.27.59.59v5.2c0 3.86-3.14 7-7 7s-7-3.14-7-7c0-3.12 2.05-5.83 5.03-6.68 1.4-.38 2.87-.04 4.08.7.12.07.25.1.37.1h.01z"/>
                 </svg>
             </a>
-            <!-- FACEBOOK LINK: UPDATED HREF -->
             <a href="https://www.facebook.com/tha1umar" target="_blank" class="social-link facebook" aria-label="Follow us on Facebook">
                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-1.74 1.5-1.74h1.7v-3.8l-2.7-.1C12.98 2.5 11.5 4 11.5 6.4v3.1H9v4h2.5v7.5h3V13.5z"/>
                 </svg>
             </a>
-            <!-- YOUTUBE LINK: Link updated to user's channel -->
             <a href="https://www.youtube.com/@tha1umar" target="_blank" class="social-link youtube" aria-label="Follow us on YouTube">
                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22 8.2c0-1.1-.9-2-2-2h-3.3c-.3-1.1-.9-2-2-2h-3.4c-1.1 0-1.7.9-2 2H4c-1.1 0-2 .9-2 2v7.7c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8.2zm-12.7 8.5v-6.9l6 3.4-6 3.5z"/>
                 </svg>
             </a>
-            <!-- INSTAGRAM LINK: UPDATED HREF -->
             <a href="https://www.instagram.com/tha1photography/" target="_blank" class="social-link instagram" aria-label="Follow us on Instagram">
                 <svg viewBox="0 0 24 24" fill="url(#grad-insta)" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.25.06 1.9.2 2.47.42.6.22 1.05.51 1.52.98.47.47.76.92.98 1.52.22.57.36 1.22.42 2.47.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.25-.2 1.9-.42 2.47a3.9 3.9 0 0 1-.98 1.52c-.47.47-.92.76-1.52.98-.57.22-1.22.36-2.47.42-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.25-.06-1.9-.2-2.47-.42a3.9 3.9 0 0 1-1.52-.98c-.47-.47-.76-.92-.98-1.52-.22-.57-.36-1.22-.42-2.47-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.25.2-1.9.42-2.47a3.9 3.9 0 0 1 .98-1.52c.47-.47.92-.76 1.52-.98.57-.22 1.22-.36 2.47-.42C8.42 2.17 8.8 2.16 12 2.16zm0 1.76c-3.14 0-3.53 0-4.78.06-1.17.06-1.74.19-2.12.33a2.3 2.3 0 0 0-.85.55c-.38.38-.55.85-.7 1.42-.14.39-.27.96-.33 2.12-.06 1.25-.06 1.64-.06 4.78s0 3.53.06 4.78c.06 1.17.19 1.74.33 2.12a2.3 2.3 0 0 0 .55.85c.38.38.85.55 1.42.7.39.14.96.27 2.12.33 1.25.06 1.64.06 4.78.06s3.53 0 4.78-.06c1.17-.06 1.74-.19 2.12-.33a2.3 2.3 0 0 0 .85-.55c-.38-.38-.85-.55-1.42-.7-.39-.14-.96-.27-2.12-.33-1.25-.06-1.64-.06-4.78-.06zm0 2.92c-2.47 0-4.48 2-4.48 4.48s2 4.48 4.48 4.48 4.48-2 4.48-4.48-2-4.48-4.48-4.48zm0 7.24c-1.52 0-2.76-1.24-2.76-2.76s1.24-2.76 2.76-2.76 2.76 1.24 2.76 2.76-1.24 2.76-2.76 2.76zM18.4 5.92c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z"/>
@@ -774,30 +745,35 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // =========================================================================
-            // === 🛠️ QUICK EDIT ZONE: PHONE DATA & CONSTANTS 🛠️ ===
+            // === 🛠️ DATA & CONSTANTS 🛠️ ===
             // =========================================================================
-
+            
+            // API Configuration
+            const API_KEY = ""; // Kept empty as per instructions
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+            
             const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
-            const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one.";   
+            const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one.";    
 
             // Define price tiers for filtering logic
             const PRICE_TIERS = {
                 budget: { min: 100000, max: 300000 },
-                midrange: { min: 300001, max: 599999 }, // Adjusted upper limit
-                midrangeplus: { min: 600000, max: 990000 }, // New tier
-                premium: { min: 990001, max: 5000000 } // Adjusted lower limit
+                midrange: { min: 300001, max: 599999 },
+                midrangeplus: { min: 600000, max: 990000 },
+                premium: { min: 990001, max: 5000000 }
             };
 
-            const rawPhoneData = [
+            // Use const for the core data array since it shouldn't change after loading
+            const RAW_PHONE_DATA = [
                 {
-                    name: "IPhone 17 pro max",   
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-17-pro-max-1.jpg",   
-                    description: "I dare say, the best iphone to date, yes, to date.",   
+                    name: "IPhone 17 pro max",    
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-17-pro-max-1.jpg",    
+                    description: "I dare say, the best iphone to date, yes, to date.",    
                     specs: "RAM: 12GB | Storage: 256GB | Battery: 4823 mAh | Camera: 48MP Dual",
                     priceNGN: "₦2,850,000",
                     review: "The iPhone 17 Pro Max is the undisputed king of big phones, delivering next-level 8x zoom photography, massive battery life, and blazing performance with the A19 Pro chip.",
                     gsmarenaUrl: "https://www.gsmarena.com/apple_iphone_17_pro_max-13964.php",
-                    jijiUrl: "https://jiji.ng/central-business-district/mobile-phones/new-apple-iphone-17-pro-max-256-gb-orange-fEogvDSjrRTPNE1zzYKup0wU.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=50&lid=r9k_9x3_F8Dz47CG&indexPosition=0",   
+                    jijiUrl: "https://jiji.ng/central-business-district/mobile-phones/new-apple-iphone-17-pro-max-256-gb-orange-fEogvDSjrRTPNE1zzYKup0wU.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=50&lid=r9k_9x3_F8Dz47CG&indexPosition=0",    
                     isBestValue: false, 
                 },
                 {
@@ -813,7 +789,7 @@
                 },
                 {
                     name: "Redmi 15 5G",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg",   
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-15r-cn.jpg",    
                     description: "Affordable 5G speed and reliable performance for the masses.",
                     specs: "RAM: 8GB | Storage: 256GB | Battery: 7000 mAh | Camera: 50MP Main",
                     priceNGN: "₦290,000",
@@ -824,7 +800,7 @@
                 },
                 {
                     name: "Infinix Hot 60 Pro+",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg",   
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-60-pro-plus-2.jpg",    
                     description: "High-power gaming and massive endurance at a budget price.",
                     specs: "RAM: 8GB | Storage: 256GB | Battery: 5160 mAh | Camera: 50MP Main",
                     priceNGN: "₦260,000",
@@ -846,7 +822,7 @@
                 },
                 {
                     name: "Itel Super 26 Ultra",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg",   
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-s26-ultra-2.jpg",    
                     description: "The essential budget phone focused on battery life and durability.",
                     specs: "RAM: 8GB | Storage: 256GB | Battery: 6000 mAh | Camera: 50MP Dual",
                     priceNGN: "₦250,000",
@@ -863,13 +839,12 @@
                     priceNGN: "₦850,000",
                     review: "Smooth, powerful, and creator-friendly. Although the battery might be an issue—typical iPhone life—it can still comfortably last a full day with moderate use, making it a dependable choice for content creation..",
                     gsmarenaUrl: "https://www.gsmarena.com/apple_iphone_16-13317.php",
-                    jijiUrl: "https://jiji.ng/wumba/mobile-phones/new-apple-iphone-16-128-gb-blue-n9hSdC25YSa3FQu76jenPZpu.html?page=1&pos=2&cur_pos=2&ads_per_page=20&ads_count=151&lid=3dJ7l3sott3DxX-z&indexPosition=1", // Placeholder Jiji URL
+                    jijiUrl: "https://jiji.ng/wumba/mobile-phones/new-apple-iphone-16-128-gb-blue-n9hSdC25YSa3FQu76jenPZpu.html?page=1&pos=2&cur_pos=2&ads_per_page=20&ads_count=151&lid=3dJ7l3sott3DxX-z&indexPosition=1",
                     isBestValue: false, 
                 },
-                // --- HONORABLE MENTIONS (3 entries remain here) ---
                 {
-                    name: "Tecno Pop 10 Pro",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg",   
+                    name: "Tecno Pop 10 Pro (Spark 40c)",
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg",    
                     description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
                     specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
                     priceNGN: "₦125,000",
@@ -880,7 +855,7 @@
                 },
                 {
                     name: "Infinix Hot 40",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg",   
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg",    
                     description: "A solid budget performer offering decent speed and a modern display for its price segment.",
                     specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
                     priceNGN: "₦200,000",
@@ -891,7 +866,7 @@
                 },
                 {
                     name: "Itel P65",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg",   
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg",    
                     description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
                     specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
                     priceNGN: "₦140,000",
@@ -900,7 +875,6 @@
                     jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-itel-p65-128-gb-black-3wNcqVEJd6ZgMnTWHzAJod0Y.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=xDFoKvqhMsHahUZE&indexPosition=2",
                     isBestValue: false, 
                 },
-                // --- NEW PHONE DATA ENTRY (Oppo Reno12 F) ---
                 {
                     name: "Oppo Reno12 F",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno12-f-1.jpg",
@@ -912,19 +886,17 @@
                     jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-oppo-reno12-f-256-gb-5pp5vVXws0ZN9QfzGJIGHHaY.html?page=12&pos=9&cur_pos=9&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=228",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Xiaomi Redmi Note 14 Pro 4G) ---
                 {
                     name: "Xiaomi Redmi Note 14 Pro 4G",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-14-pro-4g-gl-1.jpg",
                     description: "A versatile mid-range phone offering a powerful camera and long-lasting battery life for daily use.",
                     specs: "RAM: 8GB | Storage: 256GB | Battery: 5000 mAh | Camera: 108MP Main",
-                    priceNGN: "₦460,000",
+                    priceNGN: "₦380,000",
                     review: "Xiaomi delivers flagship-level camera hardware and a sharp AMOLED screen, making it a great multimedia device. The 4G focus keeps the price down, but the performance is still smooth thanks to the large RAM capacity.",
                     gsmarenaUrl: "https://www.gsmarena.com/xiaomi_redmi_note_14_pro_4g_(global)-13614.php",
-                    jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-oppo-reno12-f-256-gb-5pp5vVXws0ZN9QfzGJIGHHaY.html?page=12&pos=9&cur_pos=9&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=228",
+                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-xiaomi-redmi-note-14-pro-256-gb-jMc8q2WWo5kBP6cFuS17DUXh.html?page=1&pos=1&cur_pos=1&ads_per_page=7&ads_count=7&lid=YVFonrAraqfk0nUn&indexPosition=0",
                     isBestValue: false,
                 },
-                // --- NEW PHONE DATA ENTRY (Samsung Galaxy A36) ---
                 {
                     name: "Samsung Galaxy A36",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a36-1.jpg",
@@ -936,7 +908,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-samsung-galaxy-a36-256-gb-black-cowWmN7nnT4uKGvGPYBJvFOZ.html?page=9&pos=19&cur_pos=19&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=178",
                     isBestValue: false,
                 },
-                // --- UPDATED PHONE DATA ENTRY (Tecno Spark Slim) ---
                 {
                     name: "Tecno Spark Slim",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-slim-1.jpg",
@@ -948,7 +919,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-spark-slim-256-gb-35BSiT8MyIozaUDBx2ZMQzZX.html?page=1&pos=16&cur_pos=16&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=15",
                     isBestValue: false,
                 },
-                // --- UPDATED PHONE DATA ENTRY (Oppo Reno11 5G) ---
                 {
                     name: "Oppo Reno11 5G",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno11-f-5g-1.jpg",
@@ -957,20 +927,8 @@
                     priceNGN: "₦400,000",
                     review: "The Reno11 5G is the 'Portrait Expert,' featuring a superb 50MP triple-camera system including a dedicated 32MP telephoto lens. It offers fast 67W charging and a vibrant 120Hz AMOLED display, making it an excellent all-rounder for media and photography.",
                     gsmarenaUrl: "https://www.gsmarena.com/oppo_reno11_f-12797.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-spark-slim-256-gb-35BSiT8MyIozaUDBx2ZMQzZX.html?page=1&pos=16&cur_pos=16&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=15",
+                    jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-oppo-reno11-5g-256-gb-b46gDsfxDM3E1Uqi1awfwWQ5.html?page=1&pos=1&cur_pos=1&ads_per_page=2&ads_count=2&lid=62kPbYJ0tv3eim_M&indexPosition=0",
                     isBestValue: false,
-                },
-                // --- UPDATED PHONE DATA ENTRY (Oppo A6 Pro) ---
-                {
-                    name: "Oppo A6 Pro",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a6-pro-4g-1.jpg",
-                    description: "Premium build quality and reliable performance, featuring a massive 6500 mAh battery and ultra-fast 80W charging.",
-                    specs: "RAM: 8GB | Storage: 256GB | Battery: 6500 mAh | Camera: 50MP Dual",
-                    priceNGN: "₦420,000",
-                    review: "The A6 Pro stands out with its exceptional battery life (6500 mAh) and lightning-fast 80W charging. The bright 120Hz AMOLED screen and reliable 50MP camera system make it the best value for endurance and usability.",
-                    gsmarenaUrl: "https://www.gsmarena.com/oppo_a6_pro_5g-14171.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-oppo-a6-pro-256-gb-blue-frq1OMDd7VdiZlsmmYpavbDs.html?page=9&pos=9&cur_pos=9&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=168",
-                    isBestValue: true,
                 },
                 {
                     name: "Google Pixel 7",
@@ -980,7 +938,7 @@
                     priceNGN: "₦420,000",
                     review: "The Pixel 7 delivers stunning photos in any light, leveraging the Tensor G2 chip for powerful AI features like Magic Eraser. While the charging speed is slow, the pure Android experience and guaranteed updates make it a smart purchase.",
                     gsmarenaUrl: "https://www.gsmarena.com/google_pixel_7-11903.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7-128-gb-7uDBPtvOg7rdHR6M4N7tCfbb.html?page=9&pos=10&cur_pos=10&ads_per_page=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=169",
+                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7-128-gb-7uDBPtvOg7rdHR6M4N7tCfbb.html?page=9&pos=10&cur_pos=10&ads_per_perge=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=169",
                     isBestValue: false,
                 },
                 {
@@ -1029,11 +987,9 @@
                 },
             ];
 
-            // Global variable to store processed and searchable data (Re-introduced for filter setup)
-            let phoneData = [];
-            // Global variable to track current filter/search state (Re-introduced for filter setup)
+            // Global variable to track current filter state
             let currentFilter = 'all';
-            let currentSearchTerm = '';
+            let processedPhoneData; // Will hold the enriched data after processing
 
             // =========================================================================
             // === CUSTOM MESSAGE BOX LOGIC ===
@@ -1043,7 +999,6 @@
             const messageText = document.getElementById('messageText');
             const closeButton = document.getElementById('closeButton');
             
-            // Utility function for showing the modal
             const showMessage = (title, text) => {
                 messageTitle.textContent = title;
                 messageText.innerHTML = text;
@@ -1053,7 +1008,6 @@
                 }, 10);
             };
 
-            // Utility function for hiding the modal
             const hideMessage = () => {
                 messageBox.classList.remove('active');
                 setTimeout(() => {
@@ -1063,7 +1017,6 @@
 
             closeButton.addEventListener('click', hideMessage);
             
-            // Close modal when clicking outside the content area
             messageBox.addEventListener('click', (event) => {
                 if (event.target === messageBox) {
                     hideMessage();
@@ -1071,34 +1024,36 @@
             });
             
             // =========================================================================
-            // === CORE FILTERING & RENDERING LOGIC (Updated to remove search) ===
+            // === CORE FILTERING & RENDERING LOGIC ===
             // =========================================================================
 
+            /**
+             * Safely converts NGN price string (e.g., "₦2,850,000") to an integer number.
+             * @param {string} priceString 
+             * @returns {number} Price value in Naira.
+             */
             function getPriceValue(priceString) {
-                // Defensive check and cleanup, handles null/undefined/non-string
                 if (typeof priceString !== 'string') return 0;
-                return parseInt(priceString.replace('₦', '').replace(/,/g, ''), 10) || 0;
+                // Remove '₦', commas, and then parse as integer. Fallback to 0 if parsing fails.
+                const cleanPrice = priceString.replace(/[₦,]/g, '').trim();
+                return parseInt(cleanPrice, 10) || 0;
             }
 
+            /**
+             * Assigns a price tier string based on the numeric price value.
+             * @param {number} priceValue 
+             * @returns {string} The matching price tier.
+             */
             function getPriceTier(priceValue) {
-                // Check in reverse order of price ranges (Premium first to avoid overlap issues)
-                if (priceValue >= PRICE_TIERS.premium.min) {
-                    return 'premium';
-                }
-                if (priceValue >= PRICE_TIERS.midrangeplus.min && priceValue <= PRICE_TIERS.midrangeplus.max) {
-                    return 'midrangeplus';
-                }
-                if (priceValue >= PRICE_TIERS.midrange.min && priceValue <= PRICE_TIERS.midrange.max) {
-                    return 'midrange';
-                }
-                if (priceValue >= PRICE_TIERS.budget.min && priceValue <= PRICE_TIERS.budget.max) {
-                    return 'budget';
-                }
+                if (priceValue >= PRICE_TIERS.premium.min) return 'premium';
+                if (priceValue >= PRICE_TIERS.midrangeplus.min && priceValue <= PRICE_TIERS.midrangeplus.max) return 'midrangeplus';
+                if (priceValue >= PRICE_TIERS.midrange.min && priceValue <= PRICE_TIERS.midrange.max) return 'midrange';
+                if (priceValue >= PRICE_TIERS.budget.min && priceValue <= PRICE_TIERS.budget.max) return 'budget';
                 return 'unknown';
             }
 
             function processPhoneData() {
-                return rawPhoneData.map(phone => {
+                return RAW_PHONE_DATA.map(phone => {
                     const priceValue = getPriceValue(phone.priceNGN);
                     return {
                         ...phone,
@@ -1109,9 +1064,8 @@
             }
 
             function applyFilters() {
-                let filteredPhones = phoneData;
-                // Search filter step removed here.
-
+                let filteredPhones = processedPhoneData;
+                
                 // 1. Filter by Price Tier
                 if (currentFilter !== 'all') {
                     filteredPhones = filteredPhones.filter(phone => phone.priceTier === currentFilter);
@@ -1129,8 +1083,6 @@
 
                 renderCards(sortedPhones);
             }
-
-            // End updated filtering logic
             
             /**
              * Renders the phone cards onto the page using the provided data array.
@@ -1140,36 +1092,31 @@
                 container.innerHTML = '';    // Clear loading indicator
 
                 if (phones.length === 0) {
-                    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews available yet.</p>';
+                    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews match your filter. Try adjusting your price range!</p>';
                     return;
                 }
                 
-                // Define the max length for the visible review text
                 const MAX_REVIEW_LENGTH = 150; 
 
                 phones.forEach(phone => {
                     const initialReview = phone.review || DEFAULT_REVIEW_TEXT;
                     const isPlaceholder = initialReview === DEFAULT_REVIEW_TEXT;
                     
-                    // Check if we should truncate the review
                     const isLongReview = initialReview.length > MAX_REVIEW_LENGTH && !isPlaceholder;
                     let displayReview = initialReview;
                     let truncatedReview = initialReview;
 
                     if (isLongReview) {
-                        // Create the truncated text
                         truncatedReview = initialReview.substring(0, MAX_REVIEW_LENGTH).trim() + '...';
-                        displayReview = truncatedReview; // Start with truncated text
+                        displayReview = truncatedReview;
                     }
                     
                     const gsmarenaLink = phone.gsmarenaUrl || '#';    
                     const jijiLink = phone.jijiUrl || '#';    
                     
-                    // Apply smaller title class for longer names like "Infinix Hot 60 Pro+"
-                    const isSmallTitle = phone.name === "Infinix Hot 60 Pro+";
+                    const isSmallTitle = phone.name === "Infinix Hot 60 Pro+" || phone.name === "Tecno Pop 10 Pro (Spark 40c)";
                     const titleClass = isSmallTitle ? 'smaller-title' : '';
                     
-                    // Determine if it's the Best Value card
                     const isBestValue = phone.isBestValue;
                     const cardClass = isBestValue ? 'card best-value' : 'card';
                     const badgeHtml = isBestValue ? '<span class="best-value-badge">Best Value!</span>' : '';
@@ -1177,8 +1124,7 @@
 
                     const cardHtml = `
                         <div class="${cardClass}" data-phone-name="${phone.name}">
-                            ${badgeHtml} <!-- Best Value Badge -->
-                            <!-- Link to view the full image -->
+                            ${badgeHtml}
                             <a href="${phone.imageUrl}" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="View full size image for ${phone.name}">
                                 <img src="${phone.imageUrl}"    
                                     alt="${phone.name}"    
@@ -1193,55 +1139,46 @@
                                 ${phone.specs.split(' | ').join('<br>')}
                             </div>
                             
-                            <!-- Review Display Container -->
                             <div class="user-review-display ${isPlaceholder ? 'review-placeholder' : ''}">
                                 <span class="review-text-content">${displayReview}</span>
                                 ${isLongReview ? 
-                                    // Store full and truncated text in data attributes for easy access in the click handler
                                     `<button class="review-toggle-button" data-full-text="${encodeURIComponent(initialReview)}" data-truncated-text="${encodeURIComponent(truncatedReview)}">Show More</button>` : ''}
                             </div>
                             
-                            <!-- GSMArena Link -->
                             <a href="${gsmarenaLink}" target="_blank" class="review-link" rel="noopener noreferrer">
                                 Check Full Specs on GSMArena &rarr;
                             </a>
 
-                            <!-- Price Tag/Vendor Link (Jiji.ng) -->
                             <a href="${jijiLink}" target="_blank" class="price-tag price-link" rel="noopener noreferrer" aria-label="Find ${phone.name} on Jiji.ng">
                                 ${phone.priceNGN}
                             </a>
                         </div>
                     `;
                     
-                    // Use a template element for robust HTML injectio
                     const template = document.createElement('template');
                     template.innerHTML = cardHtml.trim();
                     const cardElement = template.content.firstChild;
                     
-                    // Get all interactive elements inside the card
+                    // Add interactivity
                     const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag');
-
-                    // Add stopPropagation to all interactive elements to prevent the parent card's click event
                     interactiveElements.forEach(el => {
                         el.addEventListener('click', (e) => {
                             e.stopPropagation();
                         });
                     });
                     
-                    // --- NEW: Add event listener for the toggle button ---
                     const toggleButton = cardElement.querySelector('.review-toggle-button');
                     if (toggleButton) {
                         toggleButton.addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent card click
+                            e.stopPropagation();
                             const button = e.currentTarget;
                             const reviewDisplay = button.closest('.user-review-display');
-                            // Target the span holding the text content
                             const reviewTextSpan = reviewDisplay.querySelector('.review-text-content'); 
                             
                             const isShowingMore = button.textContent === 'Show More';
-                            // Decode URI to safely retrieve the text strings
+                            // Note: Used 'dataset.truncatedText' and 'dataset.fullText' correctly in JS function.
                             const fullText = decodeURIComponent(button.dataset.fullText);
-                            const truncatedText = decodeURIComponent(button.dataset.truncatedText);
+                            const truncatedText = decodeURIComponent(button.dataset.truncatedText); 
                             
                             if (isShowingMore) {
                                 reviewTextSpan.textContent = fullText;
@@ -1255,7 +1192,7 @@
                     
                     // Add click listener to show the message box (This fires only if no specific link or button was clicked)
                     cardElement.addEventListener('click', () => {
-                        showMessage('Review Page Coming Soon!',   
+                        showMessage('Review Page Coming Soon!',    
                             'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
                     });
                     
@@ -1263,9 +1200,6 @@
                 });
             }
             
-            /**
-             * Sets up event listeners for filter controls (Search logic removed).
-             */
             function setupControls() {
                 const filterButtons = document.querySelectorAll('.filter-button');
 
@@ -1283,9 +1217,125 @@
                         applyFilters();
                     });
                 });
-                
-                // Note: Search input logic removed from this function.
             }
+
+            // =========================================================================
+            // === CHATBOT / GEMINI API INTEGRATION LOGIC ===
+            // =========================================================================
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendButton');
+            const chatOutput = document.getElementById('chatOutput');
+            const chatLoading = document.getElementById('chatLoading');
+
+            // Store chat history and available phone data in a user-readable format
+            let chatHistory = [];
+            
+            /**
+             * Renders a new message in the chat window.
+             */
+            function addMessageToChat(text, role) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', role === 'user' ? 'user-message' : 'ai-message');
+                messageElement.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Basic markdown styling
+                chatOutput.appendChild(messageElement);
+                // Scroll to the bottom
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+            }
+
+            /**
+             * Calls the Gemini API to get a recommendation.
+             * It uses the current phone list as the primary context (grounding data).
+             */
+            async function callGeminiApiForRecommendation(userPrompt) {
+                // Prepare phone list for the prompt
+                const phoneListContext = processedPhoneData.map(p => 
+                    `Name: ${p.name}, Price: ${p.priceNGN}, Specs: ${p.specs}, Review Summary: ${p.review}`
+                ).join('\n---\n');
+
+                const systemPrompt = `You are a Phones Weekly AI Analyst from Abuja. Your goal is to recommend the single best phone from the provided list based on the user's budget and priorities. You MUST only recommend a phone that exists in the list. Provide a brief, supportive explanation for your choice. Use bold for the recommended phone's name.`;
+
+                const fullPrompt = `Here is the list of available phones and their details:\n\n${phoneListContext}\n\nUser's request: ${userPrompt}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: fullPrompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                // Add user query to history for display
+                chatHistory.push({ role: "user", parts: [{ text: userPrompt }] });
+
+                let retryCount = 0;
+                const MAX_RETRIES = 5;
+
+                while (retryCount < MAX_RETRIES) {
+                    try {
+                        const response = await fetch(API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                        if (text) {
+                            // Add AI response to chat history
+                            chatHistory.push({ role: "model", parts: [{ text: text }] });
+                            return text;
+                        } else {
+                            throw new Error("No text content found in API response.");
+                        }
+                    } catch (error) {
+                        retryCount++;
+                        if (retryCount >= MAX_RETRIES) {
+                            console.error("Gemini API call failed after multiple retries:", error);
+                            return "Sorry, I'm having trouble connecting to the network right now. Please try again later.";
+                        }
+                        // Exponential backoff delay
+                        const delay = Math.pow(2, retryCount) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        // Continue loop for retry
+                    }
+                }
+            }
+
+
+            /**
+             * Handles the chat submission, manages UI state, and calls the AI.
+             */
+            async function handleChatSubmission() {
+                const userPrompt = chatInput.value.trim();
+                if (!userPrompt) return;
+
+                // 1. Update UI for User Message
+                addMessageToChat(userPrompt, 'user');
+                chatInput.value = '';
+                chatInput.disabled = true;
+                sendButton.disabled = true;
+                chatLoading.style.display = 'block';
+
+                // 2. Call the AI
+                const aiResponse = await callGeminiApiForRecommendation(userPrompt);
+
+                // 3. Update UI for AI Response
+                addMessageToChat(aiResponse, 'model');
+                chatLoading.style.display = 'none';
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                chatInput.focus();
+            }
+
+            // Event Listeners for Chatbot
+            sendButton.addEventListener('click', handleChatSubmission);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleChatSubmission();
+                }
+            });
 
 
             /**
@@ -1293,7 +1343,7 @@
              */
             async function fetchAndRenderPhones() {
                 // Process the raw data once on load
-                phoneData = processPhoneData();
+                processedPhoneData = processPhoneData();
                 
                 // Setup user controls
                 setupControls();
