@@ -418,7 +418,7 @@
             background-color: var(--chat-bubble);
             border-bottom-left-radius: 0;
             color: var(--text-light);
-            /* Highlight recommendation names */
+            /* Highlight recommendation names and sources */
         }
         
         .ai-message strong {
@@ -1353,28 +1353,32 @@
             function addMessageToChat(text, role) {
                 const messageElement = document.createElement('div');
                 messageElement.classList.add('chat-message', role === 'user' ? 'user-message' : 'ai-message');
-                messageElement.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Basic markdown styling
+                // Use innerHTML to process the markdown for strong tags and the new HTML for sources
+                messageElement.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 chatOutput.appendChild(messageElement);
                 // Scroll to the bottom
                 chatOutput.scrollTop = chatOutput.scrollHeight;
             }
 
             /**
-             * Calls the Gemini API to get a recommendation.
-             * It uses the current phone list as the primary context (grounding data).
+             * Calls the Gemini API to get a recommendation using Google Search Grounding.
              */
             async function callGeminiApiForRecommendation(userPrompt) {
-                // Prepare phone list for the prompt
-                const phoneListContext = processedPhoneData.map(p => 
-                    `Name: ${p.name}, Price: ${p.priceNGN}, Specs: ${p.specs}, Review Summary: ${p.review}`
-                ).join('\n---\n');
+                
+                // 1. Hint to the model about the local context, but allow wider search
+                const phoneNames = RAW_PHONE_DATA.map(p => p.name).join(', ');
 
-                const systemPrompt = `You are a Phones Weekly AI Analyst from Abuja. Your goal is to recommend the single best phone from the provided list based on the user's budget and priorities. You MUST only recommend a phone that exists in the list. Provide a brief, supportive explanation for your choice. Use bold for the recommended phone's name.`;
+                // 2. Updated System Instruction emphasizing up-to-date, external search for price/specs
+                const systemPrompt = `You are a Phones Weekly AI Analyst based in Abuja. Your primary goal is to provide the single best, up-to-date phone recommendation based on the user's explicit budget and priorities (gaming, camera, battery, etc.). You must use Google Search to find the latest specifications, current market prices, and retailer information from trusted sources like gsmarena.com and jiji.ng. Provide a concise, highly specific recommendation, mentioning the recommended phone in bold.`;
 
-                const fullPrompt = `Here is the list of available phones and their details:\n\n${phoneListContext}\n\nUser's request: ${userPrompt}`;
+                const fullPrompt = `User's Request: ${userPrompt}\n\nFor context, we usually review popular models like: ${phoneNames}. Please use your search capability to find the most current and relevant information for the user's specific needs, focusing on Abuja market viability (price/availability check).`;
 
                 const payload = {
                     contents: [{ parts: [{ text: fullPrompt }] }],
+                    
+                    // 3. Enable Google Search Grounding
+                    tools: [{ "google_search": {} }], 
+
                     systemInstruction: { parts: [{ text: systemPrompt }] },
                 };
 
@@ -1397,10 +1401,33 @@
                         }
 
                         const result = await response.json();
-                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                        const candidate = result.candidates?.[0];
 
-                        if (text) {
-                            // Add AI response to chat history
+                        if (candidate && candidate.content?.parts?.[0]?.text) {
+                            let text = candidate.content.parts[0].text;
+                            
+                            // 4. Extract grounding sources
+                            const groundingMetadata = candidate.groundingMetadata;
+                            let sources = [];
+                            if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                                sources = groundingMetadata.groundingAttributions
+                                    .map(attribution => ({
+                                        uri: attribution.web?.uri,
+                                        title: attribution.web?.title,
+                                    }))
+                                    .filter(source => source.uri && source.title);
+                            }
+
+                            if (sources.length > 0) {
+                                text += '<br><br><strong>Sources:</strong>';
+                                sources.forEach((source, index) => {
+                                    // Using HTML list and anchor tags for sources
+                                    text += `<div style="font-size:0.75rem;opacity:0.7;margin-top:5px;">
+                                                [${index + 1}] <a href="${source.uri}" target="_blank" style="color:var(--medium-teal);text-decoration:underline;">${source.title || 'Source Link'}</a>
+                                             </div>`;
+                                });
+                            }
+                            
                             chatHistory.push({ role: "model", parts: [{ text: text }] });
                             return text;
                         } else {
