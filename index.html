@@ -805,6 +805,7 @@
                             Redmi 14c
                         </a>
                         <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Neatly used redmi 14c. (95k)</p>
+
                     </div>
                     
                     <div class="generic-option-wrapper">
@@ -1018,7 +1019,7 @@
                     name: "Samsung Galaxy A36",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a36-1.jpg",
                     description: "The perfect blend of Samsung quality, a vibrant display, and solid mid-range performance.",
-                    specs: "RAM: 8GB | Storage: 256GB | Battery: 5000 mAh | Camera: 50MP Main",
+                    specs: "RAM: 8GB | Storage: 256GB | Battery: 5000 mAh | Camera: 50MP Dual",
                     priceNGN: "₦440,000",
                     review: "This model offers Samsung's signature Super AMOLED screen and excellent software longevity, guaranteeing a premium feel without the flagship price. The camera performs reliably well in most conditions.",
                     gsmarenaUrl: "https://www.gsmarena.com/samsung_galaxy_a36-13497.php",
@@ -1397,6 +1398,8 @@
                         });
 
                         if (!response.ok) {
+                            // Log the HTTP status error for intermediate retries
+                            console.log(`Gemini API HTTP Error (Attempt ${retryCount + 1}/${MAX_RETRIES}): Status ${response.status}. Retrying...`);
                             throw new Error(`HTTP error! status: ${response.status}`);
                         }
 
@@ -1435,10 +1438,13 @@
                         }
                     } catch (error) {
                         retryCount++;
+                        
+                        // Log a detailed error only on the final failure
                         if (retryCount >= MAX_RETRIES) {
-                            console.error("Gemini API call failed after multiple retries:", error);
+                            console.error(`Gemini API call failed after ${MAX_RETRIES} retries. Returning fallback message. Final error:`, error.message || error);
                             return "Sorry, I'm having trouble connecting to the network right now. Please try again later.";
                         }
+                        
                         // Exponential backoff delay
                         const delay = Math.pow(2, retryCount) * 1000;
                         await new Promise(resolve => setTimeout(resolve, delay));
@@ -1502,4 +1508,3 @@
     </script>
 </body>
 </html>
-
