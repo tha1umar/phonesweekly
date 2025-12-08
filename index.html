@@ -13,19 +13,21 @@
     <style>
         :root {
             --primary-green: #00e676; /* Light, vibrant green */
-            --primary-dark: #3540e0; /* Dark Teal - Used for main background */
+            --primary-dark: #1f2937; /* Dark Slate Grey / Almost Black */
             --medium-teal: #009688;
             --text-light: #fff;
             --value-gold: #ffc107;
             --chat-bg: #1e293b; /* Slate blue for chat container */
             --chat-bubble: #374151; /* Darker slate for bubbles */
+            --background-start: #0f172a; /* Deep blue-black */
+            --background-end: #1e3a8a; /* Dark Blue */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(120deg, var(--primary-dark), var(--medium-teal));
+            background: linear-gradient(120deg, var(--background-start), var(--background-end));
             color: var(--text-light);
             min-height: 100vh;
             display: flex;
@@ -38,6 +40,7 @@
             padding: 2.5rem 1rem;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
+            border-bottom: 3px solid var(--primary-green);
         }
         
         /* --- Logo Placeholder Styling for Image --- */
@@ -67,14 +70,16 @@
 
         header h1 {
             margin: 0;
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         header p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            opacity: 0.9;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.8;
             font-weight: 300;
+            margin-top: 0.5rem;
         }
 
         /* NEW: Styling for the new Filter/Search Controls */
@@ -89,21 +94,21 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
 
         .filter-button {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
             color: var(--text-light);
-            border: 2px solid transparent;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* Tailwind 'rounded-full' */
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             user-select: none;
         }
 
@@ -114,23 +119,27 @@
         .filter-button.active,
         .filter-button.active:hover {
             background-color: var(--primary-green);
-            color: var(--primary-dark);
-            border-color: var(--text-light);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: var(--background-start);
+            border-color: var(--primary-green);
+            font-weight: 700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.4);
         }
 
         main {
             flex-grow: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
             padding: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .card {
             position: relative;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 1.5rem;
             text-align: center;
@@ -138,18 +147,20 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
         }
 
         .card.best-value {
             border: 3px solid var(--value-gold);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.4);
+            background: linear-gradient(145deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.5);
         }
         
         .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Best Value Badge */
@@ -158,7 +169,7 @@
             top: 10px;
             right: 10px;
             background-color: var(--value-gold);
-            color: var(--primary-dark);
+            color: var(--background-start);
             padding: 0.3rem 0.8rem;
             border-radius: 50px;
             font-size: 0.8rem;
@@ -176,52 +187,60 @@
             aspect-ratio: 3 / 2;
             object-fit: contain;
             margin-bottom: 1rem;
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.03);
         }
         
         .card .specs {
+            flex-grow: 1; /* Pushes the price tag down */
             font-size: 0.85rem;
             opacity: 0.9;
-            margin-top: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             text-align: left;
-            padding-left: 20%;
-            line-height: 1.6;
+            line-height: 1.8;
+            border-left: 3px solid var(--medium-teal);
         }
-        
+
         .card h2 {
-            font-size: 1.6rem;
-            margin: 0;
-            font-weight: 600;
+            font-size: 1.8rem;
+            margin: 0.5rem 0 0;
+            font-weight: 700;
         }
 
         .card h2.smaller-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         .card p {
-            font-size: 1rem;
-            opacity: 0.85;
+            font-size: 0.95rem;
+            opacity: 0.8;
             font-weight: 300;
+            min-height: 2.5rem; /* Ensure consistent spacing */
         }
         
         .user-review-display {
             font-family: 'Inter', sans-serif;
             width: 100%;
-            padding: 10px;
-            margin-top: 1rem;
+            padding: 1rem;
+            margin-top: 0.5rem;
             border-radius: 10px;
-            border: 1px solid var(--medium-teal);
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--primary-dark);
+            border: 1px solid var(--primary-green);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--background-start);
             box-sizing: border-box;
             font-size: 0.9rem;
             text-align: left;
-            line-height: 1.4;
+            line-height: 1.5;
             min-height: 50px;
-            transition: all 0.3s ease;
+            flex-shrink: 0;
         }
         
         .review-placeholder {
@@ -232,7 +251,7 @@
        .review-toggle-button {
             background: none;
             border: none;
-            color: var(--primary-dark);
+            color: var(--medium-teal);
             font-weight: 600;
             cursor: pointer;
             padding: 0;
@@ -246,11 +265,11 @@
             display: block;
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             background-color: var(--primary-green);
-            color: var(--primary-dark);
+            color: var(--background-start);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-radius: 8px;
             text-decoration: none;
             transition: background-color 0.2s, transform 0.2s;
@@ -258,6 +277,7 @@
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
+            flex-shrink: 0;
         }
         
         .review-link:hover {
@@ -274,7 +294,7 @@
             background: linear-gradient(90deg, #ff9800, #ff5722); 
             color: white; 
             font-weight: 900;     
-            font-size: 1.4rem;     
+            font-size: 1.5rem;     
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6); 
             user-select: none;
@@ -282,6 +302,7 @@
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
             border: 2px solid white; 
+            flex-shrink: 0;
         }
         
         .price-tag:hover {
@@ -303,6 +324,7 @@
             padding: 1.5rem 1rem;
             background: rgba(0, 0, 0, 0.4);
             font-size: 0.9rem;
+            margin-top: 2rem;
         }
 
         /* Social Media Styling */
@@ -387,7 +409,7 @@
 
         .user-message {
             align-self: flex-end;
-            background-color: var(--primary-dark);
+            background-color: var(--background-end);
             border-bottom-right-radius: 0;
         }
 
@@ -421,7 +443,7 @@
 
         #sendButton {
             background-color: var(--primary-green);
-            color: var(--primary-dark);
+            color: var(--background-start);
             font-weight: 700;
             padding: 0.75rem 1.5rem;
             border: none;
@@ -456,7 +478,7 @@
         }
         
         .message-content {
-            background: linear-gradient(135deg, var(--primary-dark), #00695c);
+            background: linear-gradient(135deg, var(--background-start), #00695c);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -486,7 +508,7 @@
         
         .message-close-button {
             background-color: var(--primary-green);
-            color: var(--primary-dark);
+            color: var(--background-start);
             font-weight: 700;
             padding: 0.5rem 1.5rem;
             border: none;
@@ -515,15 +537,55 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* --- NEW CHANNEL WIDGET STYLES --- */
+        /* --- RECOMMENDED CHANNELS SECTION STYLES --- */
+        .youtube-links-section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .youtube-links-section h2 {
+            text-align: center;
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .channel-card {
+            display: block;
+            background: var(--chat-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
         .channel-icon {
             display: inline-block;
             margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
+            padding: 0.75rem;
+            background: #fff; /* White background for visibility */
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s;
         }
 
         .channel-card:hover .channel-icon {
@@ -536,6 +598,54 @@
             height: 28px;
             display: block;
         }
+
+        .channel-title {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .channel-description {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        /* Used Phone Placeholder */
+        .used-phone-placeholder {
+            padding: 2rem;
+            border: 2px dashed var(--value-gold);
+            border-radius: 15px;
+            margin-top: 3rem;
+            text-align: center;
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .used-phone-placeholder p {
+            margin: 0.5rem 0;
+        }
+        
+        .youtube-text-placeholder {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .generic-option-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            transition: background 0.2s;
+            flex: 1 1 30%;
+            min-width: 250px;
+        }
+
+        .generic-option-wrapper:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
 
         /* Adjustments for Mobile */
         @media (max-width: 600px) {
@@ -560,10 +670,11 @@
                 padding: 1.5rem 1rem;
             }
             .youtube-links-section {
-                padding: 1rem 1rem 0;
+                padding: 1.5rem;
             }
             .price-tag {
                 width: 100%;
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -675,27 +786,33 @@
             <p>Used affordable phone suggestion to buy on a deal — but be careful.</p>
             <p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is **strongly recommended**, because if anything goes wrong, you have a real location to return to and report issues.</p>
             
-            <div style="margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
-                
-                <div class="generic-option-wrapper">
-                    <a href="https://jiji.ng/garki-i/mobile-phones/samsung-galaxy-a14-128-gb-black-3pfUj2AFDCYsTLWIRGzQcpc9.html?pos=2&cur_pos=2&ads_per_page=100&page=1&lid=tKZVXGb_0pkDXHsK" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
-                        Samsung Galaxy A14
-                    </a>
-                    <p>For the lovers of Samsung... 110k.</p>
-                </div>
-                
-                <div class="generic-option-wrapper">
-                    <a href="Coming soon" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
-                        Searching for deals
-                    </a>
-                    <p>Searching for deals</p>
-                </div>
-                
-                <div class="generic-option-wrapper">
-                    <a href="https://www.facebook.com/marketplace/item/25835089142742708/?ref=saved&referral_code=null?page=1&pos=7&cur_pos=7&ads_per_page=20&ads_count=2485&lid=U-Z-Yeapm6MowEim&indexPosition=6" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: #1e3a8a;">
-                        Itel A80 open box
-                    </a>
-                    <p>Open box Itel A80, owner bought it and most likely got an upgrade. Worth checking out, going for 85k.</p>
+            <div class="used-phone-placeholder">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--value-gold); margin-bottom: 0.5rem;">
+                    Used Phone Deals & Recommendations
+                </p>
+                <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Information Coming Soon!</p>
+                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                    
+                    <div class="generic-option-wrapper">
+                        <a href="https://jiji.ng/garki-i/mobile-phones/samsung-galaxy-a14-128-gb-black-3pfUj2AFDCYsTLWIRGzQcpc9.html?pos=2&cur_pos=2&ads_per_page=100&page=1&lid=tKZVXGb_0pkDXHsK" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
+                            Samsung Galaxy A14 (110k)
+                        </a>
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">For the lovers of Samsung...</p>
+                    </div>
+                    
+                    <div class="generic-option-wrapper">
+                        <a href="#" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);" onclick="showMessage('Coming Soon!', 'We are actively searching for the next best used phone deals in Abuja. Check back later this week!'); return false;">
+                            Searching for deals
+                        </a>
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Daily checks for open-box bargains...</p>
+                    </div>
+                    
+                    <div class="generic-option-wrapper">
+                        <a href="https://www.facebook.com/marketplace/item/25835089142742708/?ref=saved&referral_code=null?page=1&pos=7&cur_pos=7&ads_per_page=20&ads_count=2485&lid=U-Z-Yeapm6MowEim&indexPosition=6" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
+                            Itel A80 open box (85k)
+                        </a>
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Owner bought it and most likely got an upgrade. Worth checking out.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1128,7 +1245,7 @@
                             <a href="${phone.imageUrl}" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="View full size image for ${phone.name}">
                                 <img src="${phone.imageUrl}"    
                                     alt="${phone.name}"    
-                                    onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='cover';"
+                                    onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE.replace('Image+Unavailable', phone.name.replace(/\s/g, '+'))}'; this.style.objectFit='contain';"
                                 >
                             </a>
                             
