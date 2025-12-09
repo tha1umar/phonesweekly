@@ -293,12 +293,12 @@
             padding: 0.8rem 2rem;      
             background: linear-gradient(90deg, #ff9800, #ff5722); 
             color: white; 
-            font-weight: 900;     
-            font-size: 1.5rem;     
+            font-weight: 900;      
+            font-size: 1.5rem;      
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6); 
             user-select: none;
-            text-align: center;     
+            text-align: center;      
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
             border: 2px solid white; 
@@ -725,10 +725,7 @@
     <section class="chatbot-section">
         <h2 class="chat-title">Need a Personal Recommendation? Ask our AI Analyst!</h2>
         <div id="chatOutput" class="chat-output">
-            <!-- Initial AI Greeting -->
-            <div class="chat-message ai-message">
-                Hello! I'm your Phones Weekly AI Analyst. Tell me your budget, main uses (e.g., gaming, battery life, camera), and I will recommend the best phone from the list above.
-            </div>
+            <!-- Initial AI Greeting added via JavaScript now for consistency -->
         </div>
         <div class="chat-input-container">
             <input type="text" id="chatInput" placeholder="E.g., Gaming phone under N450,000..." aria-label="Phone recommendation prompt">
@@ -745,7 +742,7 @@
         <!-- NEWS SNIPPET INSERTED HERE (Independent Block) -->
         <div class="news-snippet-placeholder">
             <h3>Best Phone Store in Wuse 2: S-NAMAMA</h3>
-            <p>Looking for the most competitive prices (not Banex)? Visit S-Namama in Wuse 2. They are located just after Zenith Bank and before the Ibro Hotel junction. Give them a visit if you please. **Phone Number: 08105038181**</p>
+            <p>Looking for the most competitive prices (not Banex)? Visit S-Namama in Wuse 2. They are located just after Zenith Bank and before the Ibro Hotel junction. Give them a visit if you please. <strong>Phone Number: 08105038181</strong></p>
         </div>
         
         <!-- RECOMMENDED TECH YOUTUBE CHANNELS (Independent H2) -->
@@ -784,7 +781,7 @@
         <!-- Used Phone Warning and Links -->
         <div class="youtube-text-placeholder">
             <p>Used affordable phone suggestion to buy on a deal — but be careful.</p>
-            <p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is **strongly recommended**, because if anything goes wrong, you have a real location to return to and report issues.</p>
+            <p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is <strong>strongly recommended</strong>, because if anything goes wrong, you have a real location to return to and report issues.</p>
             
             <div class="used-phone-placeholder">
                 <p style="font-size: 1.2rem; font-weight: 600; color: var(--value-gold); margin-bottom: 0.5rem;">
@@ -801,10 +798,10 @@
                     </div>
                     
                     <div class="generic-option-wrapper">
-                        <a href="https://jiji.ng/kubwa/mobile-phones/xiaomi-redmi-14c-128-gb-yFpxhsHemdp5ycyrAdUTUNpe.html?page=1&pos=13&cur_pos=13&ads_per_page=14&ads_count=13&lid=BcCO6CFNG9l51-XS&indexPosition=12" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);" onclick="showMessage('Coming Soon!', 'We are actively searching for the next best used phone deals in Abuja. Check back later this week!'); return false;">
-                            Redmi 14c
+                        <a href="https://jiji.ng/kubwa/mobile-phones/xiaomi-redmi-14c-128-gb-yFpxhsHemdp5ycyrAdUTUNpe.html?page=1&pos=13&cur_pos=13&ads_per_page=14&ads_count=13&lid=BcCO6CFNG9l51-XS&indexPosition=12" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
+                            Redmi 14c (95k)
                         </a>
-                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Neatly used redmi 14c. (95k)</p>
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Neatly used redmi 14c.</p>
 
                     </div>
                     
@@ -845,8 +842,8 @@
             </a>
         </div>
         
-        <p>For more questions and inquiries about any of these devices, including direct shops to get them at the best prices in Abuja, please send a WhatsApp message to **08165481152**.</p>
-        <p>Subject should be **(Phones weekly)**.</p>
+        <p>For more questions and inquiries about any of these devices, including direct shops to get them at the best prices in Abuja, please send a WhatsApp message to <strong>08165481152</strong>.</p>
+        <p>Subject should be <strong>(Phones weekly)</strong>.</p>
         <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
     </footer>
 
@@ -883,6 +880,19 @@
 
             // Use const for the core data array since it shouldn't change after loading
             const RAW_PHONE_DATA = [
+                // === NEW PHONE ENTRY - Pixel 8a ===
+                {
+                    name: "Pixel 8a",    
+                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-8a-1.jpg",    
+                    description: "Snappy, clean Android experience with a focus on AI and best-in-class camera processing for its price.",    
+                    specs: "RAM: 8GB | Storage: 128GB | Battery: 4492 mAh | Camera: 64MP Main",
+                    priceNGN: "₦530,000",
+                    review: "The Pixel 8a brings Google's Tensor G3 chip to the mid-range, offering premium AI features, the best camera in its class, and seven years of software support. It's the ultimate 'smart' phone for the price, despite average charging speed.",
+                    gsmarenaUrl: "https://www.gsmarena.com/google_pixel_8a-12937.php",
+                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-8a-128-gb-8kV0waENvLMp3QNGY5y9iPZo.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=SvKgpjeY5PM-nNtW&indexPosition=0",
+                    isBestValue: false,
+                },
+                // =======================================================
                 {
                     name: "IPhone 17 pro max",    
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-17-pro-max-1.jpg",    
@@ -1207,7 +1217,10 @@
              */
             function renderCards(phones) {
                 const container = document.getElementById('phone-reviews');
-                container.innerHTML = '';    // Clear loading indicator
+                // Check if loading indicator is still present before clearing
+                if (container.querySelector('#loading-indicator')) {
+                    container.innerHTML = '';
+                }
 
                 if (phones.length === 0) {
                     container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No phone reviews match your filter. Try adjusting your price range!</p>';
@@ -1311,7 +1324,7 @@
                     // Add click listener to show the message box (This fires only if no specific link or button was clicked)
                     cardElement.addEventListener('click', () => {
                         showMessage('Review Page Coming Soon!',    
-                            'You clicked to view the full review for **' + phone.name + '**. This feature is under development. Check back next week!');
+                            'You clicked to view the full review for <strong>' + phone.name + '</strong>. This feature is under development. Check back next week!');
                     });
                     
                     container.appendChild(cardElement);
@@ -1360,6 +1373,16 @@
                 // Scroll to the bottom
                 chatOutput.scrollTop = chatOutput.scrollHeight;
             }
+            
+            /**
+             * Initializes the chat window with the first AI message.
+             */
+            function initChat() {
+                 const initialGreeting = "Hello! I'm your Phones Weekly AI Analyst, ready to guide you to the best phone for your needs and budget. What are your main priorities?";
+                 addMessageToChat(initialGreeting, 'model');
+                 chatHistory.push({ role: "model", parts: [{ text: initialGreeting }] });
+            }
+
 
             /**
              * Calls the Gemini API to get a recommendation using Google Search Grounding.
@@ -1370,7 +1393,7 @@
                 const phoneNames = RAW_PHONE_DATA.map(p => p.name).join(', ');
 
                 // 2. Updated System Instruction emphasizing up-to-date, external search for price/specs
-                const systemPrompt = `You are a Phones Weekly AI Analyst based in Abuja. Your primary goal is to provide the single best, up-to-date phone recommendation based on the user's explicit budget and priorities (gaming, camera, battery, etc.). You must use Google Search to find the latest specifications, current market prices, and retailer information from trusted sources like gsmarena.com and jiji.ng. Provide a concise, highly specific recommendation, mentioning the recommended phone in bold.`;
+                const systemPrompt = `You are a Phones Weekly AI Analyst based in Abuja, Nigeria. Your primary goal is to provide the single best, up-to-date phone recommendation based on the user's explicit budget and priorities (gaming, camera, battery, etc.). You must use Google Search to find the latest specifications, current market prices, and retailer information from trusted Nigerian sources like jiji.ng, if possible, or reliable international sources like gsmarena.com. Provide a concise, highly specific recommendation, mentioning the recommended phone in bold.`;
 
                 const fullPrompt = `User's Request: ${userPrompt}\n\nFor context, we usually review popular models like: ${phoneNames}. Please use your search capability to find the most current and relevant information for the user's specific needs, focusing on Abuja market viability (price/availability check).`;
 
@@ -1384,7 +1407,8 @@
                 };
 
                 // Add user query to history for display
-                chatHistory.push({ role: "user", parts: [{ text: userPrompt }] });
+                // Note: The history is managed locally for display, not sent in the payload due to API format constraints
+                // For this specific use case (single request + grounding), the fullPrompt is sufficient.
 
                 let retryCount = 0;
                 const MAX_RETRIES = 5;
@@ -1398,9 +1422,13 @@
                         });
 
                         if (!response.ok) {
-                            // Log the HTTP status error for intermediate retries
-                            console.log(`Gemini API HTTP Error (Attempt ${retryCount + 1}/${MAX_RETRIES}): Status ${response.status}. Retrying...`);
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            // Exponential backoff if network or server error (e.g., 503, 429)
+                            if (response.status >= 500 || response.status === 429) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                             // For client errors (4xx), treat as non-retryable API issue
+                            console.error(`Gemini API client error: Status ${response.status}`);
+                            return "The recommendation service encountered a non-retryable error.";
                         }
 
                         const result = await response.json();
@@ -1426,8 +1454,8 @@
                                 sources.forEach((source, index) => {
                                     // Using HTML list and anchor tags for sources
                                     text += `<div style="font-size:0.75rem;opacity:0.7;margin-top:5px;">
-                                                [${index + 1}] <a href="${source.uri}" target="_blank" style="color:var(--medium-teal);text-decoration:underline;">${source.title || 'Source Link'}</a>
-                                             </div>`;
+                                            [${index + 1}] <a href="${source.uri}" target="_blank" style="color:var(--medium-teal);text-decoration:underline;">${source.title || 'Source Link'}</a>
+                                           </div>`;
                                 });
                             }
                             
@@ -1500,6 +1528,9 @@
 
                 // Apply initial filters (which is 'all') and render
                 applyFilters();
+                
+                // Initialize the chat interface with the welcome message
+                initChat();
             }
 
             // Initial call to start the application
@@ -1508,4 +1539,3 @@
     </script>
 </body>
 </html>
-
