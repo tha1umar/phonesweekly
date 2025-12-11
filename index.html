@@ -145,7 +145,7 @@
             text-align: center;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            cursor: pointer;
+            cursor: default; /* Changed cursor to default as card is no longer clickable for modal */
             border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
@@ -369,158 +369,6 @@
             font-weight: 500;
         }
         
-        /* === NEW: Chatbot Section Styling === */
-        .chatbot-section {
-            background: var(--chat-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--primary-green);
-        }
-
-        .chat-title {
-            color: var(--primary-green);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .chat-output {
-            height: 300px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            scroll-behavior: smooth;
-        }
-
-        .chat-message {
-            max-width: 85%;
-            padding: 0.75rem 1rem;
-            border-radius: 15px;
-            line-height: 1.4;
-            word-wrap: break-word;
-        }
-
-        .user-message {
-            align-self: flex-end;
-            background-color: var(--background-end);
-            border-bottom-right-radius: 0;
-        }
-
-        .ai-message {
-            align-self: flex-start;
-            background-color: var(--chat-bubble);
-            border-bottom-left-radius: 0;
-            color: var(--text-light);
-            /* Highlight recommendation names and sources */
-        }
-        
-        .ai-message strong {
-            color: var(--primary-green);
-            font-weight: 700;
-        }
-
-        .chat-input-container {
-            display: flex;
-            gap: 10px;
-        }
-
-        #chatInput {
-            flex-grow: 1;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--medium-teal);
-            background-color: rgba(255, 255, 255, 0.95);
-            color: #333;
-            font-size: 1rem;
-        }
-
-        #sendButton {
-            background-color: var(--primary-green);
-            color: var(--background-start);
-            font-weight: 700;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
-        }
-
-        #sendButton:hover:not(:disabled) {
-            background-color: #00c853;
-            transform: translateY(-1px);
-        }
-        
-        #sendButton:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        /* === END NEW CHATBOT STYLING === */
-        
-        /* Custom Modal/Message Box Styling (retained) */
-        .message-box {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .message-content {
-            background: linear-gradient(135deg, var(--background-start), #00695c);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            max-width: 90%;
-            width: 400px;
-            border: 2px solid var(--primary-green);
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .message-box.active .message-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        
-        .message-content h3 {
-            color: var(--primary-green);
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-        
-        .message-content p {
-            margin-bottom: 1.5rem;
-        }
-        
-        .message-close-button {
-            background-color: var(--primary-green);
-            color: var(--background-start);
-            font-weight: 700;
-            padding: 0.5rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .message-close-button:hover {
-            background-color: #00c853;
-        }
-
         /* Loading Spinner Styles (retained) */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
@@ -665,10 +513,6 @@
             .card {
                 padding: 1rem;
             }
-            .chatbot-section {
-                margin: 1rem auto;
-                padding: 1.5rem 1rem;
-            }
             .youtube-links-section {
                 padding: 1.5rem;
             }
@@ -721,21 +565,6 @@
         </div>
     </main>
     
-    <!-- === NEW: SMART RECOMMENDATION CHATBOT SECTION === -->
-    <section class="chatbot-section">
-        <h2 class="chat-title">Need a Personal Recommendation? Ask our AI Analyst!</h2>
-        <div id="chatOutput" class="chat-output">
-            <!-- Initial AI Greeting added via JavaScript now for consistency -->
-        </div>
-        <div class="chat-input-container">
-            <input type="text" id="chatInput" placeholder="E.g., Gaming phone under N450,000..." aria-label="Phone recommendation prompt">
-            <button id="sendButton">Send</button>
-        </div>
-        <div id="chatLoading" style="display: none; text-align: center; margin-top: 1rem; color: var(--primary-green);">
-            Thinking... <div class="spinner" style="width: 20px; height: 20px; border-width: 2px; margin: 5px auto;"></div>
-        </div>
-    </section>
-
     <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
     <section class="youtube-links-section">
 
@@ -847,15 +676,6 @@
         <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
     </footer>
 
-    <!-- Custom Message Box/Modal -->
-    <div id="messageBox" class="message-box">
-        <div class="message-content">
-            <h3 id="messageTitle">Review Page Coming Soon!</h3>
-            <p id="messageText">You clicked to view the full review for **Phone Name**. This feature is under development. Check back next week!</p>
-            <button id="closeButton" class="message-close-button">Close</button>
-        </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -864,7 +684,7 @@
             // =========================================================================
             
             // API Configuration
-            const API_KEY = ""; // Kept empty as per instructions
+            const API_KEY = ""; 
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
             
             const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
@@ -1120,36 +940,12 @@
             let processedPhoneData; // Will hold the enriched data after processing
 
             // =========================================================================
-            // === CUSTOM MESSAGE BOX LOGIC ===
+            // === CUSTOM MESSAGE BOX LOGIC (REMOVED) ===
             // =========================================================================
-            const messageBox = document.getElementById('messageBox');
-            const messageTitle = document.getElementById('messageTitle');
-            const messageText = document.getElementById('messageText');
-            const closeButton = document.getElementById('closeButton');
-            
-            const showMessage = (title, text) => {
-                messageTitle.textContent = title;
-                messageText.innerHTML = text;
-                messageBox.style.display = 'flex';
-                setTimeout(() => {
-                    messageBox.classList.add('active');
-                }, 10);
-            };
 
-            const hideMessage = () => {
-                messageBox.classList.remove('active');
-                setTimeout(() => {
-                    messageBox.style.display = 'none';
-                }, 300);
-            };
-
-            closeButton.addEventListener('click', hideMessage);
-            
-            messageBox.addEventListener('click', (event) => {
-                if (event.target === messageBox) {
-                    hideMessage();
-                }
-            });
+            /* The custom message box HTML and all related JS functions (showMessage, 
+               hideMessage, and event listeners on messageBox and closeButton) 
+               have been entirely removed to prevent the popup from appearing. */
             
             // =========================================================================
             // === CORE FILTERING & RENDERING LOGIC ===
@@ -1249,6 +1045,7 @@
                     const titleClass = isSmallTitle ? 'smaller-title' : '';
                     
                     const isBestValue = phone.isBestValue;
+                    // Updated: Removed 'cursor: pointer' from .card CSS, so changing the cursor here explicitly is redundant but harmless.
                     const cardClass = isBestValue ? 'card best-value' : 'card';
                     const badgeHtml = isBestValue ? '<span class="best-value-badge">Best Value!</span>' : '';
 
@@ -1293,6 +1090,8 @@
                     // Add interactivity
                     const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag');
                     interactiveElements.forEach(el => {
+                        // Ensure only specific links open new pages, and stop propagation 
+                        // so the main card click is ignored (since we removed the modal logic).
                         el.addEventListener('click', (e) => {
                             e.stopPropagation();
                         });
@@ -1321,11 +1120,7 @@
                         });
                     }
                     
-                    // Add click listener to show the message box (This fires only if no specific link or button was clicked)
-                    cardElement.addEventListener('click', () => {
-                        showMessage('Review Page Coming Soon!',    
-                            'You clicked to view the full review for <strong>' + phone.name + '</strong>. This feature is under development. Check back next week!');
-                    });
+                    // Removed: The click listener that called showMessage is gone.
                     
                     container.appendChild(cardElement);
                 });
@@ -1350,171 +1145,6 @@
                 });
             }
 
-            // =========================================================================
-            // === CHATBOT / GEMINI API INTEGRATION LOGIC ===
-            // =========================================================================
-            const chatInput = document.getElementById('chatInput');
-            const sendButton = document.getElementById('sendButton');
-            const chatOutput = document.getElementById('chatOutput');
-            const chatLoading = document.getElementById('chatLoading');
-
-            // Store chat history and available phone data in a user-readable format
-            let chatHistory = [];
-            
-            /**
-             * Renders a new message in the chat window.
-             */
-            function addMessageToChat(text, role) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('chat-message', role === 'user' ? 'user-message' : 'ai-message');
-                // Use innerHTML to process the markdown for strong tags and the new HTML for sources
-                messageElement.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                chatOutput.appendChild(messageElement);
-                // Scroll to the bottom
-                chatOutput.scrollTop = chatOutput.scrollHeight;
-            }
-            
-            /**
-             * Initializes the chat window with the first AI message.
-             */
-            function initChat() {
-                 const initialGreeting = "Hello! I'm your Phones Weekly AI Analyst, ready to guide you to the best phone for your needs and budget. What are your main priorities?";
-                 addMessageToChat(initialGreeting, 'model');
-                 chatHistory.push({ role: "model", parts: [{ text: initialGreeting }] });
-            }
-
-
-            /**
-             * Calls the Gemini API to get a recommendation using Google Search Grounding.
-             */
-            async function callGeminiApiForRecommendation(userPrompt) {
-                
-                // 1. Hint to the model about the local context, but allow wider search
-                const phoneNames = RAW_PHONE_DATA.map(p => p.name).join(', ');
-
-                // 2. Updated System Instruction emphasizing up-to-date, external search for price/specs
-                const systemPrompt = `You are a Phones Weekly AI Analyst based in Abuja, Nigeria. Your primary goal is to provide the single best, up-to-date phone recommendation based on the user's explicit budget and priorities (gaming, camera, battery, etc.). You must use Google Search to find the latest specifications, current market prices, and retailer information from trusted Nigerian sources like jiji.ng, if possible, or reliable international sources like gsmarena.com. Provide a concise, highly specific recommendation, mentioning the recommended phone in bold.`;
-
-                const fullPrompt = `User's Request: ${userPrompt}\n\nFor context, we usually review popular models like: ${phoneNames}. Please use your search capability to find the most current and relevant information for the user's specific needs, focusing on Abuja market viability (price/availability check).`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: fullPrompt }] }],
-                    
-                    // 3. Enable Google Search Grounding
-                    tools: [{ "google_search": {} }], 
-
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
-                };
-
-                // Add user query to history for display
-                // Note: The history is managed locally for display, not sent in the payload due to API format constraints
-                // For this specific use case (single request + grounding), the fullPrompt is sufficient.
-
-                let retryCount = 0;
-                const MAX_RETRIES = 5;
-
-                while (retryCount < MAX_RETRIES) {
-                    try {
-                        const response = await fetch(API_URL, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            // Exponential backoff if network or server error (e.g., 503, 429)
-                            if (response.status >= 500 || response.status === 429) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                             // For client errors (4xx), treat as non-retryable API issue
-                            console.error(`Gemini API client error: Status ${response.status}`);
-                            return "The recommendation service encountered a non-retryable error.";
-                        }
-
-                        const result = await response.json();
-                        const candidate = result.candidates?.[0];
-
-                        if (candidate && candidate.content?.parts?.[0]?.text) {
-                            let text = candidate.content.parts[0].text;
-                            
-                            // 4. Extract grounding sources
-                            const groundingMetadata = candidate.groundingMetadata;
-                            let sources = [];
-                            if (groundingMetadata && groundingMetadata.groundingAttributions) {
-                                sources = groundingMetadata.groundingAttributions
-                                    .map(attribution => ({
-                                        uri: attribution.web?.uri,
-                                        title: attribution.web?.title,
-                                    }))
-                                    .filter(source => source.uri && source.title);
-                            }
-
-                            if (sources.length > 0) {
-                                text += '<br><br><strong>Sources:</strong>';
-                                sources.forEach((source, index) => {
-                                    // Using HTML list and anchor tags for sources
-                                    text += `<div style="font-size:0.75rem;opacity:0.7;margin-top:5px;">
-                                            [${index + 1}] <a href="${source.uri}" target="_blank" style="color:var(--medium-teal);text-decoration:underline;">${source.title || 'Source Link'}</a>
-                                           </div>`;
-                                });
-                            }
-                            
-                            chatHistory.push({ role: "model", parts: [{ text: text }] });
-                            return text;
-                        } else {
-                            throw new Error("No text content found in API response.");
-                        }
-                    } catch (error) {
-                        retryCount++;
-                        
-                        // Log a detailed error only on the final failure
-                        if (retryCount >= MAX_RETRIES) {
-                            console.error(`Gemini API call failed after ${MAX_RETRIES} retries. Returning fallback message. Final error:`, error.message || error);
-                            return "Sorry, I'm having trouble connecting to the network right now. Please try again later.";
-                        }
-                        
-                        // Exponential backoff delay
-                        const delay = Math.pow(2, retryCount) * 1000;
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        // Continue loop for retry
-                    }
-                }
-            }
-
-
-            /**
-             * Handles the chat submission, manages UI state, and calls the AI.
-             */
-            async function handleChatSubmission() {
-                const userPrompt = chatInput.value.trim();
-                if (!userPrompt) return;
-
-                // 1. Update UI for User Message
-                addMessageToChat(userPrompt, 'user');
-                chatInput.value = '';
-                chatInput.disabled = true;
-                sendButton.disabled = true;
-                chatLoading.style.display = 'block';
-
-                // 2. Call the AI
-                const aiResponse = await callGeminiApiForRecommendation(userPrompt);
-
-                // 3. Update UI for AI Response
-                addMessageToChat(aiResponse, 'model');
-                chatLoading.style.display = 'none';
-                chatInput.disabled = false;
-                sendButton.disabled = false;
-                chatInput.focus();
-            }
-
-            // Event Listeners for Chatbot
-            sendButton.addEventListener('click', handleChatSubmission);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    handleChatSubmission();
-                }
-            });
-
 
             /**
              * Orchestrates the data fetching and rendering process.
@@ -1528,9 +1158,6 @@
 
                 // Apply initial filters (which is 'all') and render
                 applyFilters();
-                
-                // Initialize the chat interface with the welcome message
-                initChat();
             }
 
             // Initial call to start the application
