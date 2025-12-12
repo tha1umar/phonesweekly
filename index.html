@@ -493,6 +493,17 @@
         .generic-option-wrapper:hover {
             background: rgba(255, 255, 255, 0.1);
         }
+        
+        /* New style for sold items */
+        .generic-option-wrapper.sold {
+            opacity: 0.5;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        .generic-option-wrapper.sold a {
+            background-color: #9e9e9e !important; /* Grey out button */
+        }
 
 
         /* Adjustments for Mobile */
@@ -619,11 +630,11 @@
                 <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Information Coming Soon!</p>
                 <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
                     
-                    <div class="generic-option-wrapper">
-                        <a href="https://jiji.ng/kubwa/mobile-phones/samsung-galaxy-a05-128-gb-green-1mm1khGg1NmrcMg198zpyZcz.html?page=1&pos=3&cur_pos=3&ads_per_page=20&ads_count=35&lid=kQDqkN5vXMQ60jVv&indexPosition=2" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
-                            Samsung Galaxy A05 (80k)
+                    <div class="generic-option-wrapper sold">
+                        <a href="#" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
+                            Looking for deals
                         </a>
-                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">For the lovers of Samsung...</p>
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Samsung Galaxy A05 Sold! Check other used deals.</p>
                     </div>
                     
                     <div class="generic-option-wrapper">
@@ -886,7 +897,7 @@
                     priceNGN: "₦420,000",
                     review: "The Pixel 7 delivers stunning photos in any light, leveraging the Tensor G2 chip for powerful AI features like Magic Eraser. While the charging speed is slow, the pure Android experience and guaranteed updates make it a smart purchase.",
                     gsmarenaUrl: "https://www.gsmarena.com/google_pixel_7-11903.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7-128-gb-7uDBPtvOg7rdHR6M4N7tCfbb.html?page=9&pos=10&cur_pos=10&ads_per_perge=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=169",
+                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-7-128-gb-black-7uDBPtvOg7rdHR6M4N7tCfbb.html?page=9&pos=10&cur_pos=10&ads_per_perge=20&ads_count=296&lid=kVVV0CJl934XLZS6&indexPosition=169",
                     isBestValue: false,
                 },
                 {
@@ -1166,4 +1177,3 @@
     </script>
 </body>
 </html>
-
