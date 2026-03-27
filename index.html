@@ -145,7 +145,7 @@
             text-align: center;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            cursor: default; /* Changed cursor to default as card is no longer clickable for modal */
+            cursor: default;
             border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
@@ -196,7 +196,7 @@
         }
         
         .card .specs {
-            flex-grow: 1; /* Pushes the price tag down */
+            flex-grow: 1;
             font-size: 0.85rem;
             opacity: 0.9;
             margin-top: 1rem;
@@ -223,7 +223,7 @@
             font-size: 0.95rem;
             opacity: 0.8;
             font-weight: 300;
-            min-height: 2.5rem; /* Ensure consistent spacing */
+            min-height: 2.5rem;
         }
         
         .user-review-display {
@@ -285,7 +285,7 @@
             transform: translateY(-1px);
         }
         
-        /* Price Tag styling - MAJOR TWEAK FOR SALES ACTION */
+        /* Price Tag styling */
         .price-tag {
             display: block; 
             width: 90%; 
@@ -348,12 +348,11 @@
         }
 
         .social-link svg {
-            fill: var(--text-light); /* Base color for icons */
+            fill: var(--text-light);
             width: 100%;
             height: 100%;
         }
 
-        /* Override for specific brand colors for better feel */
         .social-link.tiktok svg { fill: #000000; background-color: #ffffff; border-radius: 5px; } 
         .social-link.facebook svg { fill: #1877F2; } 
         .social-link.youtube svg { fill: #FF0000; } 
@@ -369,7 +368,7 @@
             font-weight: 500;
         }
         
-        /* Loading Spinner Styles (retained) */
+        /* Loading Spinner Styles */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid var(--primary-green);
@@ -430,7 +429,7 @@
             display: inline-block;
             margin-bottom: 0.75rem;
             padding: 0.75rem;
-            background: #fff; /* White background for visibility */
+            background: #fff;
             border-radius: 50%;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
             transition: transform 0.3s;
@@ -441,7 +440,7 @@
         }
 
         .channel-icon svg {
-            fill: #FF0000; /* YouTube Red */
+            fill: #FF0000;
             width: 28px;
             height: 28px;
             display: block;
@@ -494,7 +493,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        /* New style for sold items */
         .generic-option-wrapper.sold {
             opacity: 0.5;
             pointer-events: none;
@@ -502,7 +500,7 @@
             border: 1px dashed rgba(255, 255, 255, 0.1);
         }
         .generic-option-wrapper.sold a {
-            background-color: #9e9e9e !important; /* Grey out button */
+            background-color: #9e9e9e !important;
         }
 
 
@@ -535,7 +533,7 @@
     </style>
 </head>
 <body>
-    <!-- Instagram SVG Gradient Definition (Must be in body or head) -->
+    <!-- Instagram SVG Gradient Definition -->
     <svg width="0" height="0" class="instagram-gradient">
         <linearGradient id="grad-insta" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#feda75;stop-opacity:1" />
@@ -569,7 +567,6 @@
     </section>
 
     <main id="phone-reviews">
-        <!-- Phone Cards will be rendered here -->
         <div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
             Loading phone data...
             <div class="spinner"></div>
@@ -579,13 +576,11 @@
     <!-- RECOMMENDED YOUTUBE CHANNELS SECTION -->
     <section class="youtube-links-section">
 
-        <!-- NEWS SNIPPET INSERTED HERE (Independent Block) -->
         <div class="news-snippet-placeholder">
             <h3>Best Phone Store in Wuse 2: S-NAMAMA</h3>
             <p>Looking for the most competitive prices (not Banex)? Visit S-Namama in Wuse 2. They are located just after Zenith Bank and before the Ibro Hotel junction. Give them a visit if you please. <strong>Phone Number: 08105038181</strong></p>
         </div>
         
-        <!-- RECOMMENDED TECH YOUTUBE CHANNELS (Independent H2) -->
         <h2>Recommended Tech YouTube Channels</h2>
 
         <div class="channel-grid">
@@ -618,7 +613,6 @@
             </a>
         </div>
         
-        <!-- Used Phone Warning and Links -->
         <div class="youtube-text-placeholder">
             <p>Used affordable phone suggestion to buy on a deal — but be careful.</p>
             <p><strong>Disclaimer:</strong> Always take safety precautions when buying a used device. Inspect it thoroughly, confirm the receipt, and ensure the seller is legitimate. Buying from a physical shop is <strong>strongly recommended</strong>, because if anything goes wrong, you have a real location to return to and report issues.</p>
@@ -638,11 +632,10 @@
                     </div>
                     
                     <div class="generic-option-wrapper">
-                        <a href="Image place holder"_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
+                        <a href="Image place holder" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
                             Looking for deals
                         </a>
                         <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem;">Neatly used redmi 14c.</p>
-
                     </div>
                     
                     <div class="generic-option-wrapper">
@@ -658,7 +651,6 @@
     </section>
 
     <footer>
-        <!-- Social Media Links -->
         <div class="social-links">
             <a href="https://tiktok.com/@tha1umar" target="_blank" class="social-link tiktok" aria-label="Follow us on TikTok">
                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -694,14 +686,9 @@
             // === 🛠️ DATA & CONSTANTS 🛠️ ===
             // =========================================================================
             
-            // API Configuration
-            const API_KEY = ""; 
-            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
-            
             const PLACEHOLDER_IMAGE = "https://placehold.co/450x300/004d40/ffffff?text=Image+Unavailable";
             const DEFAULT_REVIEW_TEXT = "No custom review set. Edit the 'review' field in the phoneData array to set one.";    
 
-            // Define price tiers for filtering logic
             const PRICE_TIERS = {
                 budget: { min: 100000, max: 300000 },
                 midrange: { min: 300001, max: 599999 },
@@ -709,9 +696,7 @@
                 premium: { min: 990001, max: 5000000 }
             };
 
-            // Use const for the core data array since it shouldn't change after loading
             const RAW_PHONE_DATA = [
-                // === NEW PHONE ENTRY - Pixel 8a ===
                 {
                     name: "Pixel 8a",    
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-8a-1.jpg",    
@@ -723,7 +708,6 @@
                     jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-google-pixel-8a-128-gb-8kV0waENvLMp3QNGY5y9iPZo.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=SvKgpjeY5PM-nNtW&indexPosition=0",
                     isBestValue: false,
                 },
-                // =======================================================
                 {
                     name: "IPhone 17 pro max",    
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-17-pro-max-1.jpg",    
@@ -805,34 +789,14 @@
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/tecno/tecno-spark-40c-1.jpg",    
                     description: "A reliable entry-level device focusing on battery life and essential smartphone functions.",
                     specs: "RAM: 4GB | Storage: 128GB | Battery: 6000 mAh | Camera: 13MP Main",
-                    priceNGN: "₦125,000",
-                    review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro (also known as the spark 40 c) is a solid all-rounder for everyday use (even if its camera won’t challenge the big players).",
+                    priceNGN: "₦139,000",
+                    review: "With a massive battery and smooth 120 Hz display at a budget price, the Pop 10 Pro (also known as the spark 40 c) is a solid all-rounder for everyday use (even if its camera won't challenge the big players).",
                     gsmarenaUrl: "https://www.gsmarena.com/tecno_spark_40c-14052.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-pop-10-pro-128-gb-jSNZH4kPHvkjyq0Wxpf2mF6q.html?page=1&pos=2&cur_pos=2&ads_per_page=3&ads_count=3&lid=kTEJTIQFdiKegH2m&indexPosition=1",
+                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-tecno-pop-10-128-gb-black-dJSrgkdiqZgvGyMcrZEE6s9v.html?page=1&pos=2&cur_pos=2&ads_per_page=3&ads_count=3&lid=31JKw2FlDlJtz-CV&indexPosition=1",
                     isBestValue: false, 
                 },
-                {
-                    name: "Infinix Hot 40",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/infinix/infinix-hot-40-1.jpg",    
-                    description: "A solid budget performer offering decent speed and a modern display for its price segment.",
-                    specs: "RAM: 8GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-                    priceNGN: "₦200,000",
-                    review: "For the price, the Hot 40 delivers a large 6.78″ FHD+ 90Hz screen, decent 50MP main camera and solid battery life—but the mid-range Helio G88 chip and heavy XOS skin mean it’s great value, not top-tier performance.",
-                    gsmarenaUrl: "https://www.gsmarena.com/infinix_hot_40-12732.php",
-                    jijiUrl: "https://jiji.ng/wuse-ii/mobile-phones/new-infinix-hot-40-256-gb-vdjlsPFFmIiy5mioY9c42Fa4.html?page=1&pos=1&cur_pos=1&ads_per_page=4&ads_count=4&lid=j9VlEAMRZ8QMQJc3&indexPosition=0",
-                    isBestValue: false, 
-                },
-                {
-                    name: "Itel P65",
-                    imageUrl: "https://fdn2.gsmarena.com/vv/pics/itel/itel-p65-1.jpg",    
-                    description: "The most affordable option, best suited for users prioritizing cost and basic communication.",
-                    specs: "RAM: 4GB | Storage: 128GB | Battery: 5000 mAh | Camera: 50MP Main",
-                    priceNGN: "₦140,000",
-                    review: "With its 6.7″ 120 Hz display, 50 MP main camera and 5,000 mAh battery for a budget price, the itel P65 punches above its price — just don’t expect flagship-level processing or ultra-sharp resolution.",
-                    gsmarenaUrl: "https://www.gsmarena.com/itel_p65-13258.php",
-                    jijiUrl: "https://jiji.ng/wuse/mobile-phones/new-itel-p65-128-gb-black-3wNcqVEJd6ZgMnTWHzAJod0Y.html?page=1&pos=3&cur_pos=3&ads_per_page=4&ads_count=4&lid=xDFoKvqhMsHahUZE&indexPosition=2",
-                    isBestValue: false, 
-                },
+
+
                 {
                     name: "Oppo Reno12 F",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno12-f-1.jpg",
@@ -945,39 +909,15 @@
                 },
             ];
 
-            // Global variable to track current filter state
             let currentFilter = 'all';
-            let processedPhoneData; // Will hold the enriched data after processing
+            let processedPhoneData;
 
-            // =========================================================================
-            // === CUSTOM MESSAGE BOX LOGIC (REMOVED) ===
-            // =========================================================================
-
-            /* The custom message box HTML and all related JS functions (showMessage, 
-               hideMessage, and event listeners on messageBox and closeButton) 
-               have been entirely removed to prevent the popup from appearing. */
-            
-            // =========================================================================
-            // === CORE FILTERING & RENDERING LOGIC ===
-            // =========================================================================
-
-            /**
-             * Safely converts NGN price string (e.g., "₦2,850,000") to an integer number.
-             * @param {string} priceString 
-             * @returns {number} Price value in Naira.
-             */
             function getPriceValue(priceString) {
                 if (typeof priceString !== 'string') return 0;
-                // Remove '₦', commas, and then parse as integer. Fallback to 0 if parsing fails.
                 const cleanPrice = priceString.replace(/[₦,]/g, '').trim();
                 return parseInt(cleanPrice, 10) || 0;
             }
 
-            /**
-             * Assigns a price tier string based on the numeric price value.
-             * @param {number} priceValue 
-             * @returns {string} The matching price tier.
-             */
             function getPriceTier(priceValue) {
                 if (priceValue >= PRICE_TIERS.premium.min) return 'premium';
                 if (priceValue >= PRICE_TIERS.midrangeplus.min && priceValue <= PRICE_TIERS.midrangeplus.max) return 'midrangeplus';
@@ -1000,30 +940,21 @@
             function applyFilters() {
                 let filteredPhones = processedPhoneData;
                 
-                // 1. Filter by Price Tier
                 if (currentFilter !== 'all') {
                     filteredPhones = filteredPhones.filter(phone => phone.priceTier === currentFilter);
                 }
 
-                // 2. Custom Sort: Best Value first, then by price (descending)
                 const sortedPhones = filteredPhones.sort((a, b) => {
-                    // Prioritize 'Best Value' phones
                     if (a.isBestValue && !b.isBestValue) return -1;
                     if (!a.isBestValue && b.isBestValue) return 1;
-
-                    // Then, sort by price (descending: highest price first)
                     return b.priceValue - a.priceValue;
                 });
 
                 renderCards(sortedPhones);
             }
             
-            /**
-             * Renders the phone cards onto the page using the provided data array.
-             */
             function renderCards(phones) {
                 const container = document.getElementById('phone-reviews');
-                // Check if loading indicator is still present before clearing
                 if (container.querySelector('#loading-indicator')) {
                     container.innerHTML = '';
                 }
@@ -1055,10 +986,8 @@
                     const titleClass = isSmallTitle ? 'smaller-title' : '';
                     
                     const isBestValue = phone.isBestValue;
-                    // Updated: Removed 'cursor: pointer' from .card CSS, so changing the cursor here explicitly is redundant but harmless.
                     const cardClass = isBestValue ? 'card best-value' : 'card';
                     const badgeHtml = isBestValue ? '<span class="best-value-badge">Best Value!</span>' : '';
-
 
                     const cardHtml = `
                         <div class="${cardClass}" data-phone-name="${phone.name}">
@@ -1097,11 +1026,8 @@
                     template.innerHTML = cardHtml.trim();
                     const cardElement = template.content.firstChild;
                     
-                    // Add interactivity
                     const interactiveElements = cardElement.querySelectorAll('.image-link, .review-link, .price-tag');
                     interactiveElements.forEach(el => {
-                        // Ensure only specific links open new pages, and stop propagation 
-                        // so the main card click is ignored (since we removed the modal logic).
                         el.addEventListener('click', (e) => {
                             e.stopPropagation();
                         });
@@ -1116,7 +1042,6 @@
                             const reviewTextSpan = reviewDisplay.querySelector('.review-text-content'); 
                             
                             const isShowingMore = button.textContent === 'Show More';
-                            // Note: Used 'dataset.truncatedText' and 'dataset.fullText' correctly in JS function.
                             const fullText = decodeURIComponent(button.dataset.fullText);
                             const truncatedText = decodeURIComponent(button.dataset.truncatedText); 
                             
@@ -1130,8 +1055,6 @@
                         });
                     }
                     
-                    // Removed: The click listener that called showMessage is gone.
-                    
                     container.appendChild(cardElement);
                 });
             }
@@ -1139,38 +1062,25 @@
             function setupControls() {
                 const filterButtons = document.querySelectorAll('.filter-button');
 
-                // Filter Button Listeners
                 filterButtons.forEach(button => {
                     button.addEventListener('click', (e) => {
                         const newFilter = e.target.dataset.filter;
                         
-                        // Update active state visuals
                         filterButtons.forEach(btn => btn.classList.remove('active'));
                         e.target.classList.add('active');
 
-                        // Update filter state and re-render
                         currentFilter = newFilter;
                         applyFilters();
                     });
                 });
             }
 
-
-            /**
-             * Orchestrates the data fetching and rendering process.
-             */
             async function fetchAndRenderPhones() {
-                // Process the raw data once on load
                 processedPhoneData = processPhoneData();
-                
-                // Setup user controls
                 setupControls();
-
-                // Apply initial filters (which is 'all') and render
                 applyFilters();
             }
 
-            // Initial call to start the application
             fetchAndRenderPhones();
         });
     </script>
