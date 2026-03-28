@@ -4,8 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phones Weekly — Smart Suggestions, Honest Reviews</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="Phones Weekly">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Phones Weekly">
+    <meta name="description" content="Honest phone reviews and smart suggestions straight from Abuja. Find the best phones at the best prices.">
+    <meta name="theme-color" content="#00e676">
+    <link rel="manifest" href="manifest.json">
+
     <!-- Favicon: Green phone icon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='green' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
+    <!-- Apple touch icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%2300e676'/><path fill='white' d='M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM7 4v16h10V4H7zm5 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/></svg>">
     <!-- Load Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1031,6 +1043,16 @@
 
             fetchAndRenderPhones();
         });
+    </script>
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered:', reg.scope))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
     </script>
 </body>
 </html>
