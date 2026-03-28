@@ -1,4 +1,4 @@
-const CACHE_NAME = 'phones-weekly-v1';
+const CACHE_NAME = 'phones-weekly-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
