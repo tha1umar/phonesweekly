@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Phones Weekly">
     <meta name="description" content="Honest phone reviews and smart suggestions straight from Abuja. Find the best phones at the best prices.">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#00e676">
     <link rel="manifest" href="manifest.json">
 
     <!-- Favicon: Green phone icon -->
@@ -24,28 +24,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-green: #2563eb; /* Royal Blue */
-            --primary-dark: #1e3a5f;
-            --medium-teal: #3b82f6;
+            --primary-green: #00e676; /* Light, vibrant green */
+            --primary-dark: #1f2937; /* Dark Slate Grey / Almost Black */
+            --medium-teal: #009688;
             --text-light: #fff;
-            --value-gold: #f59e0b;
-            --chat-bg: #f0f6ff;
-            --chat-bubble: #dbeafe;
-            --background-start: #ffffff;
-            --background-end: #eff6ff;
-            --text-dark: #1e3a5f;
-            --card-bg: #ffffff;
-            --card-border: #bfdbfe;
-            --header-bg: #1e3a5f;
-            --specs-bg: #eff6ff;
+            --value-gold: #ffc107;
+            --chat-bg: #1e293b; /* Slate blue for chat container */
+            --chat-bubble: #374151; /* Darker slate for bubbles */
+            --background-start: #0f172a; /* Deep blue-black */
+            --background-end: #1e3a8a; /* Dark Blue */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f0f6ff 0%, #dbeafe 50%, #eff6ff 100%);
-            color: var(--text-dark);
+            background: linear-gradient(120deg, var(--background-start), var(--background-end));
+            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -55,9 +50,9 @@
             position: relative;
             text-align: center;
             padding: 2.5rem 1rem;
-            background: linear-gradient(135deg, #1e3a5f, #2563eb);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
-            border-bottom: 3px solid #f59e0b;
+            border-bottom: 3px solid var(--primary-green);
         }
         
         /* --- Logo Placeholder Styling for Image --- */
@@ -117,9 +112,9 @@
         }
 
         .filter-button {
-            background-color: #ffffff;
-            color: #2563eb;
-            border: 1px solid #bfdbfe;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 0.5rem 1rem;
             border-radius: 9999px; /* Tailwind 'rounded-full' */
             cursor: pointer;
@@ -130,7 +125,7 @@
         }
 
         .filter-button:hover {
-            background-color: #dbeafe;
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .filter-button.active,
@@ -156,14 +151,14 @@
 
         .card {
             position: relative;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             cursor: default;
-            border: 1px solid #bfdbfe;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
         }
@@ -176,8 +171,8 @@
         
         .card:hover {
             transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 45px rgba(37, 99, 235, 0.2);
-            background: #f0f6ff;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Best Value Badge */
@@ -219,19 +214,17 @@
             margin-top: 1rem;
             margin-bottom: 1rem;
             padding: 1rem;
-            background: #eff6ff;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             text-align: left;
             line-height: 1.8;
-            border-left: 3px solid #2563eb;
-            color: #1e3a5f;
+            border-left: 3px solid var(--medium-teal);
         }
 
         .card h2 {
             font-size: 1.8rem;
             margin: 0.5rem 0 0;
             font-weight: 700;
-            color: #1e3a5f;
         }
 
         .card h2.smaller-title {
@@ -240,7 +233,7 @@
 
         .card p {
             font-size: 0.95rem;
-            color: #475569;
+            opacity: 0.8;
             font-weight: 300;
             min-height: 2.5rem;
         }
@@ -251,9 +244,9 @@
             padding: 1rem;
             margin-top: 0.5rem;
             border-radius: 10px;
-            border: 1px solid #2563eb;
-            background: #f8fafc;
-            color: #1e3a5f;
+            border: 1px solid var(--primary-green);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--background-start);
             box-sizing: border-box;
             font-size: 0.9rem;
             text-align: left;
@@ -341,7 +334,7 @@
         footer {
             text-align: center;
             padding: 1.5rem 1rem;
-            background: #1e3a5f;
+            background: rgba(0, 0, 0, 0.4);
             font-size: 0.9rem;
             margin-top: 2rem;
         }
@@ -408,10 +401,9 @@
             padding: 2rem;
             max-width: 1200px;
             margin: 2rem auto;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.1);
-            border: 1px solid #bfdbfe;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .youtube-links-section h2 {
@@ -430,14 +422,14 @@
         
         .channel-card {
             display: block;
-            background: #f0f6ff;
+            background: var(--chat-bg);
             padding: 1.5rem;
             border-radius: 15px;
             text-align: center;
             text-decoration: none;
-            color: #1e3a5f;
+            color: var(--text-light);
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #bfdbfe;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .channel-card:hover {
@@ -548,150 +540,6 @@
             .price-tag {
                 width: 100%;
                 font-size: 1.25rem;
-            }
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 9999;
-            background: #25D366;
-            color: white;
-            border-radius: 50px;
-            padding: 0.75rem 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            animation: pulse-wa 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.7);
-        }
-
-        .whatsapp-float svg {
-            width: 22px;
-            height: 22px;
-            fill: white;
-            flex-shrink: 0;
-        }
-
-        @keyframes pulse-wa {
-            0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5); }
-            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.9); }
-        }
-
-        /* Share Button on Cards */
-        .share-button {
-            background: none;
-            border: 1px solid #bfdbfe;
-            color: #2563eb;
-            border-radius: 8px;
-            padding: 0.4rem 0.9rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin: 0.5rem auto 0;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .share-button:hover {
-            background: #dbeafe;
-            transform: translateY(-1px);
-        }
-
-        .share-button svg {
-            width: 14px;
-            height: 14px;
-            fill: #2563eb;
-        }
-
-        .share-toast {
-            position: fixed;
-            bottom: 5rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #1e3a5f;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 9998;
-            pointer-events: none;
-        }
-
-        .share-toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Improved Mobile Layout */
-        @media (max-width: 600px) {
-            header {
-                padding: 1.5rem 1rem 1.2rem;
-            }
-            header p {
-                font-size: 0.85rem;
-            }
-            .logo-placeholder {
-                top: 0.75rem;
-                left: 0.75rem;
-                width: 40px;
-                height: 40px;
-            }
-            main {
-                padding: 1rem;
-                gap: 1.2rem;
-                grid-template-columns: 1fr;
-            }
-            .card {
-                padding: 1rem;
-            }
-            .card h2 {
-                font-size: 1.4rem;
-            }
-            .youtube-links-section {
-                padding: 1rem;
-                margin: 1rem;
-                border-radius: 12px;
-            }
-            .channel-grid {
-                grid-template-columns: 1fr;
-            }
-            .price-tag {
-                width: 100%;
-                font-size: 1.2rem;
-            }
-            .filter-buttons {
-                gap: 0.5rem;
-            }
-            .filter-button {
-                font-size: 0.78rem;
-                padding: 0.4rem 0.75rem;
-            }
-            .whatsapp-float span {
-                display: none;
-            }
-            .whatsapp-float {
-                padding: 0.9rem;
-                border-radius: 50%;
-            }
-            .controls-section {
-                padding: 0.75rem 1rem;
             }
         }
     </style>
@@ -1131,10 +979,6 @@
                             <a href="${jijiLink}" target="_blank" class="price-tag price-link" rel="noopener noreferrer" aria-label="Find ${phone.name} on Jiji.ng">
                                 ${phone.priceNGN}
                             </a>
-                            <button class="share-button" onclick="sharePhone('${phone.name}', '${jijiLink}')">
-                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
-                                Share
-                            </button>
                         </div>
                     `;
                     
@@ -1200,19 +1044,6 @@
             fetchAndRenderPhones();
         });
     </script>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/2348165481152?text=Phones%20Weekly%20-%20Hi%2C%20I%20have%20a%20question%20about%20a%20phone" 
-       class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span>Chat on WhatsApp</span>
-    </a>
-
-    <!-- Share Toast Notification -->
-    <div class="share-toast" id="share-toast">Link copied! 📋</div>
-
     <!-- PWA Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
