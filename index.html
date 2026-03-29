@@ -1690,8 +1690,12 @@
                                 adminReply: replyText,
                                 adminReplyTimestamp: Date.now()
                             });
+                            statusEl.textContent = '✅ Reply posted!';
+                            statusEl.style.color = 'var(--primary-green)';
                         } catch (err) {
-                            statusEl.textContent = '❌ Failed. Try again.';
+                            console.error('Reply error:', err);
+                            statusEl.textContent = '❌ Failed: ' + (err.message || 'Check Firebase rules.');
+                            statusEl.style.color = '#ff5722';
                             submitBtn.disabled = false;
                         }
                     });
