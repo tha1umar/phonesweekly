@@ -391,6 +391,217 @@
             font-weight: 500;
         }
         
+        /* ===================== CTA BANNER ===================== */
+        .cta-banner {
+            background: linear-gradient(90deg, #0f4c75, #1b6ca8);
+            border-top: 2px solid var(--primary-green);
+            border-bottom: 2px solid var(--primary-green);
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cta-banner p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .cta-banner span {
+            opacity: 0.85;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .cta-banner-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-green);
+            color: var(--background-start);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 230, 118, 0.4);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .cta-banner-btn:hover {
+            background: #00c853;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 230, 118, 0.6);
+        }
+
+        .cta-banner-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--background-start);
+        }
+
+        /* ===================== FLOATING ASK BUTTON ===================== */
+        .ask-float {
+            position: fixed;
+            bottom: 5.5rem;
+            left: 1.2rem;
+            background: #1b6ca8;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 9997;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Inter', sans-serif;
+            animation: askPulse 3s ease-in-out infinite;
+        }
+
+        .ask-float:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .ask-float svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+            flex-shrink: 0;
+        }
+
+        @keyframes askPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(27, 108, 168, 0.5); }
+            50% { box-shadow: 0 4px 30px rgba(27, 108, 168, 0.9); }
+        }
+
+        @media (max-width: 600px) {
+            .ask-float span { display: none; }
+            .ask-float { padding: 0.75rem; border-radius: 50%; bottom: 5rem; left: 1rem; }
+        }
+
+        /* ===================== ASK POPUP ===================== */
+        .ask-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+        }
+
+        .ask-popup-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .ask-popup {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            transform: scale(0.95);
+            transition: transform 0.25s;
+        }
+
+        .ask-popup-overlay.show .ask-popup {
+            transform: scale(1);
+        }
+
+        .ask-popup h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-green);
+        }
+
+        .ask-popup p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .ask-popup-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ask-popup-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+        }
+
+        .ask-popup-option.whatsapp {
+            background: #25d366;
+            color: #000;
+        }
+
+        .ask-popup-option.comment {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .ask-popup-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .ask-popup-option svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .ask-popup-option.whatsapp svg { fill: #000; }
+        .ask-popup-option.comment svg { fill: var(--primary-green); }
+
+        .ask-popup-close {
+            margin-top: 1.2rem;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.2s;
+        }
+
+        .ask-popup-close:hover { color: rgba(255,255,255,0.8); }
+
         /* Loading Spinner Styles */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
@@ -1007,6 +1218,18 @@
         </div>
     </header>
     
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+        <div>
+            <p>🤔 Not sure which phone to buy?</p>
+            <span>Tell me your budget and needs — I'll point you to the right one.</span>
+        </div>
+        <a href="https://wa.me/2348165481152?text=Hi%20Phones%20Weekly!%20I%20need%20help%20choosing%20the%20right%20phone." target="_blank" rel="noopener noreferrer" class="cta-banner-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Ask me on WhatsApp
+        </a>
+    </div>
+
     <!-- Filter Controls -->
     <section class="controls-section">
         <div class="filter-buttons" id="price-filters">
@@ -1017,6 +1240,18 @@
             <button class="filter-button" data-filter="premium">₦990k+ (Premium)</button>
         </div>
     </section>
+
+    <!-- CTA Above Cards -->
+    <div class="cta-banner" style="border-top: none; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); padding: 1rem 1.5rem;">
+        <div>
+            <p>💬 Need a personal recommendation?</p>
+            <span>Drop your budget and I'll find the best phone for you in Abuja.</span>
+        </div>
+        <a href="https://wa.me/2348165481152?text=Hi%20Phones%20Weekly!%20I%20need%20help%20choosing%20the%20right%20phone." target="_blank" rel="noopener noreferrer" class="cta-banner-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+        </a>
+    </div>
 
     <main id="phone-reviews">
         <div id="loading-indicator" style="grid-column: 1 / -1; text-align: center; padding: 4rem; font-size: 1.5rem; font-weight: 500; color: var(--primary-green);">
@@ -1154,6 +1389,31 @@
         <p>Subject should be <strong>(Phones weekly)</strong>.</p>
         <p>&copy; 2025 Phones Weekly | Built by <a href="#">Tha1umar</a></p>
     </footer>
+
+    <!-- Floating Ask Button -->
+    <button class="ask-float" onclick="document.getElementById('ask-popup-overlay').classList.add('show')" aria-label="Ask a question">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.06L2 22l4.94-1.37A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span>Ask a question</span>
+    </button>
+
+    <!-- Ask Popup -->
+    <div class="ask-popup-overlay" id="ask-popup-overlay" onclick="if(event.target===this)this.classList.remove('show')">
+        <div class="ask-popup">
+            <h3>How can I help? 👋</h3>
+            <p>Ask me anything about phones — budget, specs, best deals in Abuja.</p>
+            <div class="ask-popup-options">
+                <a href="https://wa.me/2348165481152?text=Hi%20Phones%20Weekly!%20I%20have%20a%20question%20about%20phones." target="_blank" rel="noopener noreferrer" class="ask-popup-option whatsapp" onclick="document.getElementById('ask-popup-overlay').classList.remove('show')">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Message me on WhatsApp
+                </a>
+                <button class="ask-popup-option comment" onclick="document.getElementById('ask-popup-overlay').classList.remove('show'); document.querySelector('.comments-section').scrollIntoView({behavior:'smooth'});">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+                    Drop a comment on the site
+                </button>
+            </div>
+            <button class="ask-popup-close" onclick="document.getElementById('ask-popup-overlay').classList.remove('show')">✕ Close</button>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
