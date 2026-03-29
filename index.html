@@ -516,31 +516,53 @@
         }
 
 
-        /* Adjustments for Mobile */
-        @media (max-width: 600px) {
-            header {
-                padding: 1.5rem 1rem;
-            }
-            .logo-placeholder {
-                top: 0.75rem;
-                left: 0.75rem;
-                width: 40px; 
-                height: 40px;
-            }
+        /* === TABLET (up to 900px) === */
+        @media (max-width: 900px) {
             main {
-                padding: 1rem;
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1.5rem;
                 gap: 1.5rem;
             }
-            .card {
-                padding: 1rem;
-            }
             .youtube-links-section {
+                margin: 1rem;
                 padding: 1.5rem;
             }
-            .price-tag {
-                width: 100%;
-                font-size: 1.25rem;
+            .channel-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
+            .controls-section {
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* === MOBILE (up to 600px) === */
+        @media (max-width: 600px) {
+            header {
+                padding: 3.5rem 1rem 1.25rem;
+                text-align: center;
+            }
+            header h1 { font-size: 1.9rem; }
+            header p { font-size: 0.85rem; padding: 0 0.5rem; }
+            .logo-placeholder { top: 0.75rem; left: 0.75rem; width: 38px; height: 38px; }
+            .controls-section { padding: 0.5rem 0.75rem; }
+            .filter-buttons { gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+            main { grid-template-columns: 1fr; padding: 0.75rem; gap: 1.25rem; }
+            .card { padding: 1rem; border-radius: 16px; }
+            .card h2 { font-size: 1.4rem; }
+            .card h2.smaller-title { font-size: 1.2rem; }
+            .card p { font-size: 0.88rem; }
+            .card .specs { font-size: 0.82rem; padding: 0.75rem; }
+            .price-tag { width: 100%; font-size: 1.2rem; padding: 0.7rem 1rem; margin-top: 1rem; }
+            .review-link { font-size: 0.85rem; padding: 0.45rem 1rem; }
+            .youtube-links-section { margin: 0.75rem; padding: 1.25rem; border-radius: 14px; }
+            .youtube-links-section h2 { font-size: 1.4rem; margin-bottom: 1.25rem; }
+            .channel-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .channel-card { padding: 1rem; }
+            .used-phone-placeholder { padding: 1.25rem; margin-top: 1.5rem; }
+            .generic-option-wrapper { min-width: unset; flex: 1 1 100%; }
+            footer { padding: 1.25rem 1rem; font-size: 0.82rem; }
+            .social-links { gap: 1rem; }
+            .social-link { width: 26px; height: 26px; }
         }
 
         /* Floating WhatsApp Button */
@@ -624,10 +646,11 @@
             transform: translateX(-50%) translateY(0);
         }
         @media (max-width: 600px) {
-            main { grid-template-columns: 1fr; }
             .whatsapp-float span { display: none; }
             .whatsapp-float { padding: 0.9rem; border-radius: 50%; }
             .filter-button { font-size: 0.78rem; padding: 0.4rem 0.75rem; }
+            .comments-section { padding: 1.25rem; margin: 0.75rem; }
+            .comment-submit-btn { width: 100%; align-self: stretch; }
         }
 
         /* ===================== COMMENTS SECTION ===================== */
@@ -893,7 +916,7 @@
                 <p style="font-size: 1.2rem; font-weight: 600; color: var(--value-gold); margin-bottom: 0.5rem;">
                     Used Phone Deals & Recommendations
                 </p>
-                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; width: 100%; box-sizing: border-box;">
                     
                     <div class="generic-option-wrapper">
                         <a href="https://jiji.ng/gwagwalada/mobile-phones/tecno-pova-neo-64-gb-blue-kWMlpqh61mvohJwxqUH0VVn6.html?page=1&pos=4&cur_pos=4&ads_per_page=20&ads_count=159&lid=V1YtZGMmFtg8mv69&indexPosition=3" target="_blank" class="review-link" style="padding: 0.6rem 1.5rem; background-color: #ffffff; color: var(--background-end);">
