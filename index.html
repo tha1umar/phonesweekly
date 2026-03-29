@@ -551,31 +551,43 @@
         /* === MOBILE (up to 600px) === */
         @media (max-width: 600px) {
             header {
-                padding: 3.5rem 1rem 1.25rem;
+                padding: 2.8rem 0.75rem 0.75rem;
                 text-align: center;
             }
-            header h1 { font-size: 1.9rem; }
-            header p { font-size: 0.85rem; padding: 0 0.5rem; }
-            .logo-placeholder { top: 0.75rem; left: 0.75rem; width: 38px; height: 38px; }
-            .controls-section { padding: 0.5rem 0.75rem; }
-            .filter-buttons { gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
-            main { grid-template-columns: 1fr; padding: 0.75rem; gap: 1.25rem; }
-            .card { padding: 1rem; border-radius: 16px; }
-            .card h2 { font-size: 1.4rem; }
-            .card h2.smaller-title { font-size: 1.2rem; }
-            .card p { font-size: 0.88rem; }
-            .card .specs { font-size: 0.82rem; padding: 0.75rem; }
-            .price-tag { width: 100%; font-size: 1.2rem; padding: 0.7rem 1rem; margin-top: 1rem; }
-            .review-link { font-size: 0.85rem; padding: 0.45rem 1rem; }
-            .youtube-links-section { margin: 0.75rem; padding: 1.25rem; border-radius: 14px; }
-            .youtube-links-section h2 { font-size: 1.4rem; margin-bottom: 1.25rem; }
-            .channel-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .channel-card { padding: 1rem; }
-            .used-phone-placeholder { padding: 1.25rem; margin-top: 1.5rem; }
-            .generic-option-wrapper { min-width: unset; flex: 1 1 100%; }
-            footer { padding: 1.25rem 1rem; font-size: 0.82rem; }
-            .social-links { gap: 1rem; }
-            .social-link { width: 26px; height: 26px; }
+            header h1 { font-size: 1.6rem; }
+            header p { font-size: 0.8rem; padding: 0 0.25rem; margin-top: 0.25rem; }
+            .logo-placeholder { top: 0.5rem; left: 0.5rem; width: 34px; height: 34px; }
+            .controls-section { padding: 0.3rem 0.5rem; }
+            .filter-buttons { gap: 0.35rem; margin-top: 0.35rem; margin-bottom: 0.35rem; }
+            .filter-button { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+            main { grid-template-columns: 1fr; padding: 0.5rem; gap: 0.75rem; }
+            .card { padding: 0.75rem; border-radius: 14px; }
+            .card h2 { font-size: 1.2rem; margin: 0.25rem 0 0; }
+            .card h2.smaller-title { font-size: 1.05rem; }
+            .card p { font-size: 0.82rem; min-height: unset; margin: 0.25rem 0; }
+            .card .specs { font-size: 0.78rem; padding: 0.5rem 0.75rem; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.6; }
+            .card img { margin-bottom: 0.5rem; }
+            .user-review-display { padding: 0.6rem 0.75rem; font-size: 0.82rem; margin-top: 0.25rem; }
+            .price-tag { width: 100%; font-size: 1.05rem; padding: 0.55rem 0.75rem; margin-top: 0.75rem; }
+            .review-link { font-size: 0.78rem; padding: 0.35rem 0.75rem; margin-top: 0.35rem; margin-bottom: 0.35rem; }
+            .share-button { font-size: 0.75rem; padding: 0.3rem 0.6rem; margin-top: 0.35rem; }
+            .youtube-links-section { margin: 0.5rem; padding: 0.875rem; border-radius: 12px; }
+            .youtube-links-section h2 { font-size: 1.2rem; margin-bottom: 0.875rem; }
+            .channel-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+            .channel-card { padding: 0.75rem; }
+            .channel-title { font-size: 1rem; }
+            .channel-description { font-size: 0.78rem; }
+            .used-phone-placeholder { padding: 0.875rem; margin-top: 1rem; }
+            .generic-option-wrapper { min-width: unset; flex: 1 1 100%; padding: 0.6rem; }
+            .comments-section { padding: 0.875rem; margin: 0.5rem; }
+            .comment-form { gap: 0.5rem; margin-bottom: 1rem; }
+            .comment-form input, .comment-form textarea { padding: 0.55rem 0.75rem; font-size: 0.85rem; }
+            .comments-section h2 { font-size: 1.3rem; }
+            .comments-section .comments-subtitle { font-size: 0.8rem; margin-bottom: 1rem; }
+            .comment-submit-btn { width: 100%; align-self: stretch; padding: 0.6rem; font-size: 0.88rem; }
+            footer { padding: 0.875rem 0.75rem; font-size: 0.78rem; }
+            .social-links { gap: 0.75rem; margin-bottom: 0.5rem; }
+            .social-link { width: 24px; height: 24px; }
         }
 
         /* Floating WhatsApp Button */
@@ -660,10 +672,7 @@
         }
         @media (max-width: 600px) {
             .whatsapp-float span { display: none; }
-            .whatsapp-float { padding: 0.9rem; border-radius: 50%; }
-            .filter-button { font-size: 0.78rem; padding: 0.4rem 0.75rem; }
-            .comments-section { padding: 1.25rem; margin: 0.75rem; }
-            .comment-submit-btn { width: 100%; align-self: stretch; }
+            .whatsapp-float { padding: 0.75rem; border-radius: 50%; bottom: 1rem; right: 1rem; }
         }
 
         /* ===================== COMMENTS SECTION ===================== */
