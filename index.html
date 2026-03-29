@@ -629,6 +629,179 @@
             .whatsapp-float { padding: 0.9rem; border-radius: 50%; }
             .filter-button { font-size: 0.78rem; padding: 0.4rem 0.75rem; }
         }
+
+        /* ===================== COMMENTS SECTION ===================== */
+        .comments-section {
+            max-width: 860px;
+            margin: 2rem auto 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .comments-section h2 {
+            text-align: center;
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .comments-section .comments-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-bottom: 1.8rem;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            resize: none;
+        }
+
+        .comment-form input::placeholder,
+        .comment-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .comment-form textarea {
+            min-height: 100px;
+        }
+
+        .comment-submit-btn {
+            align-self: flex-end;
+            background: var(--primary-green);
+            color: var(--background-start);
+            border: none;
+            border-radius: 10px;
+            padding: 0.7rem 2rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+        }
+
+        .comment-submit-btn:hover {
+            background: #00c853;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 230, 118, 0.5);
+        }
+
+        .comment-submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--primary-green);
+            animation: fadeInComment 0.4s ease;
+        }
+
+        @keyframes fadeInComment {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .comment-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-green);
+        }
+
+        .comment-time {
+            font-size: 0.78rem;
+            opacity: 0.5;
+        }
+
+        .comment-body {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .comments-loading {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            padding: 1rem 0;
+        }
+
+        .comments-empty {
+            text-align: center;
+            opacity: 0.4;
+            font-size: 0.9rem;
+            padding: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .comment-status {
+            font-size: 0.85rem;
+            text-align: center;
+            min-height: 1.2rem;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .comment-status.error {
+            color: #ff5722;
+        }
+
+        @media (max-width: 600px) {
+            .comments-section {
+                padding: 1.25rem;
+                margin: 1rem;
+            }
+            .comment-submit-btn {
+                width: 100%;
+                align-self: stretch;
+            }
+        }
+        /* ===================== END COMMENTS ===================== */
     </style>
 </head>
 <body>
@@ -754,6 +927,24 @@
         </div>
 
     </section>
+
+    <!-- ===================== COMMENTS SECTION ===================== -->
+    <section class="comments-section" id="comments-section">
+        <h2>💬 Community Chat</h2>
+        <p class="comments-subtitle">Got a question? Seen a better price? Drop your thoughts below!</p>
+
+        <div class="comment-form">
+            <input type="text" id="comment-name" placeholder="Your name (e.g. Emeka from Wuse)" maxlength="50" />
+            <textarea id="comment-body" placeholder="Ask a question, share a tip, or review a phone you've bought..." maxlength="500"></textarea>
+            <p class="comment-status" id="comment-status"></p>
+            <button class="comment-submit-btn" id="comment-submit-btn" onclick="submitComment()">Post Comment</button>
+        </div>
+
+        <div class="comments-list" id="comments-list">
+            <p class="comments-loading">Loading comments...</p>
+        </div>
+    </section>
+    <!-- ===================== END COMMENTS SECTION ===================== -->
 
     <footer>
         <div class="social-links">
@@ -1155,5 +1346,114 @@
         <span>Chat on WhatsApp</span>
     </a>
     <div class="share-toast" id="share-toast">Link copied! 📋</div>
+
+    <!-- ===================== FIREBASE COMMENTS SCRIPT ===================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push, onValue, serverTimestamp, query, orderByChild, limitToLast }
+            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANeGtzNfrH5Hp0vtq9rbtB4PpiorxFJbw",
+            authDomain: "phones-weekly.firebaseapp.com",
+            databaseURL: "https://phones-weekly-default-rtdb.firebaseio.com",
+            projectId: "phones-weekly",
+            storageBucket: "phones-weekly.firebasestorage.app",
+            messagingSenderId: "90124428454",
+            appId: "1:90124428454:web:793368d336105c03bc0067"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const commentsRef = ref(db, 'comments');
+
+        // ---- Render comments ----
+        const commentsQuery = query(commentsRef, orderByChild('timestamp'), limitToLast(50));
+
+        onValue(commentsQuery, (snapshot) => {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = '';
+
+            if (!snapshot.exists()) {
+                list.innerHTML = '<p class="comments-empty">No comments yet — be the first to drop one! 👇</p>';
+                return;
+            }
+
+            const comments = [];
+            snapshot.forEach(child => {
+                comments.push({ id: child.key, ...child.val() });
+            });
+
+            // Show newest first
+            comments.reverse().forEach(comment => {
+                const div = document.createElement('div');
+                div.className = 'comment-item';
+
+                const date = comment.timestamp
+                    ? new Date(comment.timestamp).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+                    : 'Just now';
+
+                div.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-name">🗣️ ${escapeHtml(comment.name)}</span>
+                        <span class="comment-time">${date}</span>
+                    </div>
+                    <p class="comment-body">${escapeHtml(comment.body)}</p>
+                `;
+                list.appendChild(div);
+            });
+        }, (error) => {
+            document.getElementById('comments-list').innerHTML =
+                '<p class="comments-empty" style="color:#ff5722;">Could not load comments. Check your connection.</p>';
+        });
+
+        // ---- Submit comment ----
+        window.submitComment = async function () {
+            const nameInput = document.getElementById('comment-name');
+            const bodyInput = document.getElementById('comment-body');
+            const statusEl = document.getElementById('comment-status');
+            const btn = document.getElementById('comment-submit-btn');
+
+            const name = nameInput.value.trim();
+            const body = bodyInput.value.trim();
+
+            statusEl.className = 'comment-status';
+
+            if (!name) { statusEl.textContent = '⚠️ Please enter your name.'; return; }
+            if (!body) { statusEl.textContent = '⚠️ Please write something first.'; return; }
+            if (body.length < 5) { statusEl.textContent = '⚠️ Comment is too short.'; return; }
+
+            btn.disabled = true;
+            statusEl.textContent = 'Posting...';
+
+            try {
+                await push(commentsRef, {
+                    name,
+                    body,
+                    timestamp: Date.now()
+                });
+                nameInput.value = '';
+                bodyInput.value = '';
+                statusEl.textContent = '✅ Comment posted!';
+                setTimeout(() => { statusEl.textContent = ''; }, 3000);
+            } catch (err) {
+                statusEl.className = 'comment-status error';
+                statusEl.textContent = '❌ Failed to post. Try again.';
+            } finally {
+                btn.disabled = false;
+            }
+        };
+
+        // ---- Sanitize HTML ----
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+    <!-- ===================== END FIREBASE SCRIPT ===================== -->
 </body>
 </html>
