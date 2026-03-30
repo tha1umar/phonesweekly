@@ -24,15 +24,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-green: #3b82f6; /* Electric Blue */
-            --primary-dark: #1a2234; /* Deep card surface */
-            --medium-teal: #22d3ee; /* Cyan for spec borders */
+            --primary-blue: #3b82f6;       /* Electric Blue — primary accent */
+            --primary-blue-dim: #1d4ed8;   /* Darker blue for gradients */
+            --primary-green: #3b82f6;      /* Alias for legacy references */
+            --primary-dark: #1a2234;
+            --medium-teal: #3b82f6;        /* Unified — no more competing cyan */
             --text-light: #f1f5f9;
             --value-gold: #fbbf24;
-            --chat-bg: #111827; /* Dark surface */
+            --chat-bg: #111827;
             --chat-bubble: #1a2234;
-            --background-start: #0a0a0a; /* True black */
-            --background-end: #0f172a; /* Deep navy */
+            --background-start: #060d1a;   /* Rich deep navy-black */
+            --background-end: #0f1f3d;     /* Deep navy — more blue, less flat */
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(59, 130, 246, 0.18); /* Blue-tinted border */
+            --img-bg: #0b1629;             /* Consistent image background */
         }
 
         *, *::before, *::after {
@@ -43,7 +48,7 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(120deg, var(--background-start), var(--background-end));
+            background: linear-gradient(135deg, var(--background-start) 0%, var(--background-end) 100%);
             color: var(--text-light);
             min-height: 100vh;
             display: flex;
@@ -140,12 +145,12 @@
 
         .filter-button.active,
         .filter-button.active:hover {
-            background-color: var(--primary-green);
-            color: var(--background-start);
-            border-color: var(--primary-green);
+            background-color: var(--primary-blue);
+            color: #fff;
+            border-color: var(--primary-blue);
             font-weight: 700;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.4);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.5);
         }
 
         main {
@@ -161,28 +166,29 @@
 
         .card {
             position: relative;
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 1.5rem;
             text-align: center;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             cursor: default;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--card-border);
             display: flex;
             flex-direction: column;
         }
 
         .card.best-value {
-            border: 3px solid var(--value-gold);
-            background: linear-gradient(145deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
-            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.5);
+            border: 2px solid var(--value-gold);
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(251, 191, 36, 0.03));
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.2);
         }
         
         .card:hover {
             transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 45px rgba(59, 130, 246, 0.2);
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         /* Best Value Badge */
@@ -206,11 +212,14 @@
         .card img {
             max-width: 100%;
             width: 100%;
-            border-radius: 15px;
+            border-radius: 12px;
             aspect-ratio: 4 / 3;
             object-fit: contain;
+            object-position: center;
             margin-bottom: 1rem;
-            background-color: rgba(0, 0, 0, 0.15);
+            background-color: var(--img-bg);
+            padding: 0.75rem;
+            border: 1px solid rgba(59, 130, 246, 0.12);
             transition: transform 0.3s;
         }
 
@@ -225,11 +234,11 @@
             margin-top: 1rem;
             margin-bottom: 1rem;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(59, 130, 246, 0.06);
             border-radius: 10px;
             text-align: left;
             line-height: 1.8;
-            border-left: 3px solid var(--medium-teal);
+            border-left: 3px solid var(--primary-blue);
         }
 
         .card h2 {
@@ -984,10 +993,10 @@
         }
 
         .comment-item {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(59, 130, 246, 0.05);
             border-radius: 12px;
             padding: 1rem 1.25rem;
-            border-left: 3px solid var(--primary-green);
+            border-left: 3px solid var(--primary-blue);
             animation: fadeInComment 0.4s ease;
         }
 
@@ -1379,7 +1388,7 @@
                 {
                     name: "Google Pixel 9a",
                     imageUrl: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-9a-1.jpg",
-                    description: "Based on functionality and price, arguably the best pixel phone ever",
+                    description: "This is the one. Best camera at this price, full stop. Google AI, clean software, and it just works.",
                     specs: "RAM: 8GB | Storage: 128GB | Battery: 5100 mAh | Camera: 48MP Triple",
                     priceNGN: "₦750,000",
                     review: "If you prioritize photography and a clean Android experience, nothing beats the Pixel. The new Tensor chip's AI features are game-changing for everyday tasks and editing photos on the fly.",
